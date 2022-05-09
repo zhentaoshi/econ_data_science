@@ -16,7 +16,7 @@ Programming experience is helpful, but not prerequisite.
 
 * Wickham, Hadley and Grolemund, Garrett (2016). R for Data Science: Import, Tidy, Transform, Visualize, and Model Data. O’Reilly Media, Inc. (Open access at https://r4ds.had.co.nz/)
 
-* James, G., Witten, D., Hastie, T., & Tibshirani, R. (2017). An introduction to statistical learning (Vol. 112, p. 18). New York: springer. (Open access at https://www.statlearning.com/)
+* James, Gareth., Witten, Daniela., Hastie, Trevor., & Tibshirani, Robert. (2017). An introduction to statistical learning (Vol. 112, p. 18). New York: springer. (Open access at https://www.statlearning.com/)
 
 
 **Reading**
