@@ -33,11 +33,11 @@ Programming experience is helpful, but not prerequisite.
 1. Overview. Data structure. Linux. Git.
   * Tools: Jupyter notebook. Markdown.
   * SCRP as an environment
-  * Reproduciable.  Remote computing.
+  * Reproducible.  Remote computing.
 2. R programming: basics. R Introduction.
 3. R programming: data wrangling.
 4. R programming: Time series data. time stamps.
-5. R programming: Visualization. 
+5. R programming: Visualization.
   * data reshape
   * ggplot2
   * Shiny board for interactive graphs
@@ -50,13 +50,13 @@ Programming experience is helpful, but not prerequisite.
   * Vectorization
   * Sparse matrix
   * Large scale loop
-  * Parellel computing
+  * Parallel computing
   * Cloud computing
 
 
 8. Optimization
 9. Economic theory vs. empirics. (philosophy). Harvard versus Asian. Panel data (dynamic)
-10. nonparametrics
+10. Nonparametrics
 11. machine learning I
 12. machine learning II
 13. Causality. treatment effects.
