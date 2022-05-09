@@ -1,1 +1,3 @@
-install.packages(c("AER", "quantmod"))
+install.packages(c("AER", "quantmod",
+                   "reshape2", "gridExtra",
+                   "caret"))
