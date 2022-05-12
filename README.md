@@ -19,13 +19,6 @@ Programming experience is helpful, but not prerequisite.
 * James, Gareth., Witten, Daniela., Hastie, Trevor., & Tibshirani, Robert. (2017). An introduction to statistical learning (Vol. 112, p. 18). New York: springer. (Open access at https://www.statlearning.com/)
 
 
-**Reading**
-
-* R Core Team (2022), [R-Introduction](https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf)
-
-* Efron, Bradley and Hastie, Trevor (2016): Computer Age Statistical Inference: Algorithms, Evidence, and Data Science, Cambridge University Press (Open access at https://web.stanford.edu/~hastie/CASI/index.html)
-
-
 ## Contents
 
 (Tentative schemes subject to changes)
@@ -64,6 +57,6 @@ Programming experience is helpful, but not prerequisite.
 
 Backup
 - data source. web scrapping? Lianjia
-- Text. Xiu Dacheng has open data online.
+- Text.
 - time series. nonstationary
 - high frequent financial data
