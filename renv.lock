@@ -8,6 +8,11 @@
       }
     ]
   },
+  "Python": {
+    "Version": "3.7.12",
+    "Type": "conda",
+    "Name": "./renv/python/condaenvs/renv-python"
+  },
   "Packages": {
     "AER": {
       "Package": "AER",
