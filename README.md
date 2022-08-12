@@ -4,13 +4,11 @@
 
 ## Introduction
 
-The is a data science course with focus on economic problems. The data operations and analytics will be demonstrated in the `R` language.
-After completing this course, students are expected to be fluent in the programming language and be able to independently conduct data
-analysis.
+The is a data science course with applications to economic problems. The data operations and analytics will be demonstrated in the `R` language.
+After completing this course, students are expected to be fluent in a data science programming language and be able to independently conduct data analysis.
 
 This course is design for students with economics training while are new to heavy duty data tasks.
 Programming experience is helpful, but not prerequisite.
-
 
 ## Textbooks
 
@@ -25,34 +23,41 @@ Programming experience is helpful, but not prerequisite.
 
 1. Overview. Data structure. Linux. Git.
   * Tools: Jupyter notebook. Markdown.
-  * SCRP as an environment
   * Reproducible.  Remote computing.
-2. R programming: basics. R Introduction.
-3. R programming: data wrangling.
+2. R programming: Basics. R Introduction.
+3. R programming: Data wrangling.
 4. R programming: Time series data. time stamps.
 5. R programming: Visualization.
-  * data reshape
+  * Data reshape
   * ggplot2
   * Shiny board for interactive graphs
-  * graph design
-6. R programming: scientific programming.
-  * data types
-  * data memory
-  * bootstrap
+  * Graph design
+6. R programming: scientific programming
+  * Data types
+  * Data memory
+  * Bootstrap
 7. R programming. Speed up computation.
   * Vectorization
   * Sparse matrix
   * Large scale loop
   * Parallel computing
   * Cloud computing
-
-
 8. Optimization
-9. Economic theory vs. empirics. (philosophy). Harvard versus Asian. Panel data (dynamic)
-10. Nonparametrics
-11. machine learning I
-12. machine learning II
-13. Causality. treatment effects.
+  * Conventional methods
+  * Stochastic gradient descent
+9. Nonparametrics
+  * Kernel method
+  * Sieve method
+10. Machine learning I
+  * Shrinkage methods
+  * Ridge, Lasso and more
+11. Machine learning II
+  * Tree-based methods
+  * Neural network
+12. Causality. treatment effects.
+
+
+
 
 
 Backup
@@ -65,7 +70,7 @@ Backup
 ## License
 
 
-This work is licensed under a
+This work is licensed under
 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
 
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-image]][cc-by-nc-sa]
