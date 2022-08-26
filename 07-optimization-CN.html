@@ -1,0 +1,844 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>数值最优化 &#8212; My Jupyter Book</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/07-optimization-CN.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/07-optimization-CN.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   方法
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   实施
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id10">
+   凸优化
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id21">
+   后续写作安排
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id22">
+   拓展阅读
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id29">
+   参考文献
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>数值最优化</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   方法
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   实施
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id10">
+   凸优化
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id21">
+   后续写作安排
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id22">
+   拓展阅读
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id29">
+   参考文献
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>数值最优化<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">library</span><span class="p">(</span><span class="n">magrittr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">Input In [1],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">library</span><span class="p">(</span><span class="n">magrittr</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;library&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>除少数贝叶斯估计量外，计量经济学中几乎所有的估计量，例如OLS、MLE、2SLS和GMM等，都是由目标函数的最优解得出的。要想在计量经济学中从被动接受到主动创新，理解如何构建一个最优化问题并求解就是其中的关键。可惜的是，传统的计量课程并不注重数值最优化的教学。结果就是，大部分的学生只能依赖计量程序包来进行运算，他们无法按照自己的需求设定计量经济学方法。甚至有时候，他们会调整自己的数据来迎合现成的计量方法，来产出看似“显著”的结果。</p>
+<p>一个常规的最优化函数可以写作：</p>
+<div class="math notranslate nohighlight">
+\[
+\min_{\theta \in \Theta } f(\theta) \,\, \mathrm{ s.t. }  g(\theta) = 0, h(\theta) \leq 0,
+\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(f(\cdot)\in \mathbb{R}\)</span> 是一个标量目标函数， <span class="math notranslate nohighlight">\(g(\theta) = 0\)</span> 是一个包含等式约束条件的向量，
+而 <span class="math notranslate nohighlight">\(h(\theta)\leq 0\)</span> 则是不等式约束的向量。</p>
+<p>目前的数值最优化算法都是旨在寻找局部的最小值。当多个局部极小值存在时，我们无法保证能够找出全局的最小值。</p>
+<p>不带有等式/不等式约束条件的最优化问题被称为<strong>无约束</strong>问题；否则称之为<strong>约束</strong>问题。
+约束条件可以通过拉格朗日乘数法包含在目标函数之中。对于学习过微观经济学的学生来说，拉格朗日乘数法再熟悉不过。我们总是用拉格朗日乘数法来计算给定柯布-道格拉斯效用函数和预算约束的效用的最大化问题。</p>
+<p>在实操时，我们总是会遇到便捷和效率的取舍问题。便捷指的是数学表达式和代码的可读性，而效率则是考虑电脑运算的速率。通常建议在试错阶段侧重于便捷性而在后续的阶段进行全面的效率的提升。</p>
+<section id="id2">
+<h2>方法<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>在运筹学中有许多的最优化算法。它们都是基于一系列基本原理的各种变体。许多教科书的MLE估计量都是二阶可微的，但并不存在显性解，比如Logit，Probit和Tobit。二阶可微目标函数最优化的核心思路是牛顿法。首先是最优化计算中的一个必要条件是一阶条件：
+<span class="math notranslate nohighlight">\(s(\theta) = \partial f(\theta) / \partial \theta = 0\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># criterion</span>
+<span class="n">s</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># gradient</span>
+<span class="n">h</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="mf">0.2</span> <span class="o">-</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># Hessian</span>
+
+<span class="c1"># plot</span>
+<span class="n">par</span><span class="p">(</span><span class="n">mfrow</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">par</span><span class="p">(</span><span class="n">mar</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="n">x_base</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x_base</span><span class="p">),</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x_base</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;l&quot;</span><span class="p">,</span> <span class="n">lwd</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s2">&quot;f&quot;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">s</span><span class="p">(</span><span class="n">x_base</span><span class="p">),</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x_base</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;l&quot;</span><span class="p">,</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s2">&quot;score&quot;</span><span class="p">)</span>
+<span class="n">abline</span><span class="p">(</span><span class="n">h</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">lty</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">h</span><span class="p">(</span><span class="n">x_base</span><span class="p">),</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x_base</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;l&quot;</span><span class="p">,</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s2">&quot;Hessian&quot;</span><span class="p">)</span>
+<span class="n">abline</span><span class="p">(</span><span class="n">h</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">lty</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>从初始值 <span class="math notranslate nohighlight">\(\theta_0\)</span> 开始，如果 <span class="math notranslate nohighlight">\(s(\theta_0) \neq 0\)</span> ，那么对于 <span class="math notranslate nohighlight">\(t=0,1,\cdots\)</span> ，进行以下迭代：</p>
+<div class="math notranslate nohighlight">
+\[
+\theta_{t+1} = \theta_{t} -  \left( H(\theta_t)  \right)^{-1}  s(\theta_t)
+\]</div>
+<p>其中
+<span class="math notranslate nohighlight">\(H(\theta) = \frac{ \partial s(\theta )}{ \partial \theta}\)</span> 是黑塞矩阵
+(Hessian matrix)。这个公式可以直观地用 <span class="math notranslate nohighlight">\(\theta_t\)</span> 为中心点进行泰勒展开推导出来。由于 <span class="math notranslate nohighlight">\(\theta_{ \star }\)</span> 是 <span class="math notranslate nohighlight">\(s(\cdot)\)</span> 的一个根，可以写出：</p>
+<div class="math notranslate nohighlight">
+\[
+0 = s(\theta_{\star}) = s(\theta_t) + H(\theta_t) (\theta_{t+1} - \theta_t) + O( (\theta_{t+1} - \theta_t)^2 ).
+\]</div>
+<p>忽略高阶项重新整理得到
+<span class="math notranslate nohighlight">\(\theta_{\star} = \theta_{t} -  \left( H(\theta_t)  \right)^{-1}  s(\theta_t),\)</span>
+之后用新的 <span class="math notranslate nohighlight">\(\theta_{t+1}\)</span> 替代 <span class="math notranslate nohighlight">\(\theta_{\star}\)</span> 就能写出迭代公式。换言之，这是非线性 <span class="math notranslate nohighlight">\(s(\cdot)\)</span> 的一阶线性迭代公式。算法一直迭代到
+<span class="math notranslate nohighlight">\(|\theta_{t+1} -\theta_{t}| &lt; \epsilon\)</span> (绝对标准) 且/或
+<span class="math notranslate nohighlight">\(|\theta_{t+1} -\theta_{t}|/|\theta_{t}| &lt; \epsilon\)</span> (相对标准)为止，其中
+<span class="math notranslate nohighlight">\(\epsilon\)</span> 是人为选定的宽容度(通常为较小的正数)。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Newton&#39;s method</span>
+<span class="n">Newton</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">x</span> <span class="o">-</span> <span class="n">s</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="p">}</span> <span class="c1"># update formula</span>
+
+<span class="n">x_init</span> <span class="o">&lt;-</span> <span class="mi">6</span> <span class="c1"># can experiment with various initial values</span>
+
+<span class="n">gap</span> <span class="o">&lt;-</span> <span class="mi">1</span>
+<span class="n">epsilon</span> <span class="o">&lt;-</span> <span class="mf">0.0001</span> <span class="c1"># tolerance</span>
+<span class="k">while</span> <span class="p">(</span><span class="n">gap</span> <span class="o">&gt;</span> <span class="n">epsilon</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">x_new</span> <span class="o">&lt;-</span> <span class="n">Newton</span><span class="p">(</span><span class="n">x_init</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nb">print</span><span class="p">()</span>
+  <span class="n">gap</span> <span class="o">&lt;-</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x_init</span> <span class="o">-</span> <span class="n">x_new</span><span class="p">)</span>
+  <span class="n">x_init</span> <span class="o">&lt;-</span> <span class="n">x_new</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>牛顿法</strong> 牛顿法寻求函数 <span class="math notranslate nohighlight">\(s(\theta) = 0\)</span> 的解。前文提到，一阶条件是最优化的必要不充分条件。我们需要验证每一个解 <span class="math notranslate nohighlight">\(s(\theta)\)</span> 的二阶条件来决定它是极小值、极大值还是鞍点。如果有多个极小值，我们比较它们之间的大小来决定哪一个是全局的最小值。</p>
+<p>显然，牛顿法需要计算梯度 <span class="math notranslate nohighlight">\(s(\theta)\)</span> 和黑塞矩阵 <span class="math notranslate nohighlight">\(H(\theta)\)</span> 。
+牛顿法从数值上收敛于二次率。</p>
+<p><strong>拟牛顿法</strong>(Quasi-Newton Method) 最知名的拟牛顿算法是<br />
+<a class="reference external" href="http://en.wikipedia.org/wiki/Broyden%E2%80%93Fletcher%E2%80%93Goldfarb%E2%80%93Shanno_algorithm">BFGS</a>。
+它回避了计算量巨大的Hessian matrix的直接运算，而是从一个初始的可逆Hessian开始，用一个直接的公式迭代出最终的矩阵。这个公式可以用二次近似的思想推导出来。</p>
+<p><strong>无梯度法</strong> <a class="reference external" href="http://en.wikipedia.org/wiki/Nelder%E2%80%93Mead_method">Nelder-Mead</a>
+是一个简单的方法。它通过映射和放缩来寻找局部的最小值。</p>
+</section>
+<section id="id3">
+<h2>实施<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>R 语言的最优化架构一直在完善和提升中。
+<a class="reference external" href="http://cran.r-project.org/web/views/Optimization.html">R Optimization Task View</a>
+概述了所有可用的CRAN拓展包。对于普通的非线性最优化，程序包
+<a class="reference external" href="http://cran.r-project.org/web/packages/optimx/index.html"><code class="docutils literal notranslate"><span class="pre">optimx</span></code></a> [<a href="#id4"><span class="problematic" id="id5">:cite:`nash2014best`</span></a>]
+替换了R语言初始的最优化指令。 <code class="docutils literal notranslate"><span class="pre">optimx</span></code> 为数种常用的最优化算法提供了一个统一的操作界面。此外，它还支持不同算法之间的比较。
+<a class="reference external" href="https://cran.r-project.org/web/packages/ROI/index.html"><code class="docutils literal notranslate"><span class="pre">ROI</span></code></a> [<a href="#id6"><span class="problematic" id="id7">:cite:`epubwu5858`</span></a>] 是一个相对来说比较新的程序包，它想要提供一个研究者能够相互交流的一致的模型框架。未来我们将把<code class="docutils literal notranslate"><span class="pre">ROI</span></code>的介绍纳入到我们的文稿中。</p>
+<p><strong>实例</strong></p>
+<p>我们使用 <code class="docutils literal notranslate"><span class="pre">optimx</span></code> 来求解伪泊松极大似然估计(pseudo Poisson maximum likelihood estimation PPML)。这种方法在国际贸易的跨国双边贸易中经常用到。 [<a href="#id8"><span class="problematic" id="id9">:cite:`silva2006log`</span></a>]. 如果 <span class="math notranslate nohighlight">\(y_i\)</span> 是连续随机变量，它显然不服从泊松分布，因为泊松分布是离散的非负分布。但如果满足条件均值模型
+$<span class="math notranslate nohighlight">\(E[y_i | x_i] = \exp( x_i' \beta)\)</span><span class="math notranslate nohighlight">\( ，
+我们依然可以使用泊松分布来获得参数 \)</span>\beta<span class="math notranslate nohighlight">\( 的相合估计量。哪怕 \)</span>y_i$ 不遵循条件泊松分布，依然不影响该结论的成立。</p>
+<p>如果 <span class="math notranslate nohighlight">\(Z\)</span> 服从均值为 <span class="math notranslate nohighlight">\(\lambda\)</span> 的泊松分布，概率质量函数为：</p>
+<div class="math notranslate nohighlight">
+\[
+\Pr(Z = k) = \frac{\mathrm{e}^{-\lambda} \lambda^k}{k!}, \mathrm{ for }\, \, k=0,1,2,\ldots,
+\]</div>
+<p>从而</p>
+<div class="math notranslate nohighlight">
+\[
+\log \Pr(Y = y | x) =  -\exp(x'\beta) + y\cdot x'\beta - \log k!
+\]</div>
+<p>又因为最后一项与参数无关，所以对数似然函数为：</p>
+<div class="math notranslate nohighlight">
+\[
+\ell(\beta) = \log \Pr( \mathbf{y} | \mathbf{x};\beta ) =
+-\sum_{i=1}^n \exp(x_i'\beta) + \sum_{i=1}^n y_i x_i'\beta.
+\]</div>
+<p>此外，我们就能轻松地写出梯度</p>
+<div class="math notranslate nohighlight">
+\[
+s(\beta) =\frac{\partial \ell(\beta)}{\partial \beta} =
+-\sum_{i=1}^n \exp(x_i'\beta)x_i + \sum_{i=1}^n y_i x_i.
+\]</div>
+<p>并且验证Hessian矩阵</p>
+<div class="math notranslate nohighlight">
+\[
+H(\beta) = \frac{\partial^2 \ell(\beta)}{\partial \beta \partial \beta'} =
+-\sum_{i=1}^n \exp(x_i'\beta)x_i x_i'
+\]</div>
+<p>是负定的。因此 <span class="math notranslate nohighlight">\(\ell(\beta)\)</span> 是 <span class="math notranslate nohighlight">\(\beta\)</span> 的严格凹函数。</p>
+<p>尽管效用和似然估计都是求解最大值，但是运筹学领域通常把最优化默认为最小化。为了遵循运筹学中这一“传统”，这里我们提出 <strong>负</strong> 对数似然估计。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Poisson likelihood</span>
+<span class="n">poisson</span><span class="o">.</span><span class="n">loglik</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">b</span> <span class="o">&lt;-</span> <span class="k">as</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+  <span class="k">lambda</span> <span class="o">&lt;-</span> <span class="n">exp</span><span class="p">(</span><span class="n">X</span> <span class="o">%*%</span> <span class="n">b</span><span class="p">)</span>
+  <span class="n">ell</span> <span class="o">&lt;-</span> <span class="o">-</span><span class="nb">sum</span><span class="p">(</span><span class="o">-</span><span class="k">lambda</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">log</span><span class="p">(</span><span class="k">lambda</span><span class="p">))</span>
+  <span class="k">return</span><span class="p">(</span><span class="n">ell</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>为了在 <code class="docutils literal notranslate"><span class="pre">R</span></code> 中实现最优化计算，建议将最优化的目标写成参数的函数。数据可以在函数内或者函数外提供。如果数据使用arguments形式提供的，arguments必须是显性的。(相反，在<code class="docutils literal notranslate"><span class="pre">Matlab</span></code>中要进行最优化参数必须是函数唯一的argument。)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># implement both BFGS and Nelder-Mead for comparison.
+
+library(AER)
+
+## prepare the data
+data(&quot;RecreationDemand&quot;)
+y &lt;- RecreationDemand$trips
+X &lt;- with(RecreationDemand, cbind(1, income))
+
+## estimation
+b.init &lt;- c(0, 1) # initial value
+b.hat &lt;- optimx::optimx(b.init, poisson.loglik,
+  method = c(&quot;BFGS&quot;, &quot;Nelder-Mead&quot;),
+  control = list(
+    reltol = 1e-7,
+    abstol = 1e-7
+  )
+)
+print(b.hat)
+</pre></div>
+</div>
+</div>
+</div>
+<p>给定条件均值模型，非线性最小二乘(NLS)理论上也是相合的。
+NLS最小化</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{i=1}^n (y_i - \exp(x_i \beta))^2
+\]</div>
+<p>我们不禁会想到一个问题：为什么我们会更青睐PPML而非NLS？ 原因是PPML对于线性参数的最优化是凸优化，而NLS并不是(凸优化的定义和性质将在后面详细介绍)。</p>
+<p><strong>注</strong>：<strong>凸优化</strong> 是一种较为特别的优化，它指的是最优化过程中需要求解的目标函数为凸函数。凸优化的有点在于在所有的优化问题中它是最容易解决的问题。其中的一个重要原因在于凸优化中的局部最优就是全局最优，无需再考虑求解出多个局部最优的比较问题；另一个原因是凸函数本身的形式更易于求解(可以参考微观经济学效用最大化的计算问题)。因此，大多数我们遇到的非凸优化问题也是通过近似凸优化求解来处理的。</p>
+<p>现实中，没有一个算法足以应对所有的优化问题。当真实参数已知时，模拟有助于让我们在实际应用之前检测最优化方法的准确性。等高线图(Contour plot)是一个在低维空间中对函数曲面/流形进行可视化的可靠工具。</p>
+<p><strong>实例</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">grid</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">)</span>
+<span class="n">x</span><span class="o">.</span><span class="n">length</span> <span class="o">&lt;-</span> <span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">grid</span><span class="p">)</span>
+<span class="n">y</span><span class="o">.</span><span class="n">grid</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="o">-</span><span class="mf">.5</span><span class="p">,</span> <span class="mf">.2</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">)</span>
+<span class="n">y</span><span class="o">.</span><span class="n">length</span> <span class="o">&lt;-</span> <span class="n">length</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">grid</span><span class="p">)</span>
+
+<span class="n">z</span><span class="o">.</span><span class="n">contour</span> <span class="o">&lt;-</span> <span class="n">matrix</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nrow</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">length</span><span class="p">,</span> <span class="n">ncol</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">length</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="ow">in</span> <span class="mi">1</span><span class="p">:</span><span class="n">x</span><span class="o">.</span><span class="n">length</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="n">j</span> <span class="ow">in</span> <span class="mi">1</span><span class="p">:</span><span class="n">y</span><span class="o">.</span><span class="n">length</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">z</span><span class="o">.</span><span class="n">contour</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="n">poisson</span><span class="o">.</span><span class="n">loglik</span><span class="p">(</span><span class="n">c</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">y</span><span class="o">.</span><span class="n">grid</span><span class="p">[</span><span class="n">j</span><span class="p">]))</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">contour</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">grid</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">grid</span><span class="p">,</span> <span class="n">z</span><span class="o">.</span><span class="n">contour</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>对于那些对准确性要求更高的问题，我们可以在<code class="docutils literal notranslate"><span class="pre">R</span></code>中调用第三方的独立程序包。比如我们可以用程序包<a class="reference external" href="http://cran.r-project.org/web/packages/nloptr/index.html"><code class="docutils literal notranslate"><span class="pre">nloptr</span></code></a>来调用<a class="reference external" href="http://ab-initio.mit.edu/wiki/index.php/NLopt_Installation"><code class="docutils literal notranslate"><span class="pre">NLopt</span></code></a>。</p>
+<p><code class="docutils literal notranslate"><span class="pre">NLopt</span></code> 提供了一系列的拓展算法(<a class="reference external" href="http://ab-initio.mit.edu/wiki/index.php/NLopt_Algorithms#SLSQP">http://ab-initio.mit.edu/wiki/index.php/NLopt_Algorithms#SLSQP</a>).</p>
+<p><strong>实例</strong></p>
+<p>我们可以先在NLOPT中运行Nelder-Mead算法：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## optimization with NLoptr</span>
+
+<span class="n">opts</span> <span class="o">&lt;-</span> <span class="nb">list</span><span class="p">(</span>
+  <span class="s2">&quot;algorithm&quot;</span> <span class="o">=</span> <span class="s2">&quot;NLOPT_LN_NELDERMEAD&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;xtol_rel&quot;</span> <span class="o">=</span> <span class="mf">1.0e-7</span><span class="p">,</span>
+  <span class="n">maxeval</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="p">)</span>
+
+<span class="n">res_NM</span> <span class="o">&lt;-</span> <span class="n">nloptr</span><span class="p">::</span><span class="n">nloptr</span><span class="p">(</span>
+  <span class="n">x0</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">init</span><span class="p">,</span>
+  <span class="n">eval_f</span> <span class="o">=</span> <span class="n">poisson</span><span class="o">.</span><span class="n">loglik</span><span class="p">,</span>
+  <span class="n">opts</span> <span class="o">=</span> <span class="n">opts</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res_NM</span><span class="p">)</span>
+
+<span class="c1"># &quot;SLSQP&quot; is indeed the BFGS algorithm in NLopt,</span>
+<span class="c1"># though &quot;BFGS&quot; doesn&#39;t appear in the name</span>
+<span class="n">opts</span> <span class="o">&lt;-</span> <span class="nb">list</span><span class="p">(</span><span class="s2">&quot;algorithm&quot;</span> <span class="o">=</span> <span class="s2">&quot;NLOPT_LD_SLSQP&quot;</span><span class="p">,</span> <span class="s2">&quot;xtol_rel&quot;</span> <span class="o">=</span> <span class="mf">1.0e-7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>要在NLOPT中调用BFGS，我们需要在下方的函数<code class="docutils literal notranslate"><span class="pre">poisson.log.grad()</span></code>中编写 <span class="math notranslate nohighlight">\(s(\beta)\)</span> ：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poisson</span><span class="o">.</span><span class="n">loglik</span><span class="o">.</span><span class="n">grad</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">b</span> <span class="o">&lt;-</span> <span class="k">as</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+  <span class="k">lambda</span> <span class="o">&lt;-</span> <span class="n">exp</span><span class="p">(</span><span class="n">X</span> <span class="o">%*%</span> <span class="n">b</span><span class="p">)</span>
+  <span class="n">ell</span> <span class="o">&lt;-</span> <span class="o">-</span><span class="n">colSums</span><span class="p">(</span><span class="o">-</span><span class="k">as</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="k">lambda</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span>
+  <span class="k">return</span><span class="p">(</span><span class="n">ell</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>我们比较解析梯度与数值梯度来验证函数的正确性。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># check the numerical gradient and the analytical gradient</span>
+<span class="n">b</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">.5</span><span class="p">)</span>
+<span class="n">numDeriv</span><span class="p">::</span><span class="n">grad</span><span class="p">(</span><span class="n">poisson</span><span class="o">.</span><span class="n">loglik</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<span class="n">poisson</span><span class="o">.</span><span class="n">loglik</span><span class="o">.</span><span class="n">grad</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>准备好梯度函数就可以开始运行BFGS。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res_BFGS</span> <span class="o">&lt;-</span> <span class="n">nloptr</span><span class="p">::</span><span class="n">nloptr</span><span class="p">(</span>
+  <span class="n">x0</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">init</span><span class="p">,</span>
+  <span class="n">eval_f</span> <span class="o">=</span> <span class="n">poisson</span><span class="o">.</span><span class="n">loglik</span><span class="p">,</span>
+  <span class="n">eval_grad_f</span> <span class="o">=</span> <span class="n">poisson</span><span class="o">.</span><span class="n">loglik</span><span class="o">.</span><span class="n">grad</span><span class="p">,</span>
+  <span class="n">opts</span> <span class="o">=</span> <span class="n">opts</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res_BFGS</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id10">
+<h2>凸优化<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h2>
+<p><strong>凸优化</strong> 是一种较为特别的优化，它指的是最优化过程中需要求解的目标函数为凸函数。凸优化的有点在于在所有的优化问题中它是最容易解决的问题。其中的一个重要原因在于凸优化中的局部最优就是全局最优，无需再考虑求解出多个局部最优的比较问题；另一个原因是凸函数本身的形式更易于求解(可以参考微观经济学效用最大化的计算问题)。因此，大多数我们遇到的非凸优化问题也是通过近似凸优化求解来处理的。想要进一步理解凸优化可以参考<a href="#id11"><span class="problematic" id="id12">:cite:`boyd2004convex`</span></a>中详细论述。在其中他们认为：“凸优化是技术，而其他的优化是艺术。”这句话某种意义上是成立的。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f1</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span><span class="o">^</span><span class="mi">2</span>
+<span class="n">f2</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">f3</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="o">-</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.4</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="mf">.2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="mf">.5</span><span class="p">)</span>
+
+<span class="n">par</span><span class="p">(</span><span class="n">mfrow</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">par</span><span class="p">(</span><span class="n">mar</span> <span class="o">=</span> <span class="n">c</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="n">x_base</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">f1</span><span class="p">(</span><span class="n">x_base</span><span class="p">),</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x_base</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;l&quot;</span><span class="p">,</span> <span class="n">lwd</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">xlab</span> <span class="o">=</span> <span class="s2">&quot;differentiable&quot;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">f2</span><span class="p">(</span><span class="n">x_base</span><span class="p">),</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x_base</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;l&quot;</span><span class="p">,</span> <span class="n">lwd</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">xlab</span> <span class="o">=</span> <span class="s2">&quot;non-differentiable&quot;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">f3</span><span class="p">(</span><span class="n">x_base</span><span class="p">),</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x_base</span><span class="p">,</span> <span class="nb">type</span> <span class="o">=</span> <span class="s2">&quot;l&quot;</span><span class="p">,</span> <span class="n">lwd</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="n">xlab</span> <span class="o">=</span> <span class="s2">&quot;multiple minimizers&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>实例</strong></p>
+<ul class="simple">
+<li><p>线性回归模型 MLE</p></li>
+</ul>
+<p>Normal MLE. The (negative) log-likelihood is</p>
+<div class="math notranslate nohighlight">
+\[
+\ell (\beta, \sigma) = \log \sigma + \frac{1}{2\sigma^2}\sum_{i=1}^n (y_i - x_i' \beta)^2
+\]</div>
+<p>This is not a convex problem, because <span class="math notranslate nohighlight">\(\log \sigma\)</span> is concave. But if we re-parameterize the criterion function by <span class="math notranslate nohighlight">\(\gamma = 1/\sigma\)</span> and <span class="math notranslate nohighlight">\(\alpha = \beta / \sigma\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[
+\ell (\alpha, \gamma) = -\log \gamma + \frac{1}{2}
+\sum_{i=1}^n (\gamma y_i - x_i' \alpha)^2
+\]</div>
+<p>in convex in <span class="math notranslate nohighlight">\(\alpha, \gamma\)</span>. Many MLE estimators in econometric textbooks are convex.</p>
+<p>鉴于高阶估计问题的重要性，<a href="#id13"><span class="problematic" id="id14">:cite:`gao2018two`</span></a>用R对两个计量问题进行了凸优化运算。 <code class="docutils literal notranslate"><span class="pre">CVXR</span></code> [&#64;fu2018cvxr] 是一个便捷的凸模型程序语言，同时还能支持付费优化包 <code class="docutils literal notranslate"><span class="pre">CLEPX</span></code>, <code class="docutils literal notranslate"><span class="pre">MOSEK</span></code>, <code class="docutils literal notranslate"><span class="pre">Gurubi</span></code> 和开源优化包 <code class="docutils literal notranslate"><span class="pre">ECOS</span></code> 与 <code class="docutils literal notranslate"><span class="pre">SDPT3</span></code>。 尽管开源优化包有无需付费和能够在云计算中处理大量数据的优点，但付费优化包还是更加可靠。 <code class="docutils literal notranslate"><span class="pre">MOSEK</span></code> 提供免费的学术通行证且有不错的用户体验。
+<a class="reference external" href="http://rmosek.r-forge.r-project.org/"><code class="docutils literal notranslate"><span class="pre">Rmosek</span></code></a> 提供了一个 <code class="docutils literal notranslate"><span class="pre">R</span></code> 的交互界面来下载 <code class="docutils literal notranslate"><span class="pre">Mosek</span></code> (但是在安装<code class="docutils literal notranslate"><span class="pre">Rmosek</span></code>前需要先下载好<code class="docutils literal notranslate"><span class="pre">Rtools</span></code>)</p>
+<p><strong>例子：宽松经验似然</strong></p>
+<p>想象一个有真实参数 <span class="math notranslate nohighlight">\(\beta_0\)</span> 的模型，它满足矩条件 <span class="math notranslate nohighlight">\(\mathrm{E}\left[  h\left(Z_i, \beta_0 \right)\right] = 0_m\)</span> ，其中 <span class="math notranslate nohighlight">\(\left\{Z_i \right\}_{i=1}^n\)</span> 是观测值， <span class="math notranslate nohighlight">\(\beta\)</span>
+是我们想要求解的低维参数，而 <span class="math notranslate nohighlight">\(h\)</span> 是一个 <span class="math notranslate nohighlight">\(\mathbb{R}^{m}\)</span> 中的矩条件
+经验似然 (EL) [<a href="#id15"><span class="problematic" id="id16">:cite:`owen1988empirical`</span></a>] [<a href="#id17"><span class="problematic" id="id18">:cite:`qin1994empirical`</span></a>] 计算</p>
+<div class="math notranslate nohighlight">
+\[
+\max_{\beta \in \mathcal{B}, \pi \Delta_n} \; \sum_{i=1}^n \log \pi_i \;\,\, \text{s.t.} \; \sum_{i=1}^n \pi_i h \left( Z_i, \beta \right) = 0_m
+\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(\Delta_{n} = \left\{ \pi\in\left[0,1\right]^{n}:\sum_{i=1}^{n}\pi_{i}=1 \right\}\)</span> 是 <span class="math notranslate nohighlight">\(n\)</span> 维的概率单形体 probability simplex.</p>
+<p>为了处理高维问题(比如 <span class="math notranslate nohighlight">\(m &gt; n\)</span> )， <a href="#id19"><span class="problematic" id="id20">:cite:`shi2016econometric`</span></a>提出了宽松经验似然(REL)，它被定义为如下式子的解：</p>
+<div class="math notranslate nohighlight">
+\[
+\max_{\beta\in\mathcal{B}}\max_{\pi\in\Delta_{n}^{\lambda}\left(\beta\right)}\,\sum_{i=1}^{n}\log\pi_{i}
+\]</div>
+<p>其中</p>
+<div class="math notranslate nohighlight">
+\[
+\Delta_{n}^{\lambda}\left(\beta\right)=\left\{ \pi_i \in\Delta_{n}:\big|\sum_{i=1}^{n}\pi_{i}h_{ij}\left(\beta\right)\big|\leq\lambda,\:j=1,2,\cdots,m\right\}
+\]</div>
+<p>是一个宽松单形体， <span class="math notranslate nohighlight">\(\lambda\geq0\)</span> 是一个调谐参数， <span class="math notranslate nohighlight">\(h_{ij}\left(\beta\right)=h_{j}\left(Z_{i},\beta\right)\)</span>
+是 <span class="math notranslate nohighlight">\(h\left(Z_{i},\beta\right)\)</span> 的第 <span class="math notranslate nohighlight">\(j\)</span> 个元素。</p>
+<p>与标准的EL类似， REL 的优化使用了内循环(inner loop)和外循环(outer loop)。
+<span class="math notranslate nohighlight">\(\beta\)</span> 的外循环是一个一般的低阶非线性最优化，可以通过牛顿类方法求解。有线性约束和对数目标的内循环在 <span class="math notranslate nohighlight">\(\pi=\left(\pi_{i}\right)_{i=1}^{n}\)</span> 中是外凸的。 通过引入辅助变量 <span class="math notranslate nohighlight">\(t_i\)</span> ，对数目标可以用线性目标函数<span class="math notranslate nohighlight">\(\sum_{i=1}^n t_i\)</span> 和指数圆锥约束 <span class="math notranslate nohighlight">\(n\)</span> 来表示。 <span class="math notranslate nohighlight">\(\left(\pi_{i}, 1, t_{i}\right) \in \mathcal{K}_{\mathrm{exp}}=\left\{\left(x_{1}, x_{2}, x_{3}\right): x_{1} \geq x_{2} \exp \left(x_{3} / x_{2}\right), x_{2}&gt;0\right\} \cup\left\{\left(x_{1}, 0, x_{3}\right): x_{1} \geq 0, x_{3} \leq 0\right\}\)</span>, <span class="math notranslate nohighlight">\(i=1,2,\cdots,n\)</span>.</p>
+<p>对于每个 <span class="math notranslate nohighlight">\(\beta\)</span> 来说，内循环问题就可以写成圆锥规划问题：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;\max _{\pi, t} \sum_{i=1}^{n} t_{i}\\
+\text { s.t. }&amp;\left[\begin{array}{c}
+1 \\
+-\lambda \\
+\vdots \\
+-\lambda
+\end{array}\right] \leq\left[\begin{array}{cccc}
+1 &amp; 1 &amp; \cdots &amp; 1 \\
+h_{11}(\beta) &amp; h_{21}(\beta) &amp; \cdots &amp; h_{n 1}(\beta) \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+h_{1 m}(\beta) &amp; h_{2 m}(\beta) &amp; \cdots &amp; h_{n m}(\beta)
+\end{array}\right]\left[\begin{array}{c}
+\pi_{1} \\
+\pi_{2} \\
+\vdots \\
+\pi_{n}
+\end{array}\right] \leq\left[\begin{array}{c}
+1 \\
+\lambda \\
+\vdots \\
+\lambda
+\end{array}\right]\\
+&amp;\left(\pi_{i}, 1, t_{i}\right) \in \mathcal{K}_{\mathrm{exp}}, 0 \leq \pi_{i} \leq 1, \text { for each } i=1,2, \cdots, n
+\end{aligned}
+\end{split}\]</div>
+<p>我们可以这样理解指数圆锥，注意到
+<span class="math notranslate nohighlight">\(\left(\pi_{i}, 1, t_{i}\right) \in \mathcal{K}_{\mathrm{exp}}\)</span> 与
+<span class="math notranslate nohighlight">\(\{ \pi_i \geq \exp(t_i): \pi_i\geq 0, t_i \leq 0 \}\)</span> 相等，因此
+<span class="math notranslate nohighlight">\(t_i \leq \log \pi_i\)</span> 。由于我们需要最大化 <span class="math notranslate nohighlight">\(\sum t_i\)</span> ，因此
+<span class="math notranslate nohighlight">\(t_i = \log \pi_i\)</span> 必须成立。约束最优化在 <code class="docutils literal notranslate"><span class="pre">Rmosek</span></code> 中可以运行，它可以将数学表达式转换为编程语言。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>innerloop &lt;- function(b, y, X, Z, tau) {
+  n &lt;- nrow(Z)
+  m &lt;- ncol(Z)
+
+  # Generate moment condition
+  H &lt;- MomentMatrix(y, X, Z, b)
+
+  # Initialize the mosek problem
+  Prob &lt;- list(sense = &quot;max&quot;)
+
+  # Prob$dparam$intpnt_nl_tol_rel_gap &lt;- 1e-5;
+  Prob$dparam &lt;- list(INTPNT_CO_TOL_REL_GAP = 1e-5)
+
+  # Linear coefficients of the objective
+  Prob$c &lt;- c(rep(0, n), rep(1, n), rep(0, n))
+
+  # Linear constraints
+  H_tilde &lt;- Matrix(rbind(rep(1, n), H), sparse = TRUE)
+  A &lt;-
+    rbind(
+      cbind(H_tilde, Matrix(0, m + 1, 2 * n, sparse = TRUE)),
+      cbind(Matrix(0, n, 2 * n, sparse = TRUE), Diagonal(n))
+    )
+  Prob$A &lt;- A
+  Prob$bc &lt;-
+    rbind(c(1, rep(-tau, m), rep(1, n)), c(1, rep(tau, m), rep(1, n)))
+  Prob$bx &lt;- rbind(
+    c(rep(0, n), rep(-Inf, n), rep(1, n)),
+    c(rep(1, n), rep(0, n), rep(1, n))
+  )
+
+  # Exponential Cones
+  NUMCONES &lt;- n
+  Prob$cones &lt;- matrix(list(), nrow = 2, ncol = NUMCONES)
+  rownames(Prob$cones) &lt;- c(&quot;type&quot;, &quot;sub&quot;)
+  for (i in 1:n) {
+    Prob$cones[, i] &lt;- list(&quot;PEXP&quot;, c(i, 2 * n + i, n + i))
+  }
+
+  # Invoke Mosek
+  mosek.out &lt;- mosek(Prob, opts = list(verbose = 0, soldetail = 1))
+
+  if (mosek.out$sol$itr$solsta == &quot;OPTIMAL&quot;) {
+    # Since the default of NLOPTR is to do minimization, need to set it as negative
+    return(-mosek.out$sol$itr$pobjval)
+  } else {
+    warning(&quot;WARNING: Inner loop not optimized&quot;)
+    return(Inf)
+  }
+}
+</pre></div>
+</div>
+</div>
+</div>
+<p>内循环最优化也可以用 <code class="docutils literal notranslate"><span class="pre">CVXR</span></code> 运算。它的程序更加简短易懂。</p>
+<p>innerloop.cvxr &lt;- function(b, y = NULL, X = NULL, Z = NULL, tau = NULL) {
+n &lt;- nrow(Z)
+m &lt;- ncol(Z)</p>
+<p>H &lt;- MomentMatrix(y, X, Z, b)</p>
+<p>p &lt;- Variable(n)
+constr &lt;- list(
+sum(p) == 1,
+p &gt;= 0,
+p &lt;= 1,
+H %<em>% p &gt;= -tau,
+H %</em>% p &lt;= tau
+)</p>
+<p>obj &lt;- sum(log(p))
+obj &lt;- Maximize(obj)</p>
+<p>Prob &lt;- Problem(obj, constr)
+cvxr.out &lt;- solve(Prob)</p>
+<p>if (cvxr.out<span class="math notranslate nohighlight">\(status == &quot;optimal&quot;) {
+    return(-cvxr.out\)</span>value)
+} else {
+warning(“WARNING: Inner loop not optimized”)
+return(Inf)
+}
+}</p>
+</section>
+<section id="id21">
+<h2>后续写作安排<a class="headerlink" href="#id21" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>更多的最优化问题，比如 Lasso, portfolio optimization (Shi, Su, and Xie 2020)</p></li>
+<li><p>添加 <code class="docutils literal notranslate"><span class="pre">ROI</span></code>.</p></li>
+</ul>
+</section>
+<section id="id22">
+<h2>拓展阅读<a class="headerlink" href="#id22" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><a href="#id23"><span class="problematic" id="id24">:cite:`fu2018cvxr`</span></a></p></li>
+<li><p><a href="#id25"><span class="problematic" id="id26">:cite:`gao2018two`</span></a></p></li>
+<li><p><a href="#id27"><span class="problematic" id="id28">:cite:`epubwu5858`</span></a></p></li>
+</ul>
+</section>
+<section id="id29">
+<h2>参考文献<a class="headerlink" href="#id29" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
