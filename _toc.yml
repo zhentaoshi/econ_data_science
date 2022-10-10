@@ -1,0 +1,15 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: 00-preface
+options:
+  numbered: True
+chapters:
+- file: 01-basic_R-CN
+- file: 03-advanced_R-CN
+- file: 05-integration-CN
+- file: 06-simulation-CN
+- file: 07-optimization-CN
+- file: 08-ML-CN
+- file: 09-ML2-CN
