@@ -1,0 +1,885 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Graphics &#8212; 经济学中的“数据科学”</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/translations.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="zh_CN">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">经济学中的“数据科学”</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00-preface.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-basic_R-CN.html">
+   1. 基础R语言
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-advanced_R-CN.html">
+   3. R语言进阶
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-integration-CN.html">
+   4. 积分
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-simulation-CN.html">
+   5. 模拟
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-optimization-CN.html">
+   6. 数值最优化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-ML-CN.html">
+   7. 从非参数到机器学习
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09-ML2-CN.html">
+   8. 基于预测的算法
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/zhentaoshi/econ_data_science/master?urlpath=tree/docs/02-data_visualization.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/zhentaoshi/econ_data_science"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/zhentaoshi/econ_data_science/issues/new?title=Issue%20on%20page%20%2F02-data_visualization.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/02-data_visualization.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simple-graphs">
+   Simple graphs
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#time-series">
+     Time Series
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hk-gdp">
+   HK GDP
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#us-gdp">
+     US GDP
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#china-s-gdp">
+     China’s GDP
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#shanghai-composite-index">
+     Shanghai Composite Index
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ss-return">
+     000001.SS Return
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bitcoin">
+     Bitcoin
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bitcoin-return">
+     Bitcoin return
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exchange-rates">
+     Exchange rates
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ggplot2">
+   GGplot2
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interactive-graph">
+     Interactive Graph
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#future-writing-plan">
+     Future writing plan
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Graphics</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simple-graphs">
+   Simple graphs
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#time-series">
+     Time Series
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#hk-gdp">
+   HK GDP
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#us-gdp">
+     US GDP
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#china-s-gdp">
+     China’s GDP
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#shanghai-composite-index">
+     Shanghai Composite Index
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ss-return">
+     000001.SS Return
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bitcoin">
+     Bitcoin
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bitcoin-return">
+     Bitcoin return
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exchange-rates">
+     Exchange rates
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ggplot2">
+   GGplot2
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interactive-graph">
+     Interactive Graph
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#future-writing-plan">
+     Future writing plan
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="graphics">
+<h1>Graphics<a class="headerlink" href="#graphics" title="永久链接至标题">#</a></h1>
+<!-- code is tested on SCRP --><p>China’s microeconomic datasets <a class="reference external" href="https://zhuanlan.zhihu.com/p/30588976">link</a></p>
+<p>Many links are down.</p>
+<p>Chinese Longitudinal Healthy Longevity Survey <a class="reference external" href="https://www.icpsr.umich.edu/web/NACDA/studies/36692">link</a></p>
+<p>China Household Finance Survey <a class="reference external" href="https://chfs.swufe.edu.cn/">link</a></p>
+<hr class="docutils" />
+<p>An English cliché says “One picture is worth ten thousand words”.
+John Tukey, a renowned mathematical statistician, was one of the pioneers of statistical graphs
+in the computer era. Nowadays, powerful software is able to produce dazzling statistical graphs,
+sometimes web-based and interactive. Outside of academia, journalism hooks a wide readership with
+professional data-based graphs. New York Times and The Economists are first-rate examples;
+South China Morning Post sometimes also does a respectable job.
+A well designed statistical graph can deliver an intuitive and powerful message.
+I consider graph prior to table when writing a research report or an academic paper.
+Graph is lively and engaging. Table is tedious and boring.</p>
+<section id="simple-graphs">
+<h2>Simple graphs<a class="headerlink" href="#simple-graphs" title="永久链接至标题">#</a></h2>
+<section id="time-series">
+<h3>Time Series<a class="headerlink" href="#time-series" title="永久链接至标题">#</a></h3>
+<ul class="simple">
+<li><p>Natural ordering of observations</p></li>
+<li><p>A single realization in history</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">magrittr</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">dplyr</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">doBy</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">zoo</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">rvest</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">Quandl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Macroeconomic applications</p>
+<ul>
+<li><p>国家统计局 <a class="reference external" href="https://data.stats.gov.cn/easyquery.htm?cn=B01">National Bureau of Statistics</a></p></li>
+<li><p>Federal Reserve <a class="reference external" href="https://research.stlouisfed.org/econ/mccracken/fred-databases/">FRED database</a></p></li>
+</ul>
+</li>
+<li><p>Financial applications</p>
+<ul>
+<li><p><a class="reference external" href="https://finance.yahoo.com/">Yahoo Finance</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="hk-gdp">
+<h2>HK GDP<a class="headerlink" href="#hk-gdp" title="永久链接至标题">#</a></h2>
+<p><a class="reference external" href="https://www.censtatd.gov.hk/en/web_table.html?id=33">link</a>
+With API</p>
+<section id="us-gdp">
+<h3>US GDP<a class="headerlink" href="#us-gdp" title="永久链接至标题">#</a></h3>
+</section>
+<section id="china-s-gdp">
+<h3>China’s GDP<a class="headerlink" href="#china-s-gdp" title="永久链接至标题">#</a></h3>
+<ul class="simple">
+<li><p>国家统计局 <a class="reference external" href="https://data.stats.gov.cn/easyquery.htm?cn=B01">National Bureau of Statistics</a></p></li>
+<li><p>API (Application Programming Interface) is provided  <a class="reference external" href="https://fred.stlouisfed.org/series/MKTGDPCNA646NWDB">FRED’s webpage</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">quantmod</span><span class="o">::</span><span class="nf">getSymbols.FRED</span><span class="p">(</span><span class="n">Symbols</span> <span class="o">=</span> <span class="s">&quot;MKTGDPCNA646NWDB&quot;</span><span class="p">,</span> <span class="n">env</span> <span class="o">=</span> <span class="n">.GlobalEnv</span><span class="p">)</span> 
+<span class="nf">plot</span><span class="p">(</span><span class="n">MKTGDPCNA646NWDB</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">'MKTGDPCNA646NWDB'</div><img alt="_images/02-data_visualization_9_1.png" src="_images/02-data_visualization_9_1.png" />
+</div>
+</div>
+</section>
+<section id="shanghai-composite-index">
+<h3>Shanghai Composite Index<a class="headerlink" href="#shanghai-composite-index" title="永久链接至标题">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">tick</span> <span class="o">=</span> <span class="s">&quot;000001.SS&quot;</span> <span class="c1"># need to find the tick </span>
+<span class="n">SH</span> <span class="o">&lt;-</span> <span class="n">quantmod</span><span class="o">::</span><span class="nf">getSymbols</span><span class="p">(</span><span class="n">tick</span><span class="p">,</span> <span class="n">auto.assign</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> 
+         <span class="n">from</span> <span class="o">=</span> <span class="s">&quot;2000-01-01&quot;</span><span class="p">)[,</span> <span class="nf">paste0</span><span class="p">(</span><span class="n">tick</span><span class="p">,</span><span class="s">&quot;.Close&quot;</span><span class="p">)]</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="n">SH</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+&quot;000001.SS contains missing values. Some functions will not work if objects contain missing values in the middle of the series. Consider using na.omit(), na.approx(), na.fill(), etc to remove or replace them.&quot;
+</pre></div>
+</div>
+<img alt="_images/02-data_visualization_11_1.png" src="_images/02-data_visualization_11_1.png" />
+</div>
+</div>
+</section>
+<section id="ss-return">
+<h3>000001.SS Return<a class="headerlink" href="#ss-return" title="永久链接至标题">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">diff</span><span class="p">(</span><span class="nf">log</span><span class="p">(</span><span class="n">HSI</span><span class="p">))</span> <span class="o">%&gt;%</span> <span class="n">plot</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/02-data_visualization_13_0.png" src="_images/02-data_visualization_13_0.png" />
+</div>
+</div>
+</section>
+<section id="bitcoin">
+<h3>Bitcoin<a class="headerlink" href="#bitcoin" title="永久链接至标题">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">BTC</span> <span class="o">&lt;-</span> <span class="n">quantmod</span><span class="o">::</span><span class="nf">getSymbols</span><span class="p">(</span><span class="s">&quot;BTC-USD&quot;</span><span class="p">,</span><span class="n">auto.assign</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">from</span> <span class="o">=</span> <span class="s">&quot;2021-07-01&quot;</span><span class="p">)[,</span><span class="m">4</span><span class="p">]</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">BTC</span><span class="p">)</span>
+
+<span class="n">ETH</span> <span class="o">&lt;-</span> <span class="n">quantmod</span><span class="o">::</span><span class="nf">getSymbols</span><span class="p">(</span><span class="s">&quot;ETH-USD&quot;</span><span class="p">,</span><span class="n">auto.assign</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">from</span> <span class="o">=</span> <span class="s">&quot;2021-07-01&quot;</span><span class="p">)[,</span><span class="m">4</span><span class="p">]</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">ETH</span><span class="p">)</span>
+
+<span class="nf">plot</span><span class="p">(</span> <span class="n">x</span> <span class="o">=</span> <span class="nf">as.vector</span><span class="p">(</span><span class="n">ETH</span><span class="p">),</span> <span class="n">y</span> <span class="o">=</span> <span class="nf">as.vector</span><span class="p">(</span><span class="n">BTC</span><span class="p">),</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/02-data_visualization_15_0.png" src="_images/02-data_visualization_15_0.png" />
+<img alt="_images/02-data_visualization_15_1.png" src="_images/02-data_visualization_15_1.png" />
+<img alt="_images/02-data_visualization_15_2.png" src="_images/02-data_visualization_15_2.png" />
+</div>
+</div>
+</section>
+<section id="bitcoin-return">
+<h3>Bitcoin return<a class="headerlink" href="#bitcoin-return" title="永久链接至标题">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">diff</span><span class="p">(</span> <span class="nf">log</span><span class="p">(</span><span class="n">BTC</span><span class="p">)</span> <span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">plot</span><span class="p">(</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/02-data_visualization_17_0.png" src="_images/02-data_visualization_17_0.png" />
+</div>
+</div>
+</section>
+<section id="exchange-rates">
+<h3>Exchange rates<a class="headerlink" href="#exchange-rates" title="永久链接至标题">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">quantmod</span><span class="o">::</span><span class="nf">getFX</span><span class="p">(</span><span class="s">&quot;USD/JPY&quot;</span><span class="p">)</span>
+<span class="n">quantmod</span><span class="o">::</span><span class="nf">getFX</span><span class="p">(</span><span class="s">&quot;HKD/JPY&quot;</span><span class="p">)</span>
+<span class="nf">matplot</span><span class="p">(</span> <span class="n">y</span> <span class="o">=</span> <span class="nf">cbind</span><span class="p">(</span><span class="n">USDJPY</span><span class="p">,</span> <span class="n">HKDJPY</span><span class="o">*</span><span class="m">7.8</span><span class="p">),</span> <span class="n">x</span> <span class="o">=</span> <span class="nf">index</span><span class="p">(</span><span class="n">USDJPY</span><span class="p">),</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">xlab</span> <span class="o">=</span> <span class="s">&quot;time&quot;</span>  <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">'USD/JPY'</div><div class="output text_html">'HKD/JPY'</div><img alt="_images/02-data_visualization_19_2.png" src="_images/02-data_visualization_19_2.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="ggplot2">
+<h2>GGplot2<a class="headerlink" href="#ggplot2" title="永久链接至标题">#</a></h2>
+<p>We have seen an example of R graph in the OLS regression linear example in Lecture 1.
+<code class="docutils literal notranslate"><span class="pre">plot</span></code> is a generic command for graphs, and is the default R graphic engine.
+It is capable of producing preliminary statistical graphs.</p>
+<p>Over the years, developers all over the world have had many proposals for
+more sophisticated statistical graphs. Hadley Wickham’s
+<code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> is among the most successful.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> is an advanced graphic system that generates high-quality statistical graphs.
+It is not possible to cover it in a lecture. Fortunately, the author wrote a comprehensive reference
+<a class="reference external" href="http://link.springer.com/book/10.1007%2F978-0-387-98141-3"><strong>ggplot2 book</strong></a>,
+which can be downloaded via the CUHK campus network (VPN needed).</p>
+<p><code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> accommodates data frames of a particular format. <code class="docutils literal notranslate"><span class="pre">reshape2</span></code> is a package that helps prepare the data frames for <code class="docutils literal notranslate"><span class="pre">ggplot2</span></code>.</p>
+<p>The workflow of ggplot is to add the elements in a graph one by one, and then print out
+the graph all together.
+In contrast, <code class="docutils literal notranslate"><span class="pre">plot</span></code> draws the main graph at first, and then adds the supplementary elements later.</p>
+<p><code class="docutils literal notranslate"><span class="pre">ggplot2</span></code> is particularly good at drawing multiple graphs, either of the same pattern or of
+different patterns. Multiple subgraphs convey rich information and easy comparison.</p>
+<p><strong>Example</strong></p>
+<p>Plot the density of two estimators under three different data generating processes.
+This is an example to generate subgraphs of the same pattern.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">load</span><span class="p">(</span><span class="s">&quot;data_example/big150.Rdata&quot;</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">reshape2</span><span class="p">)</span>
+
+<span class="n">big150_1</span> <span class="o">&lt;-</span> <span class="n">big150</span><span class="p">[,</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;typb&quot;</span><span class="p">,</span> <span class="s">&quot;b1&quot;</span><span class="p">,</span> <span class="s">&quot;b1_c&quot;</span><span class="p">)]</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">head</span><span class="p">(</span><span class="n">big150_1</span><span class="p">))</span>
+
+<span class="n">big150_1</span> <span class="o">&lt;-</span> <span class="nf">melt</span><span class="p">(</span><span class="n">big150_1</span><span class="p">,</span> <span class="n">id.vars</span> <span class="o">=</span> <span class="s">&quot;typb&quot;</span><span class="p">,</span> <span class="n">measure.vars</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;b1&quot;</span><span class="p">,</span> <span class="s">&quot;b1_c&quot;</span><span class="p">))</span>
+<span class="nf">names</span><span class="p">(</span><span class="n">big150_1</span><span class="p">)[</span><span class="m">2</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;estimator&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">head</span><span class="p">(</span><span class="n">big150_1</span><span class="p">))</span>
+
+<span class="n">p1</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">big150_1</span><span class="p">)</span>
+<span class="n">p1</span> <span class="o">&lt;-</span> <span class="n">p1</span> <span class="o">+</span> <span class="nf">geom_area</span><span class="p">(</span>
+  <span class="n">stat</span> <span class="o">=</span> <span class="s">&quot;density&quot;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="n">.</span><span class="m">25</span><span class="p">,</span>
+  <span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">value</span><span class="p">,</span> <span class="n">fill</span> <span class="o">=</span> <span class="n">estimator</span><span class="p">),</span> <span class="n">position</span> <span class="o">=</span> <span class="s">&quot;identity&quot;</span>
+<span class="p">)</span>
+<span class="n">p1</span> <span class="o">&lt;-</span> <span class="n">p1</span> <span class="o">+</span> <span class="nf">facet_grid</span><span class="p">(</span><span class="n">.</span> <span class="o">~</span> <span class="n">typb</span><span class="p">)</span>
+<span class="n">p1</span> <span class="o">&lt;-</span> <span class="n">p1</span> <span class="o">+</span> <span class="nf">geom_vline</span><span class="p">(</span><span class="n">xintercept</span> <span class="o">=</span> <span class="m">0</span><span class="p">)</span>
+<span class="n">p1</span> <span class="o">&lt;-</span> <span class="n">p1</span> <span class="o">+</span> <span class="nf">theme_bw</span><span class="p">()</span>
+<span class="n">p1</span> <span class="o">&lt;-</span> <span class="n">p1</span> <span class="o">+</span> <span class="nf">theme</span><span class="p">(</span>
+  <span class="n">strip.text</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">12</span><span class="p">),</span>
+  <span class="n">axis.text</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">12</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+&quot;package &#39;ggplot2&#39; was built under R version 4.1.3&quot;
+Warning message:
+&quot;package &#39;reshape2&#39; was built under R version 4.1.3&quot;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      typb           b1        b1_c
+12001   FE  0.124616242  0.11690387
+12002   FE  0.267670157  0.25202802
+12003   FE -0.030689329 -0.03976746
+12004   FE  0.121169923  0.11866138
+12005   FE  0.008300031 -0.02399673
+12006   FE -0.026199118 -0.05231120
+  typb estimator        value
+1   FE        b1  0.124616242
+2   FE        b1  0.267670157
+3   FE        b1 -0.030689329
+4   FE        b1  0.121169923
+5   FE        b1  0.008300031
+6   FE        b1 -0.026199118
+</pre></div>
+</div>
+<img alt="_images/02-data_visualization_22_2.png" src="_images/02-data_visualization_22_2.png" />
+</div>
+</div>
+<p>The function <code class="docutils literal notranslate"><span class="pre">ggplot</span></code> specifies which dataset to use for the graph. <code class="docutils literal notranslate"><span class="pre">geom_***</span></code> determines the shape to draw, for example scatter dots, lines, curves or areas. <code class="docutils literal notranslate"><span class="pre">theme</span></code> is to tune the supplementary elements like the background, the size and font of the axis text and so on.</p>
+<p><strong>Example</strong></p>
+<p>This example aligns two graphs of different patterns in one page.
+Similar graphs appear in &#64;shi2018structural.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># graph packages</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">lattice</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">reshape2</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">gridExtra</span><span class="p">)</span>
+
+<span class="nf">load</span><span class="p">(</span><span class="s">&quot;data_example/multigraph.Rdata&quot;</span><span class="p">)</span> <span class="c1"># load data</span>
+
+
+<span class="c1"># unify the theme in the two graphs</span>
+<span class="n">theme1</span> <span class="o">&lt;-</span> <span class="nf">theme_bw</span><span class="p">()</span> <span class="o">+</span> <span class="nf">theme</span><span class="p">(</span>
+  <span class="n">axis.title.x</span> <span class="o">=</span> <span class="nf">element_blank</span><span class="p">(),</span>
+  <span class="n">strip.text</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">12</span><span class="p">),</span>
+  <span class="n">axis.text</span> <span class="o">=</span> <span class="nf">element_text</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="m">12</span><span class="p">),</span>
+  <span class="n">legend.position</span> <span class="o">=</span> <span class="s">&quot;bottom&quot;</span><span class="p">,</span> <span class="n">legend.title</span> <span class="o">=</span> <span class="nf">element_blank</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="c1"># sub-graph 1</span>
+<span class="n">d1</span> <span class="o">&lt;-</span> <span class="nf">data.frame</span><span class="p">(</span><span class="n">month</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">480</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">m_vec</span><span class="p">)</span>
+<span class="n">p1</span> <span class="o">&lt;-</span> <span class="nf">qplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">month</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">m</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">d1</span><span class="p">,</span> <span class="n">geom</span> <span class="o">=</span> <span class="s">&quot;line&quot;</span><span class="p">)</span>
+<span class="n">p1</span> <span class="o">&lt;-</span> <span class="n">p1</span> <span class="o">+</span> <span class="n">theme1</span> <span class="o">+</span> <span class="nf">ylab</span><span class="p">(</span><span class="s">&quot;fraction of chartists&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># sug-graph 2</span>
+<span class="n">d2</span><span class="o">$</span><span class="n">month</span> <span class="o">&lt;-</span> <span class="m">1</span><span class="o">:</span><span class="m">480</span>
+<span class="n">p2</span> <span class="o">&lt;-</span> <span class="nf">ggplot</span><span class="p">(</span><span class="n">d2</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">&lt;-</span> <span class="n">p2</span> <span class="o">+</span> <span class="nf">geom_line</span><span class="p">(</span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">month</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">value</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="n">variable</span><span class="p">))</span>
+<span class="n">p2</span> <span class="o">&lt;-</span> <span class="n">p2</span> <span class="o">+</span> <span class="n">theme1</span> <span class="o">+</span> <span class="nf">ylab</span><span class="p">(</span><span class="s">&quot;price and fundamental&quot;</span><span class="p">)</span>
+
+<span class="c1"># generate the grahp</span>
+<span class="nf">grid.arrange</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">nrow</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning message:
+&quot;package &#39;gridExtra&#39; was built under R version 4.1.3&quot;
+
+Attaching package: &#39;gridExtra&#39;
+
+
+The following object is masked from &#39;package:dplyr&#39;:
+
+    combine
+</pre></div>
+</div>
+<img alt="_images/02-data_visualization_24_1.png" src="_images/02-data_visualization_24_1.png" />
+</div>
+</div>
+<p>In order to unify the theme of the two distinctive subgraphs,
+we define an object <code class="docutils literal notranslate"><span class="pre">theme1</span></code> and apply it in both graphic objects
+<code class="docutils literal notranslate"><span class="pre">p1</span></code> and <code class="docutils literal notranslate"><span class="pre">p2</span></code>.</p>
+<section id="interactive-graph">
+<h3>Interactive Graph<a class="headerlink" href="#interactive-graph" title="永久链接至标题">#</a></h3>
+<p>In the folder of <code class="docutils literal notranslate"><span class="pre">data_example</span></code>, we give a preliminary example
+of <code class="docutils literal notranslate"><span class="pre">flexdashboard</span></code>. It is very easy to convert a ggplot2 graph
+into an HTML interactive graph by <code class="docutils literal notranslate"><span class="pre">plotly::ggplotly()</span></code>.</p>
+</section>
+<section id="future-writing-plan">
+<h3>Future writing plan<a class="headerlink" href="#future-writing-plan" title="永久链接至标题">#</a></h3>
+<ul class="simple">
+<li><p>Shiny app <a class="reference external" href="https://shiny.rstudio.com/tutorial/">tutorial</a>. I have included a shiny app in <code class="docutils literal notranslate"><span class="pre">data_example/shiny</span></code>.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "conda-env-r-r"
+        },
+        kernelOptions: {
+            kernelName: "conda-env-r-r",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'conda-env-r-r'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By 史震涛 Shi Zhentao<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

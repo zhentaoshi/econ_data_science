@@ -1,0 +1,777 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>3. R语言进阶 &#8212; 经济学中的“数据科学”</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/translations.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="4. 积分" href="05-integration-CN.html" />
+    <link rel="prev" title="1. 基础R语言" href="01-basic_R-CN.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="zh_CN">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">经济学中的“数据科学”</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00-preface.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-basic_R-CN.html">
+   1. 基础R语言
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   3. R语言进阶
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-integration-CN.html">
+   4. 积分
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-simulation-CN.html">
+   5. 模拟
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-optimization-CN.html">
+   6. 数值最优化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-ML-CN.html">
+   7. 从非参数到机器学习
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09-ML2-CN.html">
+   8. 基于预测的算法
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/zhentaoshi/econ_data_science/master?urlpath=tree/docs/03-advanced_R-CN.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/zhentaoshi/econ_data_science"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/zhentaoshi/econ_data_science/issues/new?title=Issue%20on%20page%20%2F03-advanced_R-CN.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/03-advanced_R-CN.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   3.1. 简介
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   3.2. 向量化
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   3.3. 高效循环
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   3.4. 并行运算
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   3.5. 拓展阅读
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   3.6. 参考文献
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>R语言进阶</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   3.1. 简介
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   3.2. 向量化
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   3.3. 高效循环
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   3.4. 并行运算
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   3.5. 拓展阅读
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   3.6. 参考文献
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="r">
+<h1><span class="section-number">3. </span>R语言进阶<a class="headerlink" href="#r" title="永久链接至标题">#</a></h1>
+<section id="id1">
+<h2><span class="section-number">3.1. </span>简介<a class="headerlink" href="#id1" title="永久链接至标题">#</a></h2>
+<p>在本讲中，我们将会讨论如何在R中进行高效运算。</p>
+<ul class="simple">
+<li><p>R 是一个向量导向的语言。大多数情况下，向量化将会加快运算的速度。</p></li>
+<li><p>如果没有办法通过优化代码以提高速度，我们可以使用更多的 CPU 进行并行执行，以节省时间。</p></li>
+<li><p>如何在远程访问服务器。远程集群连接与在本地操作计算机并不相同。</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2><span class="section-number">3.2. </span>向量化<a class="headerlink" href="#id2" title="永久链接至标题">#</a></h2>
+<p>虽然有多种在数学上等效的计算方法，但是在运算速度上它们存在着明显的差异。</p>
+<p>运算速度真的那么重要吗?对于一个运算时间不到一分钟的项目来说，效率的差别并不显著。但有时候一个经济学的问题会非常冗杂。比如常见的结构化估计，单个的估计就可能需要一周的时间来运算。在计量经济学中，其他的计算密集型算法，比如自举法 (bootstrap) ，模拟最大似然估计 (simulated maximun likehood，简记 sml) 和模拟矩估计 (simulated method of moments) 等， 即使它们单次执行不需要太多的时间，重复上千次这样的流程也会占用非常多的时间。</p>
+<p>不仅如此，机器学习方法通常会涉及到调谐参数，而网格上每一点的调谐参数都需要重复相同的步骤。例如<span id="id3">[]</span>里的算法在一个24核的远程服务器中运算了8小时才找出了调谐参数的最佳组合。在这些问题中，优化代码是一个必要步骤。</p>
+<p>当然，优化代码需要投入开发者的时间。这是人力时间和机器时间的取舍与平衡问题。</p>
+<div class="proof example admonition" id="example-0">
+<p class="admonition-title"><span class="caption-number">例子 3.1 </span></p>
+<section class="example-content" id="proof-content">
+<p>在同方差的OLS回归中</p>
+<div class="math notranslate nohighlight">
+\[
+\sqrt{n}\left(\widehat{\beta}-\beta_{0}\right)\stackrel{d}{\to}N\left(0,\sigma^{2}\left(E\left[x_{i}x_{i}'\right]\right)^{-1}\right)
+\]</div>
+<p>其中渐进方差可以通过 <span class="math notranslate nohighlight">\((X'X)^{-1} \sum_{i=1}^n \widehat{e}^{2}\)</span> 相合估计。然而，如果是异方差，则</p>
+<div class="math notranslate nohighlight">
+\[
+\sqrt{n}\left(\widehat{\beta}-\beta_{0}\right)\stackrel{d}{\to}N\left(0,E\left[x_{i}x_{i}'\right]^{-1}\mathrm{var}\left(x_{i}e_{i}\right)E\left[x_{i}x_{i}'\right]^{-1}\right)
+\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(\mathrm{var}\left(x_{i}e_{i}\right)\)</span> 可以用下式估计</p>
+<div class="math notranslate nohighlight">
+\[
+\underset{\mathrm{opt1}}{\frac{1}{n}\sum_{i=1}^{n}x_{i}x_{i}'\widehat{e}_{i}^{2}}=\underset{\mathrm{opt2,3}}{\frac{1}{n}X'DX}=\underset{\mathrm{opt 4}}{\frac{1}{n}\left(X'D^{1/2}\right)\left(D^{1/2}X\right)}
+\]</div>
+<p><span class="math notranslate nohighlight">\(D\)</span> 是 <span class="math notranslate nohighlight">\(\left(\widehat{\epsilon}_{1}^{2},\widehat{\epsilon}_{2,}^{2},\ldots,\widehat{\epsilon}_{n}^{2}\right)\)</span> 的对角矩阵。
+要计算三明治形式 (the sandwich form) 的“肉”，至少有四种等效的方法：</p>
+<ol class="simple">
+<li><p>直接基于 <span class="math notranslate nohighlight">\(i=1,\ldots,n\)</span> 一个个加总 <span class="math notranslate nohighlight">\(\hat{e}_i^2 x_i x_i'\)</span> 。</p></li>
+<li><p>使用稠密的中心矩阵 <span class="math notranslate nohighlight">\(X' \mathrm{diag}(\hat{e}^2) X\)</span> .</p></li>
+<li><p>使用稀疏的中心矩阵 <span class="math notranslate nohighlight">\(X' \mathrm{diag}(\hat{e}^2) X\)</span> .</p></li>
+<li><p>对 <code class="docutils literal notranslate"><span class="pre">X*e_hat</span></code> 进行叉乘 (cross product) 。它可以用R语言进行逐个运算。</p></li>
+</ol>
+<p>首先，我们生成二元响应 (binary regressor) 和回归变量的数据。由于因变量是离散的，线性概率模型中的误差项是异方差。 所以，我们必须用异方差稳健方差 (heteroskedastic-robust variance) 才能相合估计OLS的渐近方差。使用下方的代码就能估计模型的系数，并计算对应的残差。</p>
+</section>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># an example of robust variance matrix.</span>
+<span class="c1"># compare the implementation via matrix, Matrix (package) and vecteroization.</span>
+
+<span class="c1"># n = 5000; Rep = 10; # Matrix is quick, matrix is slow, adding is OK</span>
+
+<span class="nf">source</span><span class="p">(</span><span class="s">&quot;data_example/lec2.R&quot;</span><span class="p">)</span>
+
+<span class="n">n</span> <span class="o">&lt;-</span> <span class="m">50</span>
+<span class="n">Rep</span> <span class="o">&lt;-</span> <span class="m">1000</span> 
+
+<span class="n">data.Xe</span> <span class="o">&lt;-</span> <span class="nf">lpm</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="c1"># see the function in &quot;data_example/lec2.R&quot;</span>
+<span class="n">X</span> <span class="o">&lt;-</span> <span class="n">data.Xe</span><span class="o">$</span><span class="n">X</span>
+<span class="n">e_hat</span> <span class="o">&lt;-</span> <span class="n">data.Xe</span><span class="o">$</span><span class="n">e_hat</span>
+
+<span class="n">XXe2</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">nrow</span> <span class="o">=</span> <span class="m">2</span><span class="p">,</span> <span class="n">ncol</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>对于相同的数据，我们对于四种方式分别运算，并比较每种方法的时间。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">for </span><span class="p">(</span><span class="n">opt</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="m">4</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">pts0</span> <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span>
+
+  <span class="nf">for </span><span class="p">(</span><span class="n">iter</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">Rep</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nf">set.seed</span><span class="p">(</span><span class="n">iter</span><span class="p">)</span> <span class="c1"># to make sure that the data used</span>
+    <span class="c1"># different estimation methods are the same</span>
+
+
+    <span class="nf">if </span><span class="p">(</span><span class="n">opt</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">XXe2</span> <span class="o">&lt;-</span> <span class="n">XXe2</span> <span class="o">+</span> <span class="n">e_hat</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="m">2</span> <span class="o">*</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">]</span> <span class="o">%*%</span> <span class="nf">t</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">])</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="n">else</span> <span class="nf">if </span><span class="p">(</span><span class="n">opt</span> <span class="o">==</span> <span class="m">2</span><span class="p">)</span> <span class="p">{</span> <span class="c1"># the vectorized version with dense matrix</span>
+      <span class="n">e_hat2_M</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">nrow</span> <span class="o">=</span> <span class="n">n</span><span class="p">,</span> <span class="n">ncol</span> <span class="o">=</span> <span class="n">n</span><span class="p">)</span>
+      <span class="nf">diag</span><span class="p">(</span><span class="n">e_hat2_M</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="n">e_hat</span><span class="o">^</span><span class="m">2</span>
+      <span class="n">XXe2</span> <span class="o">&lt;-</span> <span class="nf">t</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">e_hat2_M</span> <span class="o">%*%</span> <span class="n">X</span>
+    <span class="p">}</span> <span class="n">else</span> <span class="nf">if </span><span class="p">(</span><span class="n">opt</span> <span class="o">==</span> <span class="m">3</span><span class="p">)</span> <span class="p">{</span> <span class="c1"># the vectorized version with sparse matrix</span>
+      <span class="n">e_hat2_M</span> <span class="o">&lt;-</span> <span class="n">Matrix</span><span class="o">::</span><span class="nf">Matrix</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">ncol</span> <span class="o">=</span> <span class="n">n</span><span class="p">,</span> <span class="n">nrow</span> <span class="o">=</span> <span class="n">n</span><span class="p">)</span>
+      <span class="nf">diag</span><span class="p">(</span><span class="n">e_hat2_M</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="n">e_hat</span><span class="o">^</span><span class="m">2</span>
+      <span class="n">XXe2</span> <span class="o">&lt;-</span> <span class="nf">t</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">e_hat2_M</span> <span class="o">%*%</span> <span class="n">X</span>
+    <span class="p">}</span> <span class="n">else</span> <span class="nf">if </span><span class="p">(</span><span class="n">opt</span> <span class="o">==</span> <span class="m">4</span><span class="p">)</span> <span class="p">{</span> <span class="c1"># the best vectorization method. No waste</span>
+      <span class="n">Xe</span> <span class="o">&lt;-</span> <span class="n">X</span> <span class="o">*</span> <span class="n">e_hat</span>
+      <span class="n">XXe2</span> <span class="o">&lt;-</span> <span class="nf">t</span><span class="p">(</span><span class="n">Xe</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">Xe</span>
+    <span class="p">}</span>
+
+
+    <span class="n">XX_inv</span> <span class="o">&lt;-</span> <span class="nf">solve</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">X</span><span class="p">)</span>
+    <span class="n">sig_B</span> <span class="o">&lt;-</span> <span class="n">XX_inv</span> <span class="o">%*%</span> <span class="n">XXe2</span> <span class="o">%*%</span> <span class="n">XX_inv</span>
+  <span class="p">}</span>
+  <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;n =&quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="s">&quot;, Rep =&quot;</span><span class="p">,</span> <span class="n">Rep</span><span class="p">,</span> <span class="s">&quot;, opt =&quot;</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="s">&quot;, time =&quot;</span><span class="p">,</span> <span class="nf">Sys.time</span><span class="p">()</span> <span class="o">-</span> <span class="n">pts0</span><span class="p">,</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>尽管从数学上来说，四种方法都能计算出结果，但是我们可以明显地看出运算时间的差异。
+当 <span class="math notranslate nohighlight">\(n\)</span> 很小时， <code class="docutils literal notranslate"><span class="pre">matrix</span></code> 较快而 <code class="docutils literal notranslate"><span class="pre">Matrix</span></code> 较慢；向量化的方式是最快的。
+当 <span class="math notranslate nohighlight">\(n\)</span> 很大时， <code class="docutils literal notranslate"><span class="pre">matrix</span></code> 较慢而 <code class="docutils literal notranslate"><span class="pre">Matrix</span></code> 较快；向量化的方法依然是最快的。</p>
+<p>因为这次的模型很简单，单次运行仅仅占用非常短暂的时间，所以在这次测试中，我们多次重复相同的流程以更直观地体现效率的差距。而复杂的模型，例如 <code class="docutils literal notranslate"><span class="pre">data_example/IPUMS.R</span></code> 有23.4万的观测值，用不同方法计算就可能有惊人的时间差。这展现了向量化的重要作用。在复杂的运算中，向量化可以有效节省计算时间。例如，在异方差自回归的相合方差估计量(HAC)中，就涉及到了多层的矩阵运算。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">3.3. </span>高效循环<a class="headerlink" href="#id4" title="永久链接至标题">#</a></h2>
+<p>R来源于S语言，一门“古老”的语言。因此，R语言中有许多拓展包以适应现在的大数据时代。<span id="id5">[]</span> 中就有我们所需的例子。
+在此我们介绍 <a class="reference external" href="http://plyr.had.co.nz/"><code class="docutils literal notranslate"><span class="pre">plyr</span></code></a>。</p>
+<p>在传统的 <code class="docutils literal notranslate"><span class="pre">for</span></code> 循环中，我们不得不处理各种琐碎的工作。但 <a class="reference external" href="http://had.co.nz/">Hadley Wickham</a> 的 <code class="docutils literal notranslate"><span class="pre">plyr</span></code> 简化了工作并支持<strong>循环并行化</strong> (parallelization) 。</p>
+<div class="proof example admonition" id="example-1">
+<p class="admonition-title"><span class="caption-number">例子 3.2 </span></p>
+<section class="example-content" id="proof-content">
+<p>在这里，我们计算一个自由度为2的泊松分布(Poisson distribution)的实证收敛概率。首先，我们写一个自定义函数<code class="docutils literal notranslate"><span class="pre">CI</span></code>来运算置信区间。(这在上一讲中已经使用过)</p>
+<p>这是一个经典的 <code class="docutils literal notranslate"><span class="pre">for</span></code> 循环</p>
+</section>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">Rep</span> <span class="o">&lt;-</span> <span class="m">100000</span>
+<span class="n">sample_size</span> <span class="o">&lt;-</span> <span class="m">1000</span>
+<span class="n">mu</span> <span class="o">&lt;-</span> <span class="m">2</span>
+
+<span class="nf">source</span><span class="p">(</span><span class="s">&quot;data_example/lec2.R&quot;</span><span class="p">)</span>
+<span class="c1"># append a new outcome after each loop</span>
+<span class="n">pts0</span> <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span> <span class="c1"># check time</span>
+<span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">Rep</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">rpois</span><span class="p">(</span><span class="n">sample_size</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+  <span class="n">bounds</span> <span class="o">&lt;-</span> <span class="nf">CI</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">out_i</span> <span class="o">&lt;-</span> <span class="p">((</span><span class="n">bounds</span><span class="o">$</span><span class="n">lower</span> <span class="o">&lt;=</span> <span class="n">mu</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">mu</span> <span class="o">&lt;=</span> <span class="n">bounds</span><span class="o">$</span><span class="n">upper</span><span class="p">))</span>
+  <span class="nf">if </span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="m">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">out</span> <span class="o">&lt;-</span> <span class="n">out_i</span>
+  <span class="p">}</span> <span class="n">else</span> <span class="p">{</span>
+    <span class="n">out</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">out_i</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">pts1</span> <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span> <span class="o">-</span> <span class="n">pts0</span> <span class="c1"># check time elapse</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;loop without pre-definition takes&quot;</span><span class="p">,</span> <span class="n">pts1</span><span class="p">,</span> <span class="s">&quot;seconds\n&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># pre-define a container</span>
+<span class="n">out</span> <span class="o">&lt;-</span> <span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">Rep</span><span class="p">)</span>
+<span class="n">pts0</span> <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span> <span class="c1"># check time</span>
+<span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">Rep</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">rpois</span><span class="p">(</span><span class="n">sample_size</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+  <span class="n">bounds</span> <span class="o">&lt;-</span> <span class="nf">CI</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="p">((</span><span class="n">bounds</span><span class="o">$</span><span class="n">lower</span> <span class="o">&lt;=</span> <span class="n">mu</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">mu</span> <span class="o">&lt;=</span> <span class="n">bounds</span><span class="o">$</span><span class="n">upper</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="n">pts1</span> <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span> <span class="o">-</span> <span class="n">pts0</span> <span class="c1"># check time elapse</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;loop with pre-definition takes&quot;</span><span class="p">,</span> <span class="n">pts1</span><span class="p">,</span> <span class="s">&quot;seconds\n&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>注意这一行 <code class="docutils literal notranslate"><span class="pre">out</span> <span class="pre">=</span> <span class="pre">rep(0,</span> <span class="pre">Rep)</span></code>。 它提前定义( pre-defines )了一个 <code class="docutils literal notranslate"><span class="pre">out</span></code> 向量。而 <code class="docutils literal notranslate"><span class="pre">out</span></code> 向量则通过
+<code class="docutils literal notranslate"><span class="pre">out[i]</span> <span class="pre">=</span> <span class="pre">(</span> <span class="pre">(</span> <span class="pre">bounds$lower</span> <span class="pre">&lt;=</span> <span class="pre">mu</span>&#160; <span class="pre">)</span> <span class="pre">&amp;</span> <span class="pre">(mu</span> <span class="pre">&lt;=</span> <span class="pre">bounds$upper)</span> <span class="pre">)</span></code>赋值。为了向量<code class="docutils literal notranslate"><span class="pre">out</span></code>的计算，电脑打开一个连续的内存补丁。当输入新结果的时候，就会替换掉旧元素 (element) 。如果我们不提前定义<code class="docutils literal notranslate"><span class="pre">out</span></code>，而是在每个循环中添加 (append) 一个新元素，这样在每次循环中<code class="docutils literal notranslate"><span class="pre">out</span></code>向量的长度会随之改变，而且每一次都需要分配 (assign) 一个新的内存补丁来储存它。在第二个方法中，仅仅在内存中定位所需的向量，就要多占用大量的时间。</p>
+<p><code class="docutils literal notranslate"><span class="pre">out</span></code> 是结果的储存器。在一个 <code class="docutils literal notranslate"><span class="pre">for</span></code> 循环中，我们提前定义一个结果的储存向量；这样在每一次的循环中，我们就可以直接调用索引来替换对应的元素。</p>
+<p>相反，一个 <code class="docutils literal notranslate"><span class="pre">plyr</span></code> 循环不需要处理这些琐碎的细节，还可以快捷进行循环并行运算。下方的例子中，我们将<code class="docutils literal notranslate"><span class="pre">for</span></code>循环的代码封装为函数 <code class="docutils literal notranslate"><span class="pre">capture</span></code>，然后通过 <code class="docutils literal notranslate"><span class="pre">__ply</span></code> 指令重复运行。<code class="docutils literal notranslate"><span class="pre">__ply</span></code> 是一系列的函数。这里的 <code class="docutils literal notranslate"><span class="pre">ldply</span></code> 的含义是循环的输入是一个列表(<code class="docutils literal notranslate"><span class="pre">l</span></code>)，而输出则是一个数据框(<code class="docutils literal notranslate"><span class="pre">d</span></code>)。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">plyr</span><span class="p">)</span>
+
+<span class="n">capture</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">rpois</span><span class="p">(</span><span class="n">sample_size</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+  <span class="n">bounds</span> <span class="o">&lt;-</span> <span class="nf">CI</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="nf">return</span><span class="p">((</span><span class="n">bounds</span><span class="o">$</span><span class="n">lower</span> <span class="o">&lt;=</span> <span class="n">mu</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">mu</span> <span class="o">&lt;=</span> <span class="n">bounds</span><span class="o">$</span><span class="n">upper</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="n">pts0</span> <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span> <span class="c1"># check time</span>
+<span class="n">out</span> <span class="o">&lt;-</span> <span class="nf">ldply</span><span class="p">(</span><span class="n">.data</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="n">Rep</span><span class="p">,</span> <span class="n">.fun</span> <span class="o">=</span> <span class="n">capture</span><span class="p">)</span>
+
+<span class="n">pts1</span> <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span> <span class="o">-</span> <span class="n">pts0</span> <span class="c1"># check time elapse</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;plyr loop takes&quot;</span><span class="p">,</span> <span class="n">pts1</span><span class="p">,</span> <span class="s">&quot;seconds\n&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>这个例子比较简单，没有办法凸显 <code class="docutils literal notranslate"><span class="pre">plyr</span></code> 的优势。在处理大量数据的复杂问题时，不同代码带来的效率区别就十分明显了。
+单论速度， <code class="docutils literal notranslate"><span class="pre">plyr</span></code> 并没有比 <code class="docutils literal notranslate"><span class="pre">for</span></code> 循环快上多少。它们的表现不分伯仲。 我们接下来要介绍的是并行运算。如果使用<code class="docutils literal notranslate"><span class="pre">plyr</span></code>，这将会非常容易——我们仅需改变函数中的一个 <strong>argument</strong> 就可以了。</p>
+</section>
+<section id="id6">
+<h2><span class="section-number">3.4. </span>并行运算<a class="headerlink" href="#id6" title="永久链接至标题">#</a></h2>
+<p>当样本规模超出单个计算器的储存能力时，并行运算就体现了它的必要性。<span id="id7">[]</span>就是一个不错的例子。
+在这里，我们研究在多核计算器中进行并行运算能够获得多少的速度提升。首先，我们会介绍如何在单个计算器中协调多个核 (cores)。
+<code class="docutils literal notranslate"><span class="pre">foreach</span></code> 和 <code class="docutils literal notranslate"><span class="pre">doParallel</span></code> 都是并行运算常用的拓展包。
+下面的代码就是并行运算的基础结构。 <code class="docutils literal notranslate"><span class="pre">registerDoParallel(number)</span></code> 为后续并行运算提前准备了特定数量的CPU核。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">plyr</span><span class="p">);</span> <span class="nf">library</span><span class="p">(</span><span class="n">foreach</span><span class="p">);</span> <span class="nf">library</span><span class="p">(</span><span class="n">doParallel</span><span class="p">)</span>
+
+<span class="nf">registerDoParallel</span><span class="p">(</span><span class="n">a_number</span><span class="p">)</span> <span class="c1"># opens specified number of CPUs</span>
+
+<span class="n">out</span> <span class="o">&lt;-</span> <span class="nf">foreach</span><span class="p">(</span><span class="nf">icount</span><span class="p">(</span><span class="n">Rep</span><span class="p">),</span> <span class="n">.combine</span> <span class="o">=</span> <span class="n">option</span><span class="p">)</span> <span class="o">%dopar%</span> <span class="p">{</span>
+  <span class="n">my_expressions</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>理论上如果我们有两个自行运转的CPU，我们可以比单个CPU缩减一半的时间。那么事实是否与理论一致呢？</p>
+<div class="proof example admonition" id="example-2">
+<p class="admonition-title"><span class="caption-number">例子 3.3 </span></p>
+<section class="example-content" id="proof-content">
+<p>比较单核顺序循环和并行循环的运算速度</p>
+</section>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">foreach</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">doParallel</span><span class="p">)</span>
+
+<span class="nf">registerDoParallel</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="c1"># open 2 CPUs</span>
+
+<span class="n">pts0</span> <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span> <span class="c1"># check time</span>
+
+<span class="n">out</span> <span class="o">&lt;-</span> <span class="nf">foreach</span><span class="p">(</span><span class="nf">icount</span><span class="p">(</span><span class="n">Rep</span><span class="p">),</span> <span class="n">.combine</span> <span class="o">=</span> <span class="n">c</span><span class="p">)</span> <span class="o">%dopar%</span> <span class="p">{</span>
+  <span class="nf">capture</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="n">pts1</span> <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span> <span class="o">-</span> <span class="n">pts0</span> <span class="c1"># check time elapse</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;parallel loop takes&quot;</span><span class="p">,</span> <span class="n">pts1</span><span class="p">,</span> <span class="s">&quot;seconds\n&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>出乎意料的是，上方的代码运行得甚至更慢了。实际上，这是因为每一次循环都可以在非常短的时间内处理完毕。下方的代码则与之相反。 每一次循环花费的时间都是非平凡的 (non-trivial) 。而两个代码的区别仅仅是第一个使用的是 <code class="docutils literal notranslate"><span class="pre">%dopar%</span></code> 而第二个使用了 <code class="docutils literal notranslate"><span class="pre">%do%</span></code>。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">Rep</span> <span class="o">&lt;-</span> <span class="m">200</span>
+<span class="n">sample_size</span> <span class="o">&lt;-</span> <span class="m">2000000</span>
+
+<span class="nf">registerDoParallel</span><span class="p">(</span><span class="m">8</span><span class="p">)</span> <span class="c1"># change the number of open CPUs according to</span>
+<span class="c1"># the specification of your computer</span>
+
+<span class="n">pts0</span> <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span> <span class="c1"># check time</span>
+<span class="n">out</span> <span class="o">&lt;-</span> <span class="nf">foreach</span><span class="p">(</span><span class="nf">icount</span><span class="p">(</span><span class="n">Rep</span><span class="p">),</span> <span class="n">.combine</span> <span class="o">=</span> <span class="n">c</span><span class="p">)</span> <span class="o">%dopar%</span> <span class="p">{</span>
+  <span class="nf">capture</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;8-core parallel loop takes&quot;</span><span class="p">,</span> <span class="nf">Sys.time</span><span class="p">()</span> <span class="o">-</span> <span class="n">pts0</span> <span class="p">,</span> <span class="s">&quot;seconds\n&quot;</span><span class="p">)</span>
+
+<span class="n">pts0</span> <span class="o">&lt;-</span> <span class="nf">Sys.time</span><span class="p">()</span>
+<span class="n">out</span> <span class="o">&lt;-</span> <span class="nf">foreach</span><span class="p">(</span><span class="nf">icount</span><span class="p">(</span><span class="n">Rep</span><span class="p">),</span> <span class="n">.combine</span> <span class="o">=</span> <span class="n">c</span><span class="p">)</span> <span class="o">%do%</span> <span class="p">{</span>
+  <span class="nf">capture</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;single-core loop takes&quot;</span><span class="p">,</span> <span class="nf">Sys.time</span><span class="p">()</span> <span class="o">-</span> <span class="n">pts0</span> <span class="p">,</span> <span class="s">&quot;seconds\n&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id8">
+<h2><span class="section-number">3.5. </span>拓展阅读<a class="headerlink" href="#id8" title="永久链接至标题">#</a></h2>
+<p>Wickham and Grolemund: 第3、10、11、21以及26-30章</p>
+</section>
+<section id="id9">
+<h2><span class="section-number">3.6. </span>参考文献<a class="headerlink" href="#id9" title="永久链接至标题">#</a></h2>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            kernelName: "ir",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="01-basic_R-CN.html" title="上一页 页">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">上一页</p>
+            <p class="prev-next-title"><span class="section-number">1. </span>基础R语言</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="05-integration-CN.html" title="下一页 页">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">下一页</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>积分</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By 史震涛 Shi Zhentao<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

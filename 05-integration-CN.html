@@ -1,0 +1,806 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>4. 积分 &#8212; 经济学中的“数据科学”</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/translations.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="5. 模拟" href="06-simulation-CN.html" />
+    <link rel="prev" title="3. R语言进阶" href="03-advanced_R-CN.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="zh_CN">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">经济学中的“数据科学”</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00-preface.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-basic_R-CN.html">
+   1. 基础R语言
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-advanced_R-CN.html">
+   3. R语言进阶
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   4. 积分
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-simulation-CN.html">
+   5. 模拟
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-optimization-CN.html">
+   6. 数值最优化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-ML-CN.html">
+   7. 从非参数到机器学习
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09-ML2-CN.html">
+   8. 基于预测的算法
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/zhentaoshi/econ_data_science/master?urlpath=tree/docs/05-integration-CN.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/zhentaoshi/econ_data_science"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/zhentaoshi/econ_data_science/issues/new?title=Issue%20on%20page%20%2F05-integration-CN.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/05-integration-CN.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   4.1. 数理方法
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   4.2. 随机方法
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     4.2.1. 间接推断
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#markov-chain-monte-carlo">
+   4.3. 马尔可夫链-蒙特卡罗法 (Markov Chain Monte Carlo)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#metropolis-hastings">
+     4.3.1. Metropolis-Hastings 算法
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mcmc">
+     4.3.2. 拉普拉斯类估计量: MCMC的实际应用
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id17">
+   4.4. 后续写作计划
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id18">
+   4.5. 拓展阅读
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id20">
+   4.6. 参考文献
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>积分</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   4.1. 数理方法
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   4.2. 随机方法
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     4.2.1. 间接推断
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#markov-chain-monte-carlo">
+   4.3. 马尔可夫链-蒙特卡罗法 (Markov Chain Monte Carlo)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#metropolis-hastings">
+     4.3.1. Metropolis-Hastings 算法
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mcmc">
+     4.3.2. 拉普拉斯类估计量: MCMC的实际应用
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id17">
+   4.4. 后续写作计划
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id18">
+   4.5. 拓展阅读
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id20">
+   4.6. 参考文献
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">4. </span>积分<a class="headerlink" href="#id1" title="永久链接至标题">#</a></h1>
+<p>在数学定义中，积分(integration)和微分(differentiation)都涉及到了极限运算。但，计算机的精度有限，并不能处理无限小与无限大的运算，最多只能模拟求极限的过程。在本章教学中，我们先简要讨论数值微分与积分问题，之后再讨论计量经济学中随机方法的具体应用。其中我们会特别介绍模拟矩方法(simulated method of moments)，间接推断(indirect inference)和马尔可夫链-蒙特卡罗法(Markov Chain Monte Carlo, MCMC)。这些方法超出了课程 Econ5121A 和 Econ5150 的授课范围， 感兴趣的读者可以参考<span id="id2">[]</span>的第12与13章节以获得更详细的内容。</p>
+<section id="id3">
+<h2><span class="section-number">4.1. </span>数理方法<a class="headerlink" href="#id3" title="永久链接至标题">#</a></h2>
+<p>数值微分和积分是非常重要的基础知识。不过，电脑如何进行这些运算与经济学或者计量经济学并无关系；实际上，它更应该是一个数据分析课程的教学内容。因此，在这里我们快速地过一遍这些数学方法。<span id="id4">[]</span>是一本可靠的参考文献，相关知识可以详见此书第7章。</p>
+<p>在本科的微积分教学中，我们已经学过了许多常见函数的微分。然而，在某些情况下这些解析形式的微分不能或很难程序编译。例如，如果想要用牛顿法求出目标函数 <span class="math notranslate nohighlight">\(f:R^K \mapsto R\)</span> 的极值，理论上我们需要编辑它的 <span class="math notranslate nohighlight">\(K\)</span> 维梯度和 <span class="math notranslate nohighlight">\(K\times K\)</span> 海塞矩阵。而写出海塞矩阵就是一个费时费力还容易出错的工作。更甚的是，每当我们改变目标函数(这在测验和试错阶段时常发生)，我们就必须重新计算相应的梯度和海塞矩阵。所以，相较于写出解析表达式，数值微分无疑更加方便省事。尤其在早期的测试阶段，这种效率的差距就更加显著了。</p>
+<p>多元函数 <span class="math notranslate nohighlight">\(f:R^K \mapsto R\)</span> at a point <span class="math notranslate nohighlight">\(x_0 \in R^K\)</span> 的偏导为</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial f(x)}{\partial x_k}\bigg|_{x=x_0}=\lim_{\epsilon \to 0}
+\frac{f(x_0+\epsilon \cdot e_k) - f(x_0 - \epsilon \cdot e_k)}{2\epsilon},
+\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(e_k = (0,\ldots,0,1,0,\ldots,0)\)</span> 是第 <span class="math notranslate nohighlight">\(k\)</span> 阶坐标的符号(identifier)。
+计算机的数值运算方法是计算 <span class="math notranslate nohighlight">\(\epsilon\)</span> 非常小的
+<span class="math notranslate nohighlight">\(f(x_0\pm\epsilon \cdot e_k))\)</span> 。但是，怎么知道多小才算 <strong>小</strong> ？ 常规操作是尝试一系列递减的 <span class="math notranslate nohighlight">\(\epsilon\)</span> 直到导数的数值解趋于稳定。有许多的随机算法可用于处理这种问题。</p>
+<p>在R中，拓展包 <code class="docutils literal notranslate"><span class="pre">numDeriv</span></code> 就能够计算数值微分，其中</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">grad</span></code> 用于标量值函数</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">jacobian</span></code> 用于实数向量值函数</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hessian</span></code> 用于标量值函数</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">genD</span></code> 用于实数向量值函数</p></li>
+</ul>
+<p>从总体上看，积分运算比微分更难。在R中，<code class="docutils literal notranslate"><span class="pre">integrate</span></code> 可以用于计算一维求积，而<code class="docutils literal notranslate"><span class="pre">cubature</span></code>中的
+<code class="docutils literal notranslate"><span class="pre">adaptIntegrate</span></code>可以处理多维求积分问题。读者可以自行查阅数值积分的算法操作手册。</p>
+<p>当然，数值法并非万能灵药。并非所有方程都可微或者可积。在进行数值运算前，必须要先理解函数的行为(behavior)。尽管R语言中有一些能够进行符号运算的拓展包，但是R本身符号运算的功能很薄弱。<code class="docutils literal notranslate"><span class="pre">Mathematica</span></code> 或者 <code class="docutils literal notranslate"><span class="pre">Wolfram</span> <span class="pre">Alpha</span></code>，是进行符号运算的实用工具。</p>
+</section>
+<section id="id5">
+<h2><span class="section-number">4.2. </span>随机方法<a class="headerlink" href="#id5" title="永久链接至标题">#</a></h2>
+<p>数值积分的另一种方式是 <strong>随机方法</strong> (stochastic methods)。随机积分背后的原理是大数定律。
+令 <span class="math notranslate nohighlight">\(\int h(x) d F(x)\)</span> 为 <span class="math notranslate nohighlight">\(F(x)\)</span> 的积分。( <span class="math notranslate nohighlight">\(F(x)\)</span> 是概率分布函数）
+用函数 <span class="math notranslate nohighlight">\(\int h(x) d F(x) \approx S^{-1} \sum_{s=1}^S h(x_s)\)</span> ，我们就可以估计积分值，其中 <span class="math notranslate nohighlight">\(x_s\)</span> 由 <span class="math notranslate nohighlight">\(F(x)\)</span> 随机生成。当 <span class="math notranslate nohighlight">\(S\)</span> 足够大时，大数定律就可以得出:</p>
+<div class="math notranslate nohighlight">
+\[
+S^{-1} \sum_{s=1}^S h(x_s) \stackrel{\mathrm{p}}{\to} E[h(x)] = \int h(x) d F(x).
+\]</div>
+<p>如果积分并非由整体 <span class="math notranslate nohighlight">\(F(x)\)</span> 而由子集 <span class="math notranslate nohighlight">\(A\)</span> 得到，那么</p>
+<div class="math notranslate nohighlight">
+\[
+\int_A h(x) d F(x) \approx S^{-1} \sum_{s=1}^S h(x_s) \cdot 1\{x_s \in A\},
+\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(1\{\cdot\}\)</span> 是指示函数。</p>
+<p><strong>指示函数</strong> ：指示函数用来表示有哪些元素满足特定条件或者属于某一子集A，有时候也被称为特征函数。</p>
+<p>理论上我们希望 <span class="math notranslate nohighlight">\(S\)</span> 越大越好，但现实操作则往往受到计算机的储存和运算时间的限制。运算中 <span class="math notranslate nohighlight">\(S\)</span> 的大小没有统一的规定，我们可以通过初步实验来估计运算所需要的 <span class="math notranslate nohighlight">\(S\)</span> 大小。</p>
+<p>由于操作便捷、使用简单，随机积分法在计量经济学和统计学中广受欢迎。</p>
+<p><strong>例子</strong></p>
+<p>在经济学模型中，可能会遇到部分元素无法观测的问题，这将会影响到经济主体的决策。
+<span id="id6">[]</span>提出了一个隐变量模型(Roy模型)，它是劳动经济学中自选择问题的基础。</p>
+<p>Roy模型的原文中，经济主体必须是农民或者渔民。农民的效用函数被定义为 <span class="math notranslate nohighlight">\(U_1^{\star} = x' \beta_1 + e_1\)</span> ，渔民则是
+<span class="math notranslate nohighlight">\(U_2^{\star} = x' \beta_2 + e_2\)</span> ，
+其中 <span class="math notranslate nohighlight">\(U_1^{\star}\)</span> 和 <span class="math notranslate nohighlight">\(U_2^{\star}\)</span> 是隐变量 (不可观测)。计量学者可观测到的是
+<span class="math notranslate nohighlight">\(y=\mathbf{1}\{U_1^{\star}&gt; U_2^{\star}\}\)</span> 。如果
+<span class="math notranslate nohighlight">\((e_1,e_2)\)</span> 独立于 <span class="math notranslate nohighlight">\(x\)</span> ，且</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+e_1\\e_2
+\end{bmatrix}
+\sim N \left(
+\begin{bmatrix}
+0 \\ 0
+\end{bmatrix},
+  \begin{bmatrix}
+  \sigma_1^2 &amp; \sigma_{12} \\ \sigma_{12} &amp; 1
+  \end{bmatrix}\right)
+\end{split}\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(\sigma_2\)</span> 被正态标准化为1， 我们可以写出对数似然</p>
+<div class="math notranslate nohighlight">
+\[
+L(\theta) = \sum_{i = 1}^n  \left\{ y_i \log P( U_{i1}^{\star} &gt; U_{i2}^{\star} )
++ (1-y_i)\log P( U_{i1}^* \leq  U_{i2}^{\star} ) \right\}.
+\]</div>
+<p>令 <span class="math notranslate nohighlight">\(\theta = (\beta_1, \beta_2, \sigma_1, \sigma_{12})\)</span> 。
+给定测试值 <span class="math notranslate nohighlight">\(\theta\)</span> ，我们就可以计算</p>
+<div class="math notranslate nohighlight">
+\[
+p(\theta|x_i) = P\left( U^{\star}_{i1}(\theta) &gt; U^{\star}_{i2}(\theta) \right)
+= P\left( x_i'(\beta_1 - \beta_2) &gt; e_{i2} -e_{i1} \right).
+\]</div>
+<p>在联合正态分布假设下， <span class="math notranslate nohighlight">\(e_{i2} - e_{i1} \sim N(0, \sigma_1^2 - 2\sigma_{12}+1)\)</span> ，因此</p>
+<div class="math notranslate nohighlight">
+\[
+p(\theta|x_i) = \Phi \left(  \frac{x_i'(\beta_1 - \beta_2)}{\sqrt{\sigma_1^2 - 2\sigma_{12}+1}} \right)
+\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(\Phi(\cdot)\)</span> 是标准正态分布的累积分布函数(CDF)。</p>
+<p>不过，注意到它的解析形式依赖于联合正态分布的假设，并不能随便推广到其他的分布。但只要电脑能够生成 <span class="math notranslate nohighlight">\((e_{i1}, e_{i2})\)</span> 的联合分布，无论是否正态，我们都可以使用随机方法。我们估计：</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{p}(\theta|x_i) = \frac{1}{S} \sum_{i=1}^S \mathbf{1}\left( U^{s*}_{i1}(\theta) &gt; U^{s*}_{i2}(\theta) \right),
+\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(s=1,\ldots,S\)</span> 是模拟的下标， <span class="math notranslate nohighlight">\(S\)</span> 是模拟复制的总数量。</p>
+<p>接下来，我们将理论模型生成的矩与它们的真实值对应。选取哪些矩由使用者依据情况自行决定。Roy模型的一些常用选择是：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+g_1(\theta) &amp; =  n^{-1} \sum_{i=1}^n x_i (y_i - \hat{p}(\theta | x_i))  \approx  0\\
+g_2(\theta) &amp; =  n^{-1} \sum_{i=1}^n (y_i - \bar{y})^2 - \bar{\hat{p}}(\theta| x_i) (1- \bar{\hat{p}}(\theta| x_i))  \approx  0\\
+g_3(\theta) &amp; =  n^{-1} \sum_{i=1}^n (x_i - \bar{x} ) (y_i - \hat{p}(\theta | x_i))^2  \approx  0
+\end{align*}
+\end{split}\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(\bar{y} = n^{-1} \sum_{i=1}^n y_i\)</span> 且 <span class="math notranslate nohighlight">\(\bar{\hat{p}}(\theta) = n^{-1} \sum_{i=1}^n p(\theta|x_i)\)</span> 。
+由于 <span class="math notranslate nohighlight">\((e_{i1}, e_{i2})\)</span> 与 <span class="math notranslate nohighlight">\(x_i\)</span> 独立，我们就能得到第一组矩，进而得到 <span class="math notranslate nohighlight">\(E[x_i y_i] = x_i E[y_i | x_i] = x_i p(\theta|x_i)\)</span> 。
+第二组与 <span class="math notranslate nohighlight">\(y_i\)</span> 的方差相对应。由于矩条件 <span class="math notranslate nohighlight">\((g_j(\theta))_{j=1}^3\)</span> 等于未知参数的数量，这些矩条件恰好识别参数 <span class="math notranslate nohighlight">\(\theta\)</span> 。我们需要找出更多的矩来进行过度识别。此外，我们需要选择一个权重矩阵 <span class="math notranslate nohighlight">\(W\)</span> 来形成GMM的二次型目标函数。</p>
+<p>上面的这个例子是模拟最大似然(simulated maximum likelihood)的其中一个应用。如果无法写出解析形式，则可以模拟一个矩条件。
+<span id="id7">[]</span>给出了模拟矩估计(simulated method of moments, SMM）的理论支撑。我们的另一位老师Prof. Guo [<span id="id8">[]</span>] 最近将SMM应用于一个结构化劳动力模型。</p>
+<section id="id9">
+<h3><span class="section-number">4.2.1. </span>间接推断<a class="headerlink" href="#id9" title="永久链接至标题">#</a></h3>
+<p>间接推断(indirect inference) [<span id="id10">[]</span>, <span id="id11">[]</span>]
+是另一个基于模拟的估计方法。间接推断在结构化模型估计中广泛使用。[<span id="id12">[]</span>]
+间接推断法的理论研究表明了它的良好性质。如果选择了合适的binding函数，那么模型的偏差将会显著减少(bias deduction)。[<span id="id13">[]</span>]</p>
+<p>间接推断的基本思路是从辅助模型(<em>auxiliary model</em>)中找出结构参数。</p>
+<p><strong>辅助模型</strong> (<em>auxiliary model</em>): 通常是一个简化型的回归模型。</p>
+<p>简化型的回归模型忽略了背后的经济学结构，是单纯的统计学过程。因此，简化的回归模型处理起来便捷不少。binding函数( <em>binding function</em> )是简化型参数空间与结构型参数空间的一对一映射。估计出简化型的参数之后，我们就可以根据binding函数找出结构型参数。如果简化型参数可以用封闭形式表示，我们就可以利用解析形式匹配理论预测和实际的结果。[<span id="id14">[]</span>] 不过在大多数的情况下，结构型模型得出的简化型并没有封闭形式表达式，所以我们必须用模拟法计算。</p>
+<p>辅助模型的选择并不唯一。在Roy模型的例子中， <span class="math notranslate nohighlight">\(\theta\)</span> 是结构参数，构建辅助模型的切入点是 <span class="math notranslate nohighlight">\(y_i\)</span> 和 <span class="math notranslate nohighlight">\(x_i\)</span> 的线性回归模型。我们可以选 <span class="math notranslate nohighlight">\(\hat{b}=(\hat{b}_1,\hat{b}_2,\hat{b}_3)'\)</span> 作为简化型的参数，其中</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+\hat{b}_1 &amp; =  (X'X)^{-1}X'y \\
+\hat{b}_2 &amp; =  n^{-1}\sum_{y_i=1} (y_i - x_i' b_1)^2 = n^{-1}\sum_{y_i=1} (1 - x_i' b_1)^2  \\
+\hat{b}_3 &amp; =  n^{-1}\sum_{y_i=0} (y_i - x_i' b_1)^2 = n^{-1}\sum_{y_i=0} (x_i' b_1)^2.
+\end{align}
+\end{split}\]</div>
+<p>在此， <span class="math notranslate nohighlight">\(\hat{b}_1\)</span> 与 <span class="math notranslate nohighlight">\(\beta\)</span> 有关，而 <span class="math notranslate nohighlight">\((\hat{b}_2,\hat{b}_3)\)</span>
+取决于 <span class="math notranslate nohighlight">\((\sigma_1,\sigma_{12})\)</span> 。</p>
+<p>现在我们讨论结构型的参数。给定测试值 <span class="math notranslate nohighlight">\(\theta\)</span> ，模型是参数化的，我们就可以人为模拟 <span class="math notranslate nohighlight">\(x_i\)</span> 的条件误差 <span class="math notranslate nohighlight">\((e_{i1}^*, e_{i2}^*)\)</span> 。在每次的模拟中，我们可以决定 <span class="math notranslate nohighlight">\(y_i^*\)</span> ，进而在给定人造数据后估计简化型参数 <span class="math notranslate nohighlight">\(\hat{b}^*=\hat{b}^*(\theta)\)</span> 。<span class="math notranslate nohighlight">\(b(\theta)\)</span> 是binding函数。进行 <span class="math notranslate nohighlight">\(S\)</span> 次模拟后，我们可以测量 <span class="math notranslate nohighlight">\(\hat{b}\)</span> 和 <span class="math notranslate nohighlight">\(\hat{b}^*\)</span> 的距离</p>
+<div class="math notranslate nohighlight">
+\[
+Q(\theta) = \left(\hat{b} - S^{-1} \sum_{s=1}^S \hat{b}^*(\theta)^{s} \right)'
+W \left(\hat{b} - S^{-1} \sum_{s=1}^S \hat{b}^*(\theta)^{s}\right)
+\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(s\)</span> 表示模拟，而 <span class="math notranslate nohighlight">\(W\)</span> 是正定权重矩阵。
+间接推断估计量是 <span class="math notranslate nohighlight">\(\hat{\theta} = \arg\min_{\theta} Q(\theta).\)</span>
+也就是说，我们寻找真实数据与人造数据的简化型参数差异最小的 <span class="math notranslate nohighlight">\(\theta\)</span> 。</p>
+</section>
+</section>
+<section id="markov-chain-monte-carlo">
+<h2><span class="section-number">4.3. </span>马尔可夫链-蒙特卡罗法 (Markov Chain Monte Carlo)<a class="headerlink" href="#markov-chain-monte-carlo" title="永久链接至标题">#</a></h2>
+<p>如果已知累积分布函数 <span class="math notranslate nohighlight">\(F(X)\)</span> ，我们就能生成服从分布的随机变量，从而可以很容易算出 <span class="math notranslate nohighlight">\(X = F^{-1}(U)\)</span> ，其中 <span class="math notranslate nohighlight">\(U\)</span> 是从 <span class="math notranslate nohighlight">\(\mathrm{Uniform}(0,1)\)</span> 中随机抽取的。该 <span class="math notranslate nohighlight">\(X\)</span> 服从 <span class="math notranslate nohighlight">\(F(X)\)</span> 的分布。</p>
+<p>如果概率密度函数 <span class="math notranslate nohighlight">\(f(X)\)</span> 已知，我们就能用 <strong>重要性采样法</strong> (<em>importance sampling</em>)生成所需的样本。
+<a class="reference external" href="https://en.wikipedia.org/wiki/Metropolis%E2%80%93Hastings_algorithm">Metropolis-Hastings 算法</a>
+(MH算法) 就是这样的一种方法。
+MH 是其中一种 <a class="reference external" href="https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">Markov Chain Monte Carlo</a>方法。
+它可以通过 R 拓展包 <code class="docutils literal notranslate"><span class="pre">mcmc</span></code>实现。
+<a class="reference external" href="https://chi-feng.github.io/mcmc-demo/">这一网站</a> 展示MCMC的使用样例。</p>
+<section id="metropolis-hastings">
+<h3><span class="section-number">4.3.1. </span>Metropolis-Hastings 算法<a class="headerlink" href="#metropolis-hastings" title="永久链接至标题">#</a></h3>
+<p>MH背后的原理需要长导数，但是算法的实现十分简单直接。在这里，我们用MH算法生成正态分布观测值的样本(<span class="math notranslate nohighlight">\(\mu = 1\)</span> ， <span class="math notranslate nohighlight">\(\sigma = 0.5\)</span>)。</p>
+<p>在函数 <code class="docutils literal notranslate"><span class="pre">metrop</span></code> 中我们提供了</p>
+<div class="math notranslate nohighlight">
+\[
+\log f(x) = -\frac{1}{2} \log (2\pi) - \log \sigma - \frac{1}{2\sigma^2} (x-\mu)^2,
+\]</div>
+<p>密度的对数。由于第一项与参数无关，我们可以将之删去。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">y</span> <span class="o">&lt;-</span> <span class="o">-</span><span class="nf">log</span><span class="p">(</span><span class="n">sd</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span><span class="o">^</span><span class="m">2</span> <span class="o">/</span> <span class="p">(</span><span class="m">2</span> <span class="o">*</span> <span class="n">sd</span><span class="o">^</span><span class="m">2</span><span class="p">)</span>
+<span class="p">}</span> <span class="c1"># un-normalized function (doesn&#39;t need to integrate as 1)</span>
+
+<span class="n">out</span> <span class="o">&lt;-</span> <span class="n">mcmc</span><span class="o">::</span><span class="nf">metrop</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">h</span><span class="p">,</span> <span class="n">initial</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">nbatch</span> <span class="o">=</span> <span class="m">100</span><span class="p">,</span> <span class="n">nspac</span> <span class="o">=</span> <span class="m">1</span><span class="p">)</span>
+
+<span class="nf">par</span><span class="p">(</span><span class="n">mfrow</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">3</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
+<span class="nf">par</span><span class="p">(</span><span class="n">mar</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">))</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">out</span><span class="o">$</span><span class="n">batch</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">)</span> <span class="c1"># a time series with flat steps</span>
+
+<span class="n">out</span> <span class="o">&lt;-</span> <span class="n">mcmc</span><span class="o">::</span><span class="nf">metrop</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">h</span><span class="p">,</span> <span class="n">initial</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">nbatch</span> <span class="o">=</span> <span class="m">100</span><span class="p">,</span> <span class="n">nspac</span> <span class="o">=</span> <span class="m">10</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">out</span><span class="o">$</span><span class="n">batch</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">)</span> <span class="c1"># a time series looks like a white noise</span>
+
+<span class="n">out</span> <span class="o">&lt;-</span> <span class="n">mcmc</span><span class="o">::</span><span class="nf">metrop</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">h</span><span class="p">,</span> <span class="n">initial</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">nbatch</span> <span class="o">=</span> <span class="m">10000</span><span class="p">,</span> <span class="n">nspac</span> <span class="o">=</span> <span class="m">10</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="nf">density</span><span class="p">(</span><span class="n">out</span><span class="o">$</span><span class="n">batch</span><span class="p">),</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="n">lwd</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+
+<span class="n">xbase</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">-2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">0.01</span><span class="p">)</span>
+<span class="n">ynorm</span> <span class="o">&lt;-</span> <span class="nf">dnorm</span><span class="p">(</span><span class="n">xbase</span><span class="p">,</span> <span class="n">mean</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">sd</span> <span class="o">=</span> <span class="m">0.5</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">xbase</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">ynorm</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>程序生成的图表包含了三个面板。第一个是一个时间序列，其中所有观测值的边际分布都服从 <span class="math notranslate nohighlight">\(N(1,0.5^2)\)</span> 。时间依赖性是可视的；我们也能够观测到当马尔可夫链拒绝新<strong>建议</strong>，两个时期的值没有更新的平坦区(flat regions)。 为了减少时间依赖性，第二个面板在马尔可夫链上每隔十个观测值就收集一次时间序列。在这次的子表中，序列相关性就降低了。第三个面板比较了模拟的观测值的kernel密度(黑线)和 <span class="math notranslate nohighlight">\(N(1,0.5^2)\)</span> 的概率密度函数(红线)。</p>
+</section>
+<section id="mcmc">
+<h3><span class="section-number">4.3.2. </span>拉普拉斯类估计量: MCMC的实际应用<a class="headerlink" href="#mcmc" title="永久链接至标题">#</a></h3>
+<p>对于某些计量估计量来说，找到全局最优解是很困难的，因为目标函数的行为(behavior)是不规则的。 <span id="id15">[]</span> 提出了拉普拉斯类估计量(<em>Laplace-type estimator</em> LTE) 和夸西-贝叶斯估计量(Quasi-Bayesian estimator QBE)， 它可以规避最优化计算中的棘手问题。 LTE把目标函数的极值估计量转化为概率权重:</p>
+<div class="math notranslate nohighlight">
+\[
+f_n (\theta) = \frac{\exp(-L_n(\theta))\pi(\theta)}{\int_{\Theta} \exp(-L_n(\theta))\pi(\theta)}
+\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(L_n(\theta)\)</span> 是目标函数 (比如说OLS、(负) 对数似然或者广义矩估计)， <span class="math notranslate nohighlight">\(\pi(\theta)\)</span> 是先验分布(prior distribution)的密度。
+目标函数值越小，它的权重就越大。指数转换方式来自于 <a class="reference external" href="https://en.wikipedia.org/wiki/Laplace%27s_method">Laplace approximation</a>.</p>
+<p>我们用MCMC来模拟 <span class="math notranslate nohighlight">\(\theta\)</span> 的分布。从贝叶斯学派的视角来看， <span class="math notranslate nohighlight">\(f_n(\theta)\)</span> 是一个后验分布(posterior distribution)。
+不过，<span id="id16">[]</span>用该分布进行了经典的估计与推断。他们通过频率学派的理论为计算过程提供了理论支撑。 一旦 <span class="math notranslate nohighlight">\(f_n(\theta)\)</span> 已知，
+那么点估计量 <strong>渐近地</strong> 等同于它在二次损失函数下的均值，也等同于它在绝对值损失函数下的中位数。</p>
+<p>下面的程序在线性回归模型中比较了OLS估计量和LTE估计量。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">magrittr</span><span class="p">)</span>
+<span class="c1"># DGP</span>
+<span class="n">n</span> <span class="o">&lt;-</span> <span class="m">500</span>
+<span class="n">b0</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="n">.</span><span class="m">1</span><span class="p">,</span> <span class="n">.</span><span class="m">1</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">&lt;-</span> <span class="nf">cbind</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="n">Y</span> <span class="o">&lt;-</span> <span class="n">X</span> <span class="o">%*%</span> <span class="n">b0</span> <span class="o">+</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="n">b2_OLS</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="nf">lm</span><span class="p">(</span><span class="n">Y</span> <span class="o">~</span> <span class="m">-1</span> <span class="o">+</span> <span class="n">X</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">summary</span><span class="p">()</span> <span class="o">%&gt;%</span> <span class="nf">coef</span><span class="p">())[</span><span class="m">2</span><span class="p">,</span> <span class="p">]</span>
+<span class="c1"># &quot;-1&quot; in lm( ) because X has contained intercept</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">cat</span><span class="p">(</span>
+  <span class="s">&quot;The OLS point est =&quot;</span><span class="p">,</span> <span class="n">b2_OLS</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="s">&quot; sd = &quot;</span><span class="p">,</span> <span class="n">b2_OLS</span><span class="p">[</span><span class="m">2</span><span class="p">],</span>
+  <span class="s">&quot; \n and C.I.=(&quot;</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="n">b2_OLS</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">-</span> <span class="m">1.96</span> <span class="o">*</span> <span class="n">b2_OLS</span><span class="p">[</span><span class="m">2</span><span class="p">],</span> <span class="n">b2_OLS</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">+</span> <span class="m">1.96</span> <span class="o">*</span> <span class="n">b2_OLS</span><span class="p">[</span><span class="m">2</span><span class="p">]),</span> <span class="s">&quot;)&quot;</span>
+<span class="p">))</span>
+
+<span class="c1"># Laplace-type estimator</span>
+<span class="n">L</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="m">-0.5</span> <span class="o">*</span> <span class="nf">sum</span><span class="p">((</span><span class="n">Y</span> <span class="o">-</span> <span class="n">X</span> <span class="o">%*%</span> <span class="n">b</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="p">)</span> <span class="o">-</span> <span class="m">0.5</span> <span class="o">*</span> <span class="nf">crossprod</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">))</span>
+<span class="c1"># notice the &quot;minus&quot; sign of the OLS objective function</span>
+<span class="c1"># here we use a normal prior around (0,0).</span>
+<span class="c1"># results are very similar if we replace it with a flat prior so that</span>
+<span class="c1"># L &lt;- function(b) -0.5*sum((Y - X %*% b)^2)</span>
+
+<span class="n">nbatch</span> <span class="o">&lt;-</span> <span class="m">10000</span>
+<span class="n">out</span> <span class="o">&lt;-</span> <span class="n">mcmc</span><span class="o">::</span><span class="nf">metrop</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">L</span><span class="p">,</span> <span class="n">initial</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">),</span> <span class="n">nbatch</span> <span class="o">=</span> <span class="n">nbatch</span><span class="p">,</span> <span class="n">nspac</span> <span class="o">=</span> <span class="m">20</span><span class="p">)</span>
+
+<span class="c1"># summarize the estimation</span>
+<span class="n">bhat2</span> <span class="o">&lt;-</span> <span class="n">out</span><span class="o">$</span><span class="n">batch</span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="nf">round</span><span class="p">(</span><span class="n">nbatch</span> <span class="o">/</span> <span class="m">10</span><span class="p">)),</span> <span class="m">2</span><span class="p">]</span> <span class="c1"># remove the burn in</span>
+<span class="n">bhat2_point</span> <span class="o">&lt;-</span> <span class="nf">mean</span><span class="p">(</span><span class="n">bhat2</span><span class="p">)</span>
+<span class="n">bhat2_sd</span> <span class="o">&lt;-</span> <span class="nf">sd</span><span class="p">(</span><span class="n">bhat2</span><span class="p">)</span>
+<span class="n">bhat2_CI</span> <span class="o">&lt;-</span> <span class="nf">quantile</span><span class="p">(</span><span class="n">bhat2</span><span class="p">,</span> <span class="nf">c</span><span class="p">(</span><span class="n">.</span><span class="m">025</span><span class="p">,</span> <span class="n">.</span><span class="m">975</span><span class="p">))</span>
+
+<span class="c1"># compare with OLS</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">cat</span><span class="p">(</span>
+  <span class="s">&quot;The posterior mean =&quot;</span><span class="p">,</span> <span class="n">bhat2_point</span><span class="p">,</span> <span class="s">&quot; sd = &quot;</span><span class="p">,</span> <span class="n">bhat2_sd</span><span class="p">,</span>
+  <span class="s">&quot; \n and C.I.=(&quot;</span><span class="p">,</span> <span class="n">bhat2_CI</span><span class="p">,</span> <span class="s">&quot;)&quot;</span>
+<span class="p">))</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="nf">density</span><span class="p">(</span><span class="n">bhat2</span><span class="p">),</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&quot;posterior from normal prior&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id17">
+<h2><span class="section-number">4.4. </span>后续写作计划<a class="headerlink" href="#id17" title="永久链接至标题">#</a></h2>
+<ul class="simple">
+<li><p>EM algorithm</p></li>
+</ul>
+</section>
+<section id="id18">
+<h2><span class="section-number">4.5. </span>拓展阅读<a class="headerlink" href="#id18" title="永久链接至标题">#</a></h2>
+<ul class="simple">
+<li><p><span id="id19">[]</span></p></li>
+<li><p>Peng (2018), <a class="reference external" href="https://bookdown.org/rdpeng/advstatcomp/">Advanced Statistical Computing</a> 第五章和第七章1-2节。</p></li>
+</ul>
+</section>
+<section id="id20">
+<h2><span class="section-number">4.6. </span>参考文献<a class="headerlink" href="#id20" title="永久链接至标题">#</a></h2>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            kernelName: "ir",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="03-advanced_R-CN.html" title="上一页 页">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">上一页</p>
+            <p class="prev-next-title"><span class="section-number">3. </span>R语言进阶</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="06-simulation-CN.html" title="下一页 页">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">下一页</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>模拟</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By 史震涛 Shi Zhentao<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

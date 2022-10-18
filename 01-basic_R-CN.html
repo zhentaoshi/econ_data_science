@@ -1,0 +1,1405 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>1. 基础R语言 &#8212; 经济学中的“数据科学”</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/translations.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="3. R语言进阶" href="03-advanced_R-CN.html" />
+    <link rel="prev" title="Preface" href="00-preface.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="zh_CN">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">经济学中的“数据科学”</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00-preface.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   1. 基础R语言
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-advanced_R-CN.html">
+   3. R语言进阶
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-integration-CN.html">
+   4. 积分
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-simulation-CN.html">
+   5. 模拟
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-optimization-CN.html">
+   6. 数值最优化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-ML-CN.html">
+   7. 从非参数到机器学习
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09-ML2-CN.html">
+   8. 基于预测的算法
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/zhentaoshi/econ_data_science/master?urlpath=tree/docs/01-basic_R-CN.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/zhentaoshi/econ_data_science"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/zhentaoshi/econ_data_science/issues/new?title=Issue%20on%20page%20%2F01-basic_R-CN.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/01-basic_R-CN.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   1. 基础R语言
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     1.1. 引言
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     1.2. 安装
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     1.3. 帮助系统
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     1.4. 赋值
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     1.5. 向量
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     1.6. 筛选
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     1.7. 类型
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     1.8. 数组和矩阵
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     1.9. 混合数据类型
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     1.10. 拓展包
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id11">
+   2. 数据框
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     2.1. 输入和输出
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     2.2. 统计数据
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id14">
+     2.3. 自定义函数
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id15">
+     2.4. 控制流
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id16">
+     2.5. 统计学模型
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id17">
+       2.5.1. 线性回归例子
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id18">
+     2.6. 拓展阅读
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id19">
+     2.7. 参考文献
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>基础R语言</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   1. 基础R语言
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     1.1. 引言
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     1.2. 安装
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     1.3. 帮助系统
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     1.4. 赋值
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     1.5. 向量
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     1.6. 筛选
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     1.7. 类型
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     1.8. 数组和矩阵
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     1.9. 混合数据类型
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     1.10. 拓展包
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id11">
+   2. 数据框
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     2.1. 输入和输出
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     2.2. 统计数据
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id14">
+     2.3. 自定义函数
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id15">
+     2.4. 控制流
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id16">
+     2.5. 统计学模型
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id17">
+       2.5.1. 线性回归例子
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id18">
+     2.6. 拓展阅读
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id19">
+     2.7. 参考文献
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="r">
+<h1><span class="section-number">1. </span>基础R语言<a class="headerlink" href="#r" title="永久链接至标题">#</a></h1>
+<section id="id1">
+<h2><span class="section-number">1.1. </span>引言<a class="headerlink" href="#id1" title="永久链接至标题">#</a></h2>
+<p>任何一门编程语言都需要投入大量的时间才能掌握。<a class="reference external" href="https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf">R-Introduction</a> 是由R语言团队编写的一本官方操作手册。本章课程简要地涉及了当中的一些关键点。在本章教学后可以再自行仔细阅读 R-Introduction 。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">1.2. </span>安装<a class="headerlink" href="#id2" title="永久链接至标题">#</a></h2>
+<p>R语言是开源软件，在Windows，MacOS和Linux系统中都能运行。它的安装也十分便捷。</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://cran.r-project.org/mirrors.html">R project</a> 是R语言的基础版本</p></li>
+<li><p><a class="reference external" href="https://mran.microsoft.com/open">Microsoft R Open</a> 优化了底层的数值计算</p></li>
+</ul>
+<p><strong>本地操作界面</strong></p>
+<ul class="simple">
+<li><p>默认界面是极简风格的 <code class="docutils literal notranslate"><span class="pre">rgui</span></code></p></li>
+<li><p><a class="reference external" href="https://www.rstudio.com/products/rstudio/download/">RStudio</a> 是当前广受欢迎的IDE</p></li>
+<li><p>支持命令行界面 (command line interface, CLI)</p></li>
+</ul>
+<p><strong>Docker引擎</strong></p>
+<ul class="simple">
+<li><p>Docker 是一个开源引擎，开发者可以通过沙箱的形式打包他们的应用，它使得程序能够在一个统一的“运行环境”(Linux或Windows操作系统)中运行。在本地下载好Docker之后，<a class="reference external" href="https://hub.docker.com/r/rocker">rocker</a>能够为开发者提供不同用途的各种镜像。</p></li>
+</ul>
+<p><strong>远程操作界面</strong></p>
+<p>CUHK 的网上平台 <a class="reference external" href="https://scrp-login-2.econ.cuhk.edu.hk/">SCRP</a> 提供了</p>
+<ul class="simple">
+<li><p>RStudio</p></li>
+<li><p>JupyterHub</p></li>
+</ul>
+<p>远程服务器省去了安装步骤，并提供了一个一致而稳定的环境。</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">1.3. </span>帮助系统<a class="headerlink" href="#id3" title="永久链接至标题">#</a></h2>
+<p>帮助系统是我们学习新语言的最重要的帮手。在R语言中，如果我们只知道函数名称但不了解它用途，我们就可以使用<code class="docutils literal notranslate"><span class="pre">help(function_name)</span></code>指令或者简单地用一个问号<code class="docutils literal notranslate"><span class="pre">?function_name</span></code>来查看。如果我们只知道当中的部分关键词，那么就可以用双问号<code class="docutils literal notranslate"><span class="pre">??key_words</span></code>进行模糊查询。这样它就会返回多个可能相关的函数以供选择。
+<strong>例子</strong>: <code class="docutils literal notranslate"><span class="pre">?seq</span></code>, <code class="docutils literal notranslate"><span class="pre">??sequence</span></code></p>
+</section>
+<section id="id4">
+<h2><span class="section-number">1.4. </span>赋值<a class="headerlink" href="#id4" title="永久链接至标题">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;-</span></code> 是最基本的赋值指令。另一种常见的赋值符号是 <code class="docutils literal notranslate"><span class="pre">=</span></code> 。它们的作用都是给左侧的变量附上在右侧输入的 <strong>值</strong> 。这里的 <strong>值</strong> 并非一定是数值，也可能是向量、列表或者矩阵等等形式。这些我们将会在后续提到。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># Personally I prefer &quot;=&quot; to &quot;&lt;-&quot;.</span>
+<span class="c1"># Here are a few trivial computation and screen printing.</span>
+
+<span class="n">a</span> <span class="o">&lt;-</span> <span class="m">1</span>
+<span class="n">b</span> <span class="o">&lt;-</span> <span class="m">2</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="c1"># try to avoid `c`, which is an internal command</span>
+<span class="n">d</span> <span class="o">=</span> <span class="nf">log</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;log(c) =&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="s">&quot;is a simple calculation&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;exp(e) =&quot;</span><span class="p">,</span> <span class="nf">exp</span><span class="p">(</span><span class="n">e</span><span class="p">),</span> <span class="s">&quot;. I want a nice new line. \n&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">ls</span><span class="p">()</span> <span class="c1"># display the objects in memory</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>R语言对于变量名字母大小写敏感；<code class="docutils literal notranslate"><span class="pre">a</span></code> 和 <code class="docutils literal notranslate"><span class="pre">A</span></code> 是两个完全不同的对象。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="s">&quot;abc&quot;</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;a is&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s">&quot;, whereas A is &quot;</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="s">&quot;.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>下面这个指令可以清空工作历史中的所有变量，规范的程序一般会把它放在整个脚本的第一行。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span> <span class="o">=</span> <span class="nf">ls</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h2><span class="section-number">1.5. </span>向量<a class="headerlink" href="#id5" title="永久链接至标题">#</a></h2>
+<p><strong>向量</strong> 是相同类型的元素的集合，比如整数(integer)、逻辑值(logical value）、实数(real number)、复数(complex number)、字符(characters) 或者 因子(factor)。在R语言中，大多数情况下我们不需要特地宣言元素的类型。</p>
+<p><code class="docutils literal notranslate"><span class="pre">c()</span></code> 可以把两个以上的向量组合为一个更长的向量。</p>
+<p>二元运算符号 <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code> 和 <code class="docutils literal notranslate"><span class="pre">/</span></code> 默认是每个元素一个一个运算的。二元逻辑符号 <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> <code class="docutils literal notranslate"><span class="pre">|</span></code> <code class="docutils literal notranslate"><span class="pre">!=</span></code>也是一样的。我们可以参考下面的例子来理解。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">,</span><span class="m">3</span><span class="p">,</span> <span class="m">4</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="nf">rep</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span><span class="m">2</span><span class="p">),</span> <span class="m">2</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># logical vectors</span>
+<span class="n">logi_1</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="bp">T</span><span class="p">,</span> <span class="bp">T</span><span class="p">,</span> <span class="bp">F</span><span class="p">)</span>
+<span class="n">logi_2</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="bp">F</span><span class="p">,</span> <span class="bp">T</span><span class="p">,</span> <span class="bp">T</span><span class="p">)</span>
+
+<span class="n">logi_12</span> <span class="o">&lt;-</span> <span class="n">logi_1</span> <span class="o">&amp;</span> <span class="n">logi_2</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">logi_12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>R语言中的 <strong>因子</strong> (factor)是一种特殊的数据结构，这与别的编程语言不同。这个数据结构在制作矩阵和数据分类中会经常用到。而 <strong>字符</strong> (characters)则是纯文本。尽管因子往往也是字符串的形式，但是在实际使用中，二者有明显的不同。</p>
+<p>R语言中的缺省值用<code class="docutils literal notranslate"><span class="pre">NA</span></code>来表示(Not Available)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="kc">NA</span><span class="p">;</span> <span class="n">b</span> <span class="o">=</span> <span class="m">3</span><span class="p">;</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>当有一些运算不成立时，比如<code class="docutils literal notranslate"><span class="pre">log(-1)</span></code>，R语言会返回<code class="docutils literal notranslate"><span class="pre">NAN</span></code> (not a number)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">log</span><span class="p">(</span><span class="m">-1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sqrt</span><span class="p">(</span><span class="m">-1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="kc">Inf</span>
+<span class="n">a</span><span class="o">+</span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="kc">Inf</span>
+<span class="n">a</span><span class="o">+</span><span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h2><span class="section-number">1.6. </span>筛选<a class="headerlink" href="#id6" title="永久链接至标题">#</a></h2>
+<p>向量的筛选通过方框指令 <code class="docutils literal notranslate"><span class="pre">a[</span> <span class="pre">]</span></code> 来实现。
+R语言不是从0开始，而是从1开始。(这和Python不一样。)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">10</span>
+<span class="n">a</span><span class="p">[</span><span class="m">5</span><span class="o">:</span><span class="m">7</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="nf">seq</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="m">0.1</span><span class="p">);</span> <span class="nf">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">d</span><span class="p">[</span><span class="m">5</span><span class="o">:</span><span class="m">7</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="s">&quot;c&quot;</span><span class="p">,</span><span class="s">&quot;d&quot;</span><span class="p">,</span><span class="s">&quot;e&quot;</span><span class="p">,</span><span class="s">&quot;f&quot;</span><span class="p">,</span><span class="s">&quot;g&quot;</span><span class="p">,</span><span class="s">&quot;h&quot;</span><span class="p">,</span><span class="s">&quot;i&quot;</span><span class="p">,</span><span class="s">&quot;j&quot;</span><span class="p">)</span>
+<span class="n">c</span><span class="p">[</span><span class="m">5</span><span class="o">:</span><span class="m">7</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="s">&quot;abcdefghij&quot;</span>
+<span class="n">b</span><span class="p">[</span><span class="m">5</span><span class="o">:</span><span class="m">7</span><span class="p">]</span> <span class="c1"># the indexed items do not exists</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id7">
+<h2><span class="section-number">1.7. </span>类型<a class="headerlink" href="#id7" title="永久链接至标题">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">&lt;-</span> <span class="s">&quot;18&quot;</span><span class="p">;</span> <span class="nf">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">&lt;-</span> <span class="nf">as.numeric</span><span class="p">(</span><span class="n">a</span><span class="p">);</span> <span class="nf">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="kc">pi</span> <span class="o">*</span> <span class="nf">c</span><span class="p">(</span><span class="m">-1</span><span class="o">:</span><span class="m">1</span><span class="p">,</span> <span class="m">10</span><span class="p">);</span> <span class="nf">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nf">as.integer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="m">3</span>
+<span class="nf">is.integer</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="nf">as.integer</span><span class="p">(</span><span class="m">3</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nf">is.integer</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="nf">as.double</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nf">is.integer</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id8">
+<h2><span class="section-number">1.8. </span>数组和矩阵<a class="headerlink" href="#id8" title="永久链接至标题">#</a></h2>
+<p><strong>数组</strong> (array)是可以在两个或者以上的维度存储数据的R语言数据类型。<strong>矩阵</strong> (matrix)是二维的数组。</p>
+<ul class="simple">
+<li><p>R 以列为主顺序</p></li>
+<li><p>数组运算: 每个对应元素一个个运算</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="nf">array</span><span class="p">(</span><span class="nf">rpois</span><span class="p">(</span><span class="m">4</span><span class="o">*</span><span class="m">3</span><span class="o">*</span><span class="m">2</span><span class="p">,</span> <span class="n">lambda</span> <span class="o">=</span> <span class="m">1</span><span class="p">),</span> <span class="n">dim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">2</span><span class="p">));</span> <span class="nf">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="c1"># 3 dimensional array</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="n">A</span> <span class="o">=</span> <span class="nf">array</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="m">4</span><span class="o">*</span><span class="m">3</span><span class="o">*</span><span class="m">2</span><span class="p">),</span> <span class="n">dim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span><span class="m">3</span><span class="p">,</span><span class="m">2</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">A</span><span class="o">+</span><span class="n">B</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>处理两个长度不同的数组运算时一定要特别谨慎，这种时候特别容易遇到各种报错。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">6</span><span class="p">,</span> <span class="m">3</span><span class="p">);</span> <span class="nf">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="nf">matrix</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">);</span> <span class="nf">print</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="n">A</span><span class="o">+</span><span class="n">B</span><span class="p">)</span> <span class="c1"># produce error message</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>在编程中<strong>Warning</strong>和<strong>Error</strong>不同。由于长度不同导致无法运算时会报错(Error)。由于长度不同，即使可以计算的时候，程序一般也会出现Warning。请注意区分这两种情况。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">3</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">A</span><span class="o">+</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">4</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">A</span><span class="o">+</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">%*%</span></code>: 矩阵乘法</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">solve</span></code>: 求逆矩阵</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eigen</span></code>: 求特征值和特征向量</p></li>
+</ul>
+<p><strong>例子</strong>: 有单一自变量 <span class="math notranslate nohighlight">\(x\)</span> 和常数的的OLS估计中，大学教科书中用矩阵形式将OLS表示为：</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\beta} = (X' X)^{-1} X'y.
+\]</div>
+<p>为了在R语言中进行OLS估计，我们需要将这样的数学表达式转译成代码：</p>
+<p>第一步: 我们需要数据 <span class="math notranslate nohighlight">\(Y\)</span> 和 <span class="math notranslate nohighlight">\(X\)</span> 来运算OLS，因此我们首先创建一个数据集。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># simulate data</span>
+<span class="nf">rm</span><span class="p">(</span><span class="n">list</span> <span class="o">=</span> <span class="nf">ls</span><span class="p">())</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">111</span><span class="p">)</span> <span class="c1"># can be removed to allow the result to change</span>
+
+<span class="c1"># set the parameters</span>
+<span class="n">n</span> <span class="o">&lt;-</span> <span class="m">100</span>
+<span class="n">b0</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">nrow</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+
+<span class="c1"># generate the data</span>
+<span class="n">e</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">&lt;-</span> <span class="nf">cbind</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="n">Y</span> <span class="o">&lt;-</span> <span class="n">X</span> <span class="o">%*%</span> <span class="n">b0</span> <span class="o">+</span> <span class="n">e</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>第二步: 把公式翻译成代码</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># OLS estimation</span>
+<span class="n">bhat</span> <span class="o">&lt;-</span> <span class="nf">solve</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">X</span><span class="p">,</span> <span class="nf">t</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">Y</span><span class="p">);</span> <span class="nf">print</span><span class="p">(</span><span class="n">bhat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">bhat</span> <span class="o">&lt;-</span> <span class="nf">solve</span><span class="p">(</span> <span class="nf">crossprod</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="nf">crossprod</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">))</span> <span class="o">%T&gt;%</span> <span class="nf">print</span><span class="p">(</span> <span class="p">)</span> <span class="c1"># equivalent computation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>第三步 (附加): 绘制散点图和回归线，进而对回归线(黑色)和真实值(红色)进行比较。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">Y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">X</span><span class="p">[,</span> <span class="m">2</span><span class="p">],</span> <span class="n">xlab</span> <span class="o">=</span> <span class="s">&quot;X&quot;</span><span class="p">,</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s">&quot;Y&quot;</span><span class="p">,</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&quot;regression&quot;</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="n">bhat</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="n">b</span> <span class="o">=</span> <span class="n">bhat</span><span class="p">[</span><span class="m">2</span><span class="p">])</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="n">b0</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b0</span><span class="p">[</span><span class="m">2</span><span class="p">],</span> <span class="n">col</span> <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">h</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">lty</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">v</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">lty</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>第四步: 在计量经济学中，我们通常还关心假设检验的结果。最常用的就是 <em>t</em> 统计量。
+为了检验原假设 <span class="math notranslate nohighlight">\(H_0: \beta_2 = 1\)</span> ，我们求解对应的 <em>t</em> 统计量。同样地，我们把公式翻译成代码。</p>
+<div class="math notranslate nohighlight">
+\[
+t  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \hat{\sigma}_{\hat{\beta}_2}  }
+  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \sqrt{ \left[ (X'X)^{-1} \hat{\sigma}^2 \right]_{22} } }.
+\]</div>
+<p>其中 <span class="math notranslate nohighlight">\([\cdot]_{22}\)</span> 是矩阵的(2,2)元素。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># calculate the t-value</span>
+<span class="n">bhat2</span> <span class="o">&lt;-</span> <span class="n">bhat</span><span class="p">[</span><span class="m">2</span><span class="p">]</span> <span class="c1"># the parameter we want to test</span>
+<span class="n">e_hat</span> <span class="o">&lt;-</span> <span class="n">Y</span> <span class="o">-</span> <span class="n">X</span> <span class="o">%*%</span> <span class="n">bhat</span>
+<span class="n">sigma_hat_square</span> <span class="o">&lt;-</span> <span class="nf">sum</span><span class="p">(</span><span class="n">e_hat</span><span class="o">^</span><span class="m">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="m">2</span><span class="p">)</span>
+<span class="n">Sigma_B</span> <span class="o">&lt;-</span> <span class="nf">solve</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">X</span><span class="p">)</span> <span class="o">*</span> <span class="n">sigma_hat_square</span>
+<span class="n">t_value_2</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">bhat2</span> <span class="o">-</span> <span class="n">b0</span><span class="p">[</span><span class="m">2</span><span class="p">])</span> <span class="o">/</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">Sigma_B</span><span class="p">[</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">])</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;The t-statistic =&quot;</span><span class="p">,</span> <span class="n">t_value_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id9">
+<h2><span class="section-number">1.9. </span>混合数据类型<a class="headerlink" href="#id9" title="永久链接至标题">#</a></h2>
+<p>一个向量只能包含一种的元素。但是 <strong>列表</strong> (list)可以同时装有不同类型的对象。当我们需要返回不止一种对象的时候，我们就可以使用列表。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">Lst</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">(</span><span class="n">dept</span> <span class="o">=</span> <span class="s">&quot;Econ&quot;</span><span class="p">,</span> <span class="n">no</span> <span class="o">=</span> <span class="m">5180</span><span class="p">)</span>
+<span class="n">Lst</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">Lst</span><span class="o">$</span><span class="n">dept</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">Lst</span><span class="p">[[</span><span class="m">2</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>例子</strong>: 当我们使用 <code class="docutils literal notranslate"><span class="pre">eigen</span></code> 时，我们既想知道特征值也想得到特征向量。我们就可以将其分别储存到<code class="docutils literal notranslate"><span class="pre">$value</span></code>和<code class="docutils literal notranslate"><span class="pre">$vector</span></code>中。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="nf">diag</span><span class="p">(</span><span class="m">2</span><span class="p">)</span>
+<span class="nf">eigen</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>数据框</strong> (data.frame) 是一个用来储存数据的二维表格，就像Excel数据表一样。矩阵(matrix)同样是二维表格，但不同之处在于，它只能容纳一种元素。
+现实生活中，数据可能是整数、实数、字符、分类数据等各种各样的类型。因此，在R语言当中，处理混合数据时默认使用的类型是数据框。<code class="docutils literal notranslate"><span class="pre">tibble</span></code>是一种新的改良过的数据框类型。</p>
+</section>
+<section id="id10">
+<h2><span class="section-number">1.10. </span>拓展包<a class="headerlink" href="#id10" title="永久链接至标题">#</a></h2>
+<p>R语言自带的基础包(base)十分有限，但是R有良好的统计学拓展包生态系统。这对于R语言开发者来说是宝贵的财富，其他的语言(比如Python和MATLAB)无法媲美。
+大部分的R Packages都在<a class="reference external" href="https://cran.r-project.org/web/packages/">CRAN</a> 平台。
+目前学术界的常规流程是，当统计学家发表一篇关于新的统计学方法的论文时，他们就会在CRAN平台上传对应的程序包。他们通过CRAN拓展他们的成果，开发者也能第一时间接触到最新的方法。</p>
+<p>我们可以通过
+<code class="docutils literal notranslate"><span class="pre">install.packages(&quot;package_name&quot;)</span></code>指令下载最新的安装包。为了调用我们需要的函数，我们可以用<code class="docutils literal notranslate"><span class="pre">library(package_name)</span></code>或者<code class="docutils literal notranslate"><span class="pre">package_name::function_name</span></code>指令在当前的程序中调用该拓展包。
+前者将调用程序包中的所有函数，有时候会因为和其他函数名称相同引起冲突。后者则可以让整个环境更简洁。
+<a class="reference external" href="http://www.springer.com/gp/book/9780387773162">Applied Econometrics with R</a> (Christian Kleiber 和 Achim Zeileis)是一本有用的教材。 它同时也伴有程序包<code class="docutils literal notranslate"><span class="pre">AER</span></code>。它当中包含了常见的计量方法，比如工具变量法和稳健方差估计。</p>
+<!-- Before we can "knit" in R-studio the Rmd file to produce the pdf document you are reading at this moment, -->
+<!-- we have to install several packages such as [knitr](https://yihui.name/knitr/) and those it depends on. --><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># auto install missing packages</span>
+<span class="n">wanted</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;magrittr&quot;</span><span class="p">,</span> <span class="s">&quot;AER&quot;</span><span class="p">,</span> <span class="s">&quot;quantmod&quot;</span><span class="p">,</span> <span class="s">&quot;reshape2&quot;</span><span class="p">,</span> <span class="s">&quot;gridExtra&quot;</span><span class="p">)</span>
+<span class="n">missing</span> <span class="o">&lt;-</span> <span class="nf">setdiff</span><span class="p">(</span><span class="n">wanted</span><span class="p">,</span> <span class="nf">installed.packages</span><span class="p">())</span>
+
+<span class="nf">install.packages</span><span class="p">(</span><span class="n">missing</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">magrittr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id11">
+<h1><span class="section-number">2. </span>数据框<a class="headerlink" href="#id11" title="永久链接至标题">#</a></h1>
+<p>下面是一个本科计量经济学教材中的数据集。我们载入数据并展示前6个记录。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">AER</span><span class="p">)</span>
+<span class="nf">data</span><span class="p">(</span><span class="s">&quot;CreditCard&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">CreditCard</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="nf">tail</span><span class="p">(</span><span class="n">CreditCard</span><span class="o">$</span><span class="n">income</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id12">
+<h2><span class="section-number">2.1. </span>输入和输出<a class="headerlink" href="#id12" title="永久链接至标题">#</a></h2>
+<p>原始数据通常以ASCII文件或者Excel文件形式储存。我不建议使用Excel数据表来进行数据分析，因为Excel文件背后的结构难以被统计软件识别。我推荐<code class="docutils literal notranslate"><span class="pre">csv</span></code>文件形式，一种简单的ASCII格式。</p>
+<p><code class="docutils literal notranslate"><span class="pre">read.table()</span></code> 或者 <code class="docutils literal notranslate"><span class="pre">read.csv()</span></code> 可以把数据从ASCII文件中导入R语言。</p>
+<p><strong>例子</strong>: Acemoglu, Johnson and Robinson (2001). <a class="reference external" href="https://economics.mit.edu/faculty/acemoglu/data/ajr2001">Data source</a>. 这个实证研究的例子 被 Chang, Shi and Zhang (2022) 采用。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">AJR</span> <span class="o">=</span> <span class="nf">read.csv</span><span class="p">(</span><span class="s">&quot;data_example/AJR.csv&quot;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">AJR</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id='AJR_exec'></a>
+<strong>练习</strong></p>
+<p>使用数据集 <code class="docutils literal notranslate"><span class="pre">AJR.csv</span></code>.</p>
+<ul class="simple">
+<li><p>收集一个5列的小型数据集 <code class="docutils literal notranslate"><span class="pre">shortnam</span></code>, <code class="docutils literal notranslate"><span class="pre">logpgp95</span></code>, <code class="docutils literal notranslate"><span class="pre">avexpr</span></code>, <code class="docutils literal notranslate"><span class="pre">lat_abst</span></code>, <code class="docutils literal notranslate"><span class="pre">logem4</span></code> (log of mortality rate) 和 <code class="docutils literal notranslate"><span class="pre">cons1</span></code>.</p></li>
+<li><p>如果哪个国家缺失了上述的任意变量，那么从数据库中删去该国家。 (提示: 使用<code class="docutils literal notranslate"><span class="pre">apply()</span></code>)</p></li>
+</ul>
+<p><strong>例子</strong>: 对于中文字符来说，我建议使用 <code class="docutils literal notranslate"><span class="pre">UTF-8</span></code> 编码。否则，SCRP很可能无法识别乱码的文本。如果原数据中是用”UTF-8”编码的，<code class="docutils literal notranslate"><span class="pre">Notepad++</span></code>是一个转译编码的免费工具。可以查看它菜单中的<code class="docutils literal notranslate"><span class="pre">Encoding</span></code>。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># stock_id &lt;- readr::read_csv(&quot;data_example/SH_stockid_UTF8.csv&quot;, locale = readr::locale(encoding = &quot;UTF-8&quot;))</span>
+<span class="n">stock_id</span> <span class="o">&lt;-</span> <span class="n">readr</span><span class="o">::</span><span class="nf">read_csv</span><span class="p">(</span><span class="s">&quot;data_example/SH_stockid_UTF8.csv&quot;</span><span class="p">)</span>
+<span class="nf">head</span><span class="p">(</span><span class="n">stock_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">write.table()</span></code> 或 <code class="docutils literal notranslate"><span class="pre">write.csv()</span></code> 可以从R控制台中将数据导出为ASCII文件。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">write.csv</span><span class="p">(</span><span class="n">CreditCard</span><span class="p">,</span> <span class="s">&quot;CreditCard.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>例子</strong></p>
+<p>除了在本地硬盘上加载数据文件，我们也可以直接从网络下载数据。在此，我们介绍如何从 <em>Yahoo Finance</em> 获得 <em>Apple Inc.</em> 的每日股价数据。我们需要使用到<code class="docutils literal notranslate"><span class="pre">quantmod</span></code>拓展包。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">quantmod</span><span class="o">::</span><span class="nf">getSymbols</span><span class="p">(</span><span class="s">&quot;AAPL&quot;</span><span class="p">,</span> <span class="n">src</span> <span class="o">=</span> <span class="s">&quot;yahoo&quot;</span><span class="p">)</span>
+<span class="nf">tail</span><span class="p">(</span><span class="n">AAPL</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">AAPL</span><span class="o">$</span><span class="n">AAPL.Close</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>另一个例子: <a class="reference external" href="https://fred.stlouisfed.org/series/IPB50001SQ">Quarterly US Industrial Production Index</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">quantmod</span><span class="o">::</span><span class="nf">getSymbols.FRED</span><span class="p">(</span><span class="n">Symbols</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;IPB50001SQ&quot;</span><span class="p">),</span> <span class="n">env</span> <span class="o">=</span> <span class="n">.GlobalEnv</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">IPB50001SQ</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id13">
+<h2><span class="section-number">2.2. </span>统计数据<a class="headerlink" href="#id13" title="永久链接至标题">#</a></h2>
+<p>R是一个统计软件，它自然有各种内置的统计学函数。</p>
+<p><code class="docutils literal notranslate"><span class="pre">p</span></code> (概率 probability), <code class="docutils literal notranslate"><span class="pre">d</span></code> (密度 density), <code class="docutils literal notranslate"><span class="pre">q</span></code> (分位点 quantile), <code class="docutils literal notranslate"><span class="pre">r</span></code> (生成随机变量 random variable generator)可以放在概率分布的名称前面使用。R语言中的常见概率分布比如 <code class="docutils literal notranslate"><span class="pre">norm</span></code> (正态分布), <code class="docutils literal notranslate"><span class="pre">chisq</span></code> (<span class="math notranslate nohighlight">\(\chi^2\)</span>), <code class="docutils literal notranslate"><span class="pre">t</span></code> (<em>t</em>分布),
+<code class="docutils literal notranslate"><span class="pre">weibull</span></code> (韦伯分布), <code class="docutils literal notranslate"><span class="pre">cauchy</span></code> (柯西分布), <code class="docutils literal notranslate"><span class="pre">binomial</span></code> (二项分布), <code class="docutils literal notranslate"><span class="pre">pois</span></code> (泊松分布)， 不一而足。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">pnorm</span><span class="p">(</span><span class="m">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">qnorm</span><span class="p">(</span><span class="m">0.975</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">rnorm</span><span class="p">(</span><span class="m">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">dnorm</span><span class="p">(</span><span class="m">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>例子</strong></p>
+<p>这里的例子展示了样本误差</p>
+<ol class="simple">
+<li><p>在一个网格系统<code class="docutils literal notranslate"><span class="pre">x_axis</span> <span class="pre">=</span> <span class="pre">seq(0.01,</span> <span class="pre">15,</span> <span class="pre">by</span> <span class="pre">=</span> <span class="pre">0.01)</span></code>上画出 <span class="math notranslate nohighlight">\(\chi^2(3)\)</span> 的密度；(黑线)</p></li>
+<li><p>从 <span class="math notranslate nohighlight">\(\chi^2(3)\)</span> 分布中生成1000个观测值，画出kernel密度(实际密度的一个非参数估计)；(红线)</p></li>
+<li><p>计算95%的分位数和观察到一个值大于95%的实证概率。
+在总体中，这个概率应当是5%。那么本次实验得到的数字是什么呢?</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">set.seed</span><span class="p">(</span><span class="m">888</span><span class="p">)</span>
+<span class="n">x_axis</span> <span class="o">&lt;-</span> <span class="nf">seq</span><span class="p">(</span><span class="m">0.01</span><span class="p">,</span> <span class="m">15</span><span class="p">,</span> <span class="n">by</span> <span class="o">=</span> <span class="m">0.01</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="nf">dchisq</span><span class="p">(</span><span class="n">x_axis</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
+<span class="nf">plot</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x_axis</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">xlab</span> <span class="o">=</span> <span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s">&quot;density&quot;</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">&lt;-</span> <span class="nf">rchisq</span><span class="p">(</span><span class="m">1000</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="nf">density</span><span class="p">(</span><span class="n">z</span><span class="p">),</span> <span class="n">col</span> <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">crit</span> <span class="o">&lt;-</span> <span class="nf">qchisq</span><span class="p">(</span><span class="n">.</span><span class="m">95</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span>
+
+<span class="nf">mean</span><span class="p">(</span><span class="n">z</span> <span class="o">&gt;</span> <span class="n">crit</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id14">
+<h2><span class="section-number">2.3. </span>自定义函数<a class="headerlink" href="#id14" title="永久链接至标题">#</a></h2>
+<p>R有许多的内置函数。不过在实际使用中我们往往会遇到各种需要自己DIY函数的情况。 最推荐的方式是自行封装一个用户自定义函数。它有如下优点：</p>
+<ol class="simple">
+<li><p>在搭建程序时，它可以减小代码量，使得一个复杂的程序被拆分为易于操作的各个部分；</p></li>
+<li><p>有些脚本可能甚至有成百上千的变量，自定义函数内部的变量是局部变量而不是全局变量，这样的话它们就不容易与函数外部的变量发生混淆。自定义函数只有在输入和输出的时候才与外部程序有交互。</p></li>
+<li><p>如果我们需要修改程序，我们只需要在函数中修改一次而不需要把每个地方进行修改。</p></li>
+</ol>
+<p>R语言自定义函数的格式是：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">function_name</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">expressions</span>
+  <span class="nf">return</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>例子</strong></p>
+<p>如果中心极限定理成立，给定样本，那么我们可以计算95%的双边置信区间</p>
+<div class="math notranslate nohighlight">
+\[
+\left(\hat{\mu} - \frac{1.96}{\sqrt{n}} \hat{\sigma}, \hat{\mu} + \frac{1.96}{\sqrt{n}} \hat{\sigma} \right)
+\]</div>
+<p>这个的计算并不难，但是我并不知道R语言是否有内置函数能够实现这个功能。下面是一个自定义的置信区间函数：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct confidence interval</span>
+
+<span class="n">CI</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># x is a vector of random variables</span>
+
+  <span class="n">n</span> <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">mu</span> <span class="o">&lt;-</span> <span class="nf">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">sig</span> <span class="o">&lt;-</span> <span class="nf">sd</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+  <span class="n">upper</span> <span class="o">&lt;-</span> <span class="n">mu</span> <span class="o">+</span> <span class="m">1.96</span> <span class="o">/</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="n">sig</span>
+  <span class="n">lower</span> <span class="o">&lt;-</span> <span class="n">mu</span> <span class="o">-</span> <span class="m">1.96</span> <span class="o">/</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="n">sig</span>
+  <span class="nf">return</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">lower</span> <span class="o">=</span> <span class="n">lower</span><span class="p">,</span> <span class="n">upper</span> <span class="o">=</span> <span class="n">upper</span><span class="p">))</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id15">
+<h2><span class="section-number">2.4. </span>控制流<a class="headerlink" href="#id15" title="永久链接至标题">#</a></h2>
+<p>控制流是所有编程语言的必备功能。
+<code class="docutils literal notranslate"><span class="pre">if</span></code> 用于条件选择， 而 <code class="docutils literal notranslate"><span class="pre">for</span></code> 或者 <code class="docutils literal notranslate"><span class="pre">while</span></code> 用于循环。</p>
+<p><strong>例子</strong></p>
+<p>计算自由度为2的泊松分布的收敛概率。我们将实验重复1000次。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">Rep</span> <span class="o">&lt;-</span> <span class="m">1000</span>
+<span class="n">sample_size</span> <span class="o">&lt;-</span> <span class="m">100</span>
+<span class="n">capture</span> <span class="o">&lt;-</span> <span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">Rep</span><span class="p">)</span>
+
+<span class="nf">if </span><span class="p">(</span><span class="n">sample_size</span> <span class="o">&lt;</span> <span class="m">50</span><span class="p">){</span>
+      <span class="nf">print</span><span class="p">(</span><span class="s">&quot;Sample size too small. Refuse to work&quot;</span><span class="p">)</span>
+      <span class="p">}</span> <span class="n">else</span> <span class="p">{</span>
+    <span class="nf">for </span><span class="p">(</span><span class="n">i</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">Rep</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">mu</span> <span class="o">&lt;-</span> <span class="m">2</span>
+      <span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">rpois</span><span class="p">(</span><span class="n">sample_size</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
+      <span class="n">bounds</span> <span class="o">&lt;-</span> <span class="nf">CI</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+      <span class="n">capture</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="p">((</span><span class="n">bounds</span><span class="o">$</span><span class="n">lower</span> <span class="o">&lt;=</span> <span class="n">mu</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">mu</span> <span class="o">&lt;=</span> <span class="n">bounds</span><span class="o">$</span><span class="n">upper</span><span class="p">))</span>
+    <span class="p">}</span>
+    <span class="nf">print</span><span class="p">(</span><span class="s">&quot;Asymptotic theory may work&quot;</span><span class="p">)</span>
+    <span class="nf">cat</span><span class="p">(</span><span class="s">&quot;the emprical size = &quot;</span><span class="p">,</span> <span class="nf">mean</span><span class="p">(</span><span class="n">capture</span><span class="p">))</span> <span class="c1"># empirical size</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id16">
+<h2><span class="section-number">2.5. </span>统计学模型<a class="headerlink" href="#id16" title="永久链接至标题">#</a></h2>
+<p>统计学模型通常用 <code class="docutils literal notranslate"><span class="pre">y~x</span></code> 表示， 其中左侧的 <code class="docutils literal notranslate"><span class="pre">y</span></code> 是因变量。右侧的 <code class="docutils literal notranslate"><span class="pre">x</span></code> 为解释变量。
+自带的函数是 <code class="docutils literal notranslate"><span class="pre">lm</span></code> 。使用方式为 <code class="docutils literal notranslate"><span class="pre">lm(y~x,</span> <span class="pre">data</span> <span class="pre">=</span> <span class="pre">data_frame)</span></code>。</p>
+<p>R语言自带的所有回归函数都有相同的结构。学会了其中一种，自然可以举一反三。</p>
+<section id="id17">
+<h3><span class="section-number">2.5.1. </span>线性回归例子<a class="headerlink" href="#id17" title="永久链接至标题">#</a></h3>
+<p>我们通过模拟数据来展示一个例子</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="bp">T</span> <span class="o">&lt;-</span> <span class="m">100</span>
+<span class="n">p</span> <span class="o">&lt;-</span> <span class="m">1</span>
+
+<span class="n">b0</span> <span class="o">&lt;-</span> <span class="m">1</span>
+<span class="c1"># Generate data</span>
+<span class="n">x</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="nf">rnorm</span><span class="p">(</span><span class="bp">T</span> <span class="o">*</span> <span class="n">p</span><span class="p">),</span> <span class="bp">T</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="n">x</span> <span class="o">%*%</span> <span class="n">b0</span> <span class="o">+</span> <span class="nf">rnorm</span><span class="p">(</span><span class="bp">T</span><span class="p">)</span>
+
+<span class="c1"># Linear Model</span>
+<span class="n">result</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">y</span> <span class="o">~</span> <span class="n">x</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">result</span></code> 是一个包含了所有回归结果的列表。我们可以从results中看到所有的估计参数值、t检验结果、F检验结果和R方。我们可以画出真实值和拟合值来检验回归模型的拟合效果。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">result</span><span class="o">$</span><span class="n">fitted.values</span><span class="p">,</span>
+  <span class="n">col</span> <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">xlab</span> <span class="o">=</span> <span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s">&quot;y&quot;</span><span class="p">,</span>
+  <span class="n">main</span> <span class="o">=</span> <span class="s">&quot;Fitted Value&quot;</span>
+<span class="p">)</span>
+<span class="nf">lines</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;l&quot;</span><span class="p">,</span> <span class="n">lty</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;bottomleft&quot;</span><span class="p">,</span>
+  <span class="n">legend</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Fitted Value&quot;</span><span class="p">,</span> <span class="s">&quot;True Value&quot;</span><span class="p">),</span>
+  <span class="n">col</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;red&quot;</span><span class="p">,</span> <span class="s">&quot;blue&quot;</span><span class="p">),</span> <span class="n">lty</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">2</span><span class="p">,</span> <span class="n">cex</span> <span class="o">=</span> <span class="m">0.75</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>然后我们画出拟合的直线</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">xlab</span> <span class="o">=</span> <span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s">&quot;y&quot;</span><span class="p">,</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&quot;Fitted Line&quot;</span><span class="p">)</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="n">result</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">1</span><span class="p">],</span> <span class="n">b</span> <span class="o">=</span> <span class="n">result</span><span class="o">$</span><span class="n">coefficients</span><span class="p">[</span><span class="m">2</span><span class="p">])</span>
+<span class="nf">abline</span><span class="p">(</span><span class="n">a</span> <span class="o">=</span> <span class="m">0</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b0</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="s">&quot;red&quot;</span><span class="p">)</span>
+
+<span class="nf">legend</span><span class="p">(</span><span class="s">&quot;bottomright&quot;</span><span class="p">,</span>
+  <span class="n">legend</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Fitted Line&quot;</span><span class="p">,</span> <span class="s">&quot;True Coef&quot;</span><span class="p">),</span>
+  <span class="n">col</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;black&quot;</span><span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">),</span> <span class="n">lty</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="n">cex</span> <span class="o">=</span> <span class="m">0.75</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>我们在此再给出另一个例子。这次我们使用数据包<code class="docutils literal notranslate"><span class="pre">datasets</span></code>中的女性数据来研究女性身高与体重的关系。这个数据包是R语言安装自带的，它还有其他各种类型的数据集。要查看完整的数据集列表，可以使用指令<code class="docutils literal notranslate"><span class="pre">library(help</span> <span class="pre">=</span> <span class="pre">&quot;datasets&quot;)</span></code>。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># univariate</span>
+<span class="n">reg1</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">height</span> <span class="o">~</span> <span class="n">weight</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">women</span><span class="p">)</span>
+
+<span class="c1"># multivariate</span>
+<span class="n">reg2</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">height</span> <span class="o">~</span> <span class="n">weight</span> <span class="o">+</span> <span class="nf">I</span><span class="p">(</span><span class="n">weight</span><span class="o">^</span><span class="m">2</span><span class="p">),</span> <span class="n">data</span> <span class="o">=</span> <span class="n">women</span><span class="p">)</span>
+<span class="c1"># &quot;weight^2&quot; is a square term.</span>
+<span class="c1"># &quot;I()&quot; is used to inhibit the formula operator &quot;+&quot;</span>
+<span class="c1"># from being interpreted as an arithmetical one.</span>
+
+<span class="nf">summary</span><span class="p">(</span><span class="n">reg1</span><span class="p">)</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">reg2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>练习</strong></p>
+<p>在先前的练习中(#AJR_exec)，我们编译了<code class="docutils literal notranslate"><span class="pre">AJR.csv</span></code>中所有的<code class="docutils literal notranslate"><span class="pre">shortnam</span></code>、 <code class="docutils literal notranslate"><span class="pre">logpgp95</span></code>、 <code class="docutils literal notranslate"><span class="pre">avexpr</span></code>、<code class="docutils literal notranslate"><span class="pre">lat_abst</span></code>、 和 <code class="docutils literal notranslate"><span class="pre">logem4</span></code> 变量。现在请尝试把<code class="docutils literal notranslate"><span class="pre">logpgp95</span></code>作为因变量进行工具变量回归，其中<code class="docutils literal notranslate"><span class="pre">avexpr</span></code>和<code class="docutils literal notranslate"><span class="pre">latabst</span></code>为解释变量而<code class="docutils literal notranslate"><span class="pre">logem4</span></code>和<code class="docutils literal notranslate"><span class="pre">lat_abst</span></code>是工具变量。(提示: 使用函数<code class="docutils literal notranslate"><span class="pre">AER::ivreg()</span></code>)</p>
+</section>
+</section>
+<section id="id18">
+<h2><span class="section-number">2.6. </span>拓展阅读<a class="headerlink" href="#id18" title="永久链接至标题">#</a></h2>
+<!-- [Wickham and Grolemund](https://r4ds.had.co.nz/): Ch 1, 2, 4, 8, 19 and 20 -->
+<ul class="simple">
+<li><p>详细阅读 <a class="reference external" href="https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf">R-Introduction</a></p></li>
+<li><p>Wickham and Grolemund (<a class="reference external" href="https://r4ds.had.co.nz/">https://r4ds.had.co.nz/</a>)</p>
+<ul>
+<li><p>第四章: workflow:basics</p></li>
+<li><p>第六章: workflow:scripts</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="id19">
+<h2><span class="section-number">2.7. </span>参考文献<a class="headerlink" href="#id19" title="永久链接至标题">#</a></h2>
+<ul class="simple">
+<li><p>Acemoglu, Daron, Simon Johnson, and James A. Robinson. “The colonial origins of comparative development: An empirical investigation.” American economic review 91, no. 5 (2001): 1369-1401.</p></li>
+<li><p>Chang, Jinyuan., Shi, Zhentao. and Zhang, Jia., 2022. Culling the herd of moments with penalized empirical likelihood. Journal of Business &amp; Economic Statistics,  pp.1-39.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            kernelName: "ir",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="00-preface.html" title="上一页 页">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">上一页</p>
+            <p class="prev-next-title">Preface</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="03-advanced_R-CN.html" title="下一页 页">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">下一页</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>R语言进阶</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By 史震涛 Shi Zhentao<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

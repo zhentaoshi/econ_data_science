@@ -1,0 +1,887 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>5. 模拟 &#8212; 经济学中的“数据科学”</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/translations.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="6. 数值最优化" href="07-optimization-CN.html" />
+    <link rel="prev" title="4. 积分" href="05-integration-CN.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="zh_CN">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">经济学中的“数据科学”</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00-preface.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-basic_R-CN.html">
+   1. 基础R语言
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-advanced_R-CN.html">
+   3. R语言进阶
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-integration-CN.html">
+   4. 积分
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   5. 模拟
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-optimization-CN.html">
+   6. 数值最优化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-ML-CN.html">
+   7. 从非参数到机器学习
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="09-ML2-CN.html">
+   8. 基于预测的算法
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/zhentaoshi/econ_data_science/master?urlpath=tree/docs/06-simulation-CN.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/zhentaoshi/econ_data_science"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/zhentaoshi/econ_data_science/issues/new?title=Issue%20on%20page%20%2F06-simulation-CN.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/06-simulation-CN.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   5.1. 有限样本计算
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   5.2. 自举法
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     5.2.1. 自举法估计
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     5.2.2. 自举检验
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id12">
+   5.3. 拓展阅读
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id13">
+   5.4. 参考文献
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>模拟</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   5.1. 有限样本计算
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   5.2. 自举法
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     5.2.1. 自举法估计
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     5.2.2. 自举检验
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id12">
+   5.3. 拓展阅读
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id13">
+   5.4. 参考文献
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">5. </span>模拟<a class="headerlink" href="#id1" title="永久链接至标题">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">magrittr</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">tibble</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">plyr</span><span class="p">)</span>
+<span class="nf">set.seed</span><span class="p">(</span><span class="m">888</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>概率论与赌博之间有不为人知的渊源。蒙特卡罗(Monte Carlo)，欧洲“赌博之都”，就是一个不幸的证明。然而，称之为澳门模拟或者香港赌马模拟也并没有让我感觉好多少。我更愿意简单称之为“模拟”。</p>
+<p>模拟被广泛用于 (i) 检测有限样本渐近理论的预测效果； (ii) 自举法(bootstrap),一种数据驱动的自主推断方法；
+(iii) 生成非标准分布； (iv) 估算没有解析表达式的积分。在本章中我们侧重讲解(i) 和 (ii)，而 (iii) 和 (iv)
+会在下一章 <strong>积分</strong> 中提到。</p>
+<p>从现在起，我们将开始写脚本。<strong>脚本</strong> 是有特定目的的程序文本。一个有上千行的脚本并不是从头到尾写出来的，而是递归地逐步完成的。我们将整个复杂的工作分散为各个易于操作的任务，写一小段片段，测试它，在必要的时候再将它编写为一个自定义函数(user-defined function)。之后，各个分散的部分再由上层结构整合起来。(这个过程就像建造一艘空客380的飞机: 它的引擎和机翼在英国制造，机身在德国制造，其他部件的制造也分散在世界各地；然后所有的部件在法国的图卢兹被整合组装。)最后，在文本中加入注释以增加可读性。如果没有注释，在一个月后你重新打开脚本的时候，你就会忘记之前执行的操作，得从头理解一遍程序。</p>
+<div class="proof example admonition" id="example-0">
+<p class="admonition-title"><span class="caption-number">例子 5.1 </span></p>
+<section class="example-content" id="proof-content">
+<p>祖冲之 (429–500 AD)，一个古代的中国数学家，计算出 <span class="math notranslate nohighlight">\(\pi\)</span> 介于 3.1415926 和 3.1415927 之间，其计算的精确度直到900年后才被打破。他使用的是一种确定性近似演算法(deterministic approximation algorithm)。现在假如我们给祖冲之展示一台现代计算机，他能够怎样实现更好的估计效果呢？</p>
+</section>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">require</span><span class="p">(</span><span class="n">plotrix</span><span class="p">)</span>
+<span class="nf">require</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+
+<span class="nf">plot</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="nf">c</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;n&quot;</span><span class="p">,</span> <span class="n">asp</span> <span class="o">=</span> <span class="m">1</span><span class="p">,</span> <span class="n">xlab</span> <span class="o">=</span> <span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s">&quot;y&quot;</span><span class="p">)</span>
+<span class="nf">rect</span><span class="p">(</span><span class="m">-1</span><span class="p">,</span> <span class="m">-1</span><span class="p">,</span> <span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+<span class="nf">draw.circle</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">)</span>
+<span class="nf">points</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="nf">runif</span><span class="p">(</span><span class="m">100</span><span class="p">)</span> <span class="o">*</span> <span class="m">2</span> <span class="o">-</span> <span class="m">1</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="nf">runif</span><span class="p">(</span><span class="m">100</span><span class="p">)</span> <span class="o">*</span> <span class="m">2</span> <span class="o">-</span> <span class="m">1</span><span class="p">,</span> <span class="n">pch</span> <span class="o">=</span> <span class="m">20</span><span class="p">,</span> <span class="n">col</span> <span class="o">=</span> <span class="s">&quot;blue&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>站在大数定律的肩膀上，我们知道 <span class="math notranslate nohighlight">\(\pi\)</span> 可以用随机算法来估计。由</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\pi r^{2}}{\left(2r\right)^{2}}=E\left[\boldsymbol{1}\left\{ x^{2}+y^{2}\leq1\right\} \right],
+\]</div>
+<p>可以得出 <span class="math notranslate nohighlight">\(\pi=4\times E[ 1 \{  x^{2}+y^{2}\leq1 \}]\)</span> 。上式中的数学期望是未知的，我们在此可以通过模拟进行估计。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">&lt;-</span> <span class="m">10000000</span>
+<span class="n">Z</span> <span class="o">&lt;-</span> <span class="m">2</span> <span class="o">*</span> <span class="nf">matrix</span><span class="p">(</span><span class="nf">runif</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">ncol</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span> <span class="o">-</span> <span class="m">1</span> <span class="c1"># uniform distribution in [-1, 1]</span>
+
+<span class="n">inside</span> <span class="o">&lt;-</span> <span class="nf">mean</span><span class="p">(</span><span class="nf">sqrt</span><span class="p">(</span><span class="nf">rowSums</span><span class="p">(</span><span class="n">Z</span><span class="o">^</span><span class="m">2</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="m">1</span><span class="p">)</span> <span class="c1"># the center of the cirle is (0, 0)</span>
+<span class="nf">cat</span><span class="p">(</span><span class="s">&quot;The estimated pi = &quot;</span><span class="p">,</span> <span class="n">inside</span> <span class="o">*</span> <span class="m">4</span><span class="p">,</span> <span class="s">&quot;\n&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>只要计算机的内存允许，样本数量可以设置得越大越好。这样可以用平均数的平均数进行不断的迭代以实现更高的精确度。</p>
+<section id="id2">
+<h2><span class="section-number">5.1. </span>有限样本计算<a class="headerlink" href="#id2" title="永久链接至标题">#</a></h2>
+<p>在实际生活中，样本数量是有限的。有限样本的数据的分布取决于样本的数量 <span class="math notranslate nohighlight">\(n\)</span> ，仅有在少数的案例中才能找到简单的数学表达式。
+幸运的是，当样本数量非常大时，表达式可以被简化。渐近理论就是这样用于估计有限样本分布的工具。无论是在计量经济学或者统计学中，目前为止，它是分析估计量和检验最有用的方法。模拟是评价估计精确度的一种方法。</p>
+<p>尽管有真实数据的实证例子也能用于展示，但人造数据更加方便有效。计量经济学中主流的范式是假设数据是基于模型生成的。之后我们作为研究者，检验估计量能与未知参数表征的模型的吻合程度。在模拟当中，我们可以完全掌握数据的生成过程(data generation process, dgp)以及真实参数。然而，在现实例子中，我们无从得知真实的模型，所以我们不能直接评估参数估计的质量和准确性。</p>
+<p>(如果我们只侧重于预测，那就是另一种情况了。就像我们在机器学习中经常遇到的情况那样，我们就把数据分为两个部分，一个用于建模和估计，另一部分用于验证。)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># the workhorse functions</span>
+<span class="n">simulation</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">type</span> <span class="o">=</span> <span class="s">&quot;Normal&quot;</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># a function gives the t-value under the null</span>
+  <span class="nf">if </span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;Normal&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">e</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+  <span class="p">}</span> <span class="n">else</span> <span class="nf">if </span><span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="s">&quot;T&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">e</span> <span class="o">&lt;-</span> <span class="nf">rt</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="n">X</span> <span class="o">&lt;-</span> <span class="nf">cbind</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">VGAM</span><span class="o">::</span><span class="nf">rpareto</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">shape</span> <span class="o">=</span> <span class="m">1.5</span><span class="p">))</span>
+  <span class="n">Y</span> <span class="o">&lt;-</span> <span class="n">X</span> <span class="o">%*%</span> <span class="n">b0</span> <span class="o">+</span> <span class="n">e</span>
+  <span class="nf">rm</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+  <span class="n">bhat</span> <span class="o">&lt;-</span> <span class="nf">solve</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">X</span><span class="p">,</span> <span class="nf">t</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">Y</span><span class="p">)</span>
+  <span class="n">bhat2</span> <span class="o">&lt;-</span> <span class="n">bhat</span><span class="p">[</span><span class="m">2</span><span class="p">]</span> <span class="c1"># parameter we want to test</span>
+
+  <span class="n">e_hat</span> <span class="o">&lt;-</span> <span class="n">Y</span> <span class="o">-</span> <span class="n">X</span> <span class="o">%*%</span> <span class="n">bhat</span>
+  <span class="n">sigma_hat_square</span> <span class="o">&lt;-</span> <span class="nf">sum</span><span class="p">(</span><span class="n">e_hat</span><span class="o">^</span><span class="m">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="m">2</span><span class="p">)</span>
+  <span class="n">sig_B</span> <span class="o">&lt;-</span> <span class="nf">solve</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">%*%</span> <span class="n">X</span><span class="p">)</span> <span class="o">*</span> <span class="n">sigma_hat_square</span>
+  <span class="n">t_value_2</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="n">bhat2</span> <span class="o">-</span> <span class="n">b0</span><span class="p">[</span><span class="m">2</span><span class="p">])</span> <span class="o">/</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">sig_B</span><span class="p">[</span><span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">])</span>
+
+  <span class="nf">return</span><span class="p">(</span><span class="n">t_value_2</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># report the empirical test size</span>
+<span class="n">report</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># collect the test size from the two distributions</span>
+  <span class="c1"># this function contains some repetitive code, but is OK for such a simple one</span>
+  <span class="n">TEST_SIZE</span> <span class="o">&lt;-</span> <span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">3</span><span class="p">)</span>
+
+  <span class="c1"># e ~ normal distribution, under which the t-dist is exact</span>
+  <span class="n">Res</span> <span class="o">&lt;-</span> <span class="n">plyr</span><span class="o">::</span><span class="nf">ldply</span><span class="p">(</span><span class="n">.data</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="n">Rep</span><span class="p">,</span> <span class="n">.fun</span> <span class="o">=</span> <span class="nf">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="nf">simulation</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s">&quot;Normal&quot;</span><span class="p">))</span>
+  <span class="n">TEST_SIZE</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="nf">mean</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">Res</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nf">qt</span><span class="p">(</span><span class="n">.</span><span class="m">975</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="m">2</span><span class="p">))</span>
+  <span class="n">TEST_SIZE</span><span class="p">[</span><span class="m">2</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="nf">mean</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">Res</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nf">qnorm</span><span class="p">(</span><span class="n">.</span><span class="m">975</span><span class="p">))</span>
+
+  <span class="c1"># e ~ t-distribution, under which the exact distribution is complicated.</span>
+  <span class="c1"># we rely on asymptotic normal distribution for inference instead</span>
+  <span class="n">Res</span> <span class="o">&lt;-</span> <span class="n">plyr</span><span class="o">::</span><span class="nf">ldply</span><span class="p">(</span><span class="n">.data</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="n">Rep</span><span class="p">,</span> <span class="n">.fun</span> <span class="o">=</span> <span class="nf">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="nf">simulation</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s">&quot;T&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">))</span>
+  <span class="n">TEST_SIZE</span><span class="p">[</span><span class="m">3</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="nf">mean</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="n">Res</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nf">qnorm</span><span class="p">(</span><span class="n">.</span><span class="m">975</span><span class="p">))</span>
+
+  <span class="nf">return</span><span class="p">(</span><span class="n">TEST_SIZE</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">## the super structure</span>
+<span class="c1"># set the parameters</span>
+<span class="n">Rep</span> <span class="o">&lt;-</span> <span class="m">1000</span>
+<span class="n">b0</span> <span class="o">&lt;-</span> <span class="nf">matrix</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="n">nrow</span> <span class="o">=</span> <span class="m">2</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">&lt;-</span> <span class="m">1</span> <span class="c1"># t dist. with df = 1 is Cauchy</span>
+
+<span class="c1"># run the calculation of the empirical sizes for different sample sizes</span>
+<span class="n">NN</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="m">5</span><span class="p">,</span> <span class="m">10</span><span class="p">,</span> <span class="m">200</span><span class="p">,</span> <span class="m">5000</span><span class="p">)</span>
+<span class="n">RES</span> <span class="o">&lt;-</span> <span class="n">plyr</span><span class="o">::</span><span class="nf">ldply</span><span class="p">(</span><span class="n">.data</span> <span class="o">=</span> <span class="n">NN</span><span class="p">,</span> <span class="n">.fun</span> <span class="o">=</span> <span class="n">report</span><span class="p">)</span>
+<span class="nf">names</span><span class="p">(</span><span class="n">RES</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;exact&quot;</span><span class="p">,</span> <span class="s">&quot;normal.asym&quot;</span><span class="p">,</span> <span class="s">&quot;cauchy.asym&quot;</span><span class="p">)</span> <span class="c1"># to make the results readable</span>
+<span class="n">RES</span><span class="o">$</span><span class="n">n</span> <span class="o">&lt;-</span> <span class="n">NN</span>
+<span class="n">RES</span> <span class="o">&lt;-</span> <span class="n">RES</span><span class="p">[,</span> <span class="nf">c</span><span class="p">(</span><span class="m">4</span><span class="p">,</span> <span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="p">)]</span> <span class="c1"># beautify the print</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">RES</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>第一列是，我们在误差正态时使用精确分布理论来找到的临界值 (依据 <span class="math notranslate nohighlight">\(t\)</span> 分布)。第二列依然基于误差项的正态分布性质，但是这次的临界值依靠正态分布得到(基于渐近估计理论)。当样本量很小时就会观测到明显的规模失真；但是随着样本量的增加，偏差随之减少。</p>
+<p>当误差分布是柯西分布时，所谓的 <strong>精确分布</strong> 就不再精确了——只有当误差项正态且独立于 <span class="math notranslate nohighlight">\(x\)</span> 时才是精确的。
+如果我们尝试使用渐近正态估计，我们会发现渐近估计无法成立，因为随着样本规模的增大，检验并不会收敛于5%的临界值。</p>
+<p>当我们在此设计模拟时，尽管误差项的分布各不相同， <span class="math notranslate nohighlight">\(X\)</span> 总是服从帕累托分布的。当我们查看表格的时候，我们会发现 <span class="math notranslate nohighlight">\(X\)</span> 的分布实际上并不影响结果，这是为什么呢？ 因为有</p>
+<div class="math notranslate nohighlight">
+\[
+\sqrt{n} (\hat{\beta} - \beta_0) |X = (X'X/n)^{-1}  (X' e /\sqrt{n}),
+\]</div>
+<p>以 <span class="math notranslate nohighlight">\(x\)</span> 为条件的，系数向量的第 <span class="math notranslate nohighlight">\(k\)</span> 个元素为</p>
+<div class="math notranslate nohighlight">
+\[
+\widehat{\beta}_{k}|X=\eta_{k}'\widehat{\beta}|X
+\sim N\left(\beta_{k},\sigma^{2}\left(X'X\right)_{kk}^{-1}\right).
+\]</div>
+<p>因此 <span class="math notranslate nohighlight">\(t\)</span> 统计量为</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+T_{k}  =\frac{\widehat{\beta}_{k}-\beta_{k}}{\sqrt{s^{2}\left[\left(X'X\right)^{-1}\right]_{kk}}}\\
+  =\frac{\widehat{\beta}_{k}-\beta_{k}}{\sqrt{\sigma^{2}\left[\left(X'X\right)^{-1}\right]_{kk}}}\cdot\frac{\sqrt{\sigma^{2}}}{\sqrt{s^{2}}}\\
+  =\frac{\left(\widehat{\beta}_{k}-\beta_{k}\right)/\sqrt{\sigma^{2}\left[\left(X'X\right)^{-1}\right]_{kk}}}{\sqrt{\frac{e'}{\sigma}M_{X}\frac{e}{\sigma}/\left(n-K\right)}}.
+\end{split}\]</div>
+<p>虽然 <span class="math notranslate nohighlight">\(X'X/n\)</span> 不会收敛于一个稳定的概率极限，自正则的 <span class="math notranslate nohighlight">\(t\)</span> 统计量依然存在。
+忽视 <span class="math notranslate nohighlight">\(X\)</span> 的分布类型，当误差项是正态分布时，上述表达式的分子服从一个标准正态分布，而分母则服从 <span class="math notranslate nohighlight">\(\chi^2\)</span> 分布， 且两者相互独立。最后得出的统计量服从 <span class="math notranslate nohighlight">\(t\)</span> 分布。</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">5.2. </span>自举法<a class="headerlink" href="#id3" title="永久链接至标题">#</a></h2>
+<p>自举法(Bootstrap)最早来源于<span id="id4">[]</span>,是一个在估计和推断理论中影响力巨大的思想。在此我们简单进行介绍。教科书的阐述可以参考
+<span id="id5">[]</span> (第11章)。</p>
+<p>令 <span class="math notranslate nohighlight">\(X_1, X_2, \ldots, X_n \sim F\)</span> 是服从分布 <span class="math notranslate nohighlight">\(F\)</span> 的 <span class="math notranslate nohighlight">\(n\)</span> 个独立同分布样本。统计量 <span class="math notranslate nohighlight">\(T_n(\theta)\sim G_n(\cdot, F)\)</span> 的有限样本分布通常取决于样本的大小 <span class="math notranslate nohighlight">\(n\)</span> 和已知的真实分布 <span class="math notranslate nohighlight">\(F\)</span> 。渐近理论通过极限</p>
+<div class="math notranslate nohighlight">
+\[
+G(\cdot, F) := \lim_{n\to\infty} G_n(\cdot, F).
+\]</div>
+<p>来估计 <span class="math notranslate nohighlight">\(G_n(\cdot, F)\)</span> 。
+特别地，如果 <span class="math notranslate nohighlight">\(T_n(\theta)\)</span> 是 <strong>渐近枢轴量</strong>(<em>asymptotically pivotal</em>)，那么 <span class="math notranslate nohighlight">\(G_n(\cdot, F)\)</span> 独立于 <span class="math notranslate nohighlight">\(F\)</span> 且它简化为 <span class="math notranslate nohighlight">\(G(\cdot)\)</span> 。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">runif</span><span class="p">(</span><span class="m">10</span><span class="p">)</span> <span class="o">%&gt;%</span>
+  <span class="nf">ecdf</span><span class="p">()</span> <span class="o">%&gt;%</span>
+  <span class="nf">plot</span><span class="p">(,</span> <span class="n">xlim</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&quot;ECDF for uniform distribution&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>自举法(Bootstrap)将 <span class="math notranslate nohighlight">\(G_n(\cdot, F)\)</span> 中的未知分布 <span class="math notranslate nohighlight">\(F\)</span> 用真实分布的相合估计量 <span class="math notranslate nohighlight">\(F_n\)</span> 替代，而不是使用分布的极限；例如实证分布函数
+<span class="math notranslate nohighlight">\(\hat{F}_n(\cdot) = n^{-1} \sum_{i=1}^n 1\{\cdot \leq X_i\}\)</span> 。自举法推断是从自举分布(bootstrap distribution)</p>
+<div class="math notranslate nohighlight">
+\[
+G^{*}_n(\cdot):= G_n(\cdot, \hat{F}_n)
+\]</div>
+<p>中得出的。
+自举法是一个模拟问题。在一个独立同分布样本中，我们给每一个观测值同等的权重，这称为 <strong>非参数自举法</strong> (<em>nonparametric bootstrap</em>)。
+不过，自举法有许多不同的变体以应对不同情况的需求。
+在一个相关数据集中，例如时间序列数据[<span id="id6">[]</span>]、聚类数据或网络(clustering data or networks)，我们必须调整抽样方式以保存数据的相关结构。如果是在回归问题的背景下，我们固定自变量，只对残差进行自举，则被称为 <strong>参数自举法</strong>(<em>parametric bootstrap</em>)。此外，如果误差项是异方差，那么 <span class="math notranslate nohighlight">\(X\)</span> 和 <span class="math notranslate nohighlight">\(\hat{e}\)</span> 之间的关系可以用 <strong>原始自举法</strong> (<em>wild bootstrap</em> )[<span id="id7">[]</span>] 保持。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">&lt;-</span> <span class="m">9</span> <span class="c1"># sample size</span>
+<span class="n">boot_Rep</span> <span class="o">&lt;-</span> <span class="m">3</span> <span class="c1"># bootstrap 3 times</span>
+
+<span class="n">real_sample</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="c1"># the real sample</span>
+<span class="n">d0</span> <span class="o">&lt;-</span> <span class="nf">tibble</span><span class="p">(</span><span class="n">no</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">real_sample</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">d0</span><span class="p">)</span>
+
+<span class="n">d_boot</span> <span class="o">&lt;-</span> <span class="nf">list</span><span class="p">()</span> <span class="c1"># save the bootstrap sample</span>
+<span class="nf">for </span><span class="p">(</span><span class="n">b</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">boot_Rep</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">boot_index</span> <span class="o">&lt;-</span> <span class="nf">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">replace</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">)</span>
+  <span class="n">d_boot</span><span class="p">[[</span><span class="n">b</span><span class="p">]]</span> <span class="o">&lt;-</span> <span class="nf">tibble</span><span class="p">(</span><span class="n">no</span> <span class="o">=</span> <span class="n">boot_index</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">real_sample</span><span class="p">[</span><span class="n">boot_index</span><span class="p">])</span>
+<span class="p">}</span>
+
+<span class="n">d_boot</span> <span class="o">%&gt;%</span> <span class="nf">as_tibble</span><span class="p">(,</span> <span class="n">.name_repair</span> <span class="o">=</span> <span class="s">&quot;minimal&quot;</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>在大多数情况下，自举法的 <strong>相合性</strong> 是可以证明的：我们感兴趣的统计量与它的自举法的结果会收敛于一个相同的渐近分布；或者对于所有的<span class="math notranslate nohighlight">\(a\)</span> ， <span class="math notranslate nohighlight">\(G^*_n(a) \stackrel{p}{ \to } G(a)\)</span> ，从而 <span class="math notranslate nohighlight">\(G(a)\)</span> 是连续函数。不过，若是统计量的分布在极限时不连续，那么自举法的相合性就不再成立，这种情况的自举法是不稳定的。比如在弱工具变量时，简单自举法不能复原两阶段最小二乘估计量的渐近分布。</p>
+<p>有许多复杂的方法来解决自举法的相合性问题，本讲我们暂不介绍。</p>
+<section id="id8">
+<h3><span class="section-number">5.2.1. </span>自举法估计<a class="headerlink" href="#id8" title="永久链接至标题">#</a></h3>
+<p>用 <code class="docutils literal notranslate"><span class="pre">ply</span></code> 来处理自举法十分便捷——这个程序包中有成套的函数来进行反复的模拟。此外，R包 <a class="reference external" href="http://cran.r-project.org/web/packages/boot/index.html">boot</a> 提供了一个一般性的函数 <code class="docutils literal notranslate"><span class="pre">boot()</span></code>供开发者使用。</p>
+<p>当估计量的解析式难以求解或者编程时，自举法就能发挥出它自身的优势和作用。</p>
+<div class="proof example admonition" id="example-1">
+<p class="admonition-title"><span class="caption-number">例子 5.2 </span></p>
+<section class="example-content" id="proof-content">
+<p><span id="id9">[]</span>的两阶段法是样本选择中最流行的估计量之一。令最终等式形如</p>
+<div class="math notranslate nohighlight">
+\[
+y_i = x_i \beta + u_i
+\]</div>
+<p>选择等式(selection equation)为：</p>
+<div class="math notranslate nohighlight">
+\[
+D_i = z_i \gamma + v_i
+\]</div>
+<p>要获得一个点估计量，我们只需要运行一个Probit模型，预测参与的概率(probability of participation)，之后再用 <span class="math notranslate nohighlight">\(x_i\)</span> 和 <span class="math notranslate nohighlight">\(\lambda (\hat{D}_i)\)</span> 对 <span class="math notranslate nohighlight">\(y_i\)</span> 进行OLS回归就能得到结果。(其中 <span class="math notranslate nohighlight">\(\lambda(\cdot)\)</span> 是inverse Mill’s ratio）不过，从Heckman (1979)的原文中可以看出，二阶段估计量的渐近方差非常复杂。与其写出解析式，不如对于方差使用自举法。</p>
+</section>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># the dataset comes from</span>
+<span class="c1"># Greene( 2003 ): example 22.8, page 786</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">sampleSelection</span><span class="p">)</span>
+<span class="nf">data</span><span class="p">(</span><span class="n">Mroz87</span><span class="p">)</span>
+<span class="c1"># equations</span>
+<span class="n">selection_eq</span> <span class="o">&lt;-</span> <span class="n">lfp</span> <span class="o">~</span> <span class="m">-1</span> <span class="o">+</span> <span class="n">age</span> <span class="o">+</span> <span class="n">faminc</span> <span class="o">+</span> <span class="n">exper</span> <span class="o">+</span> <span class="n">educ</span>
+<span class="n">outcome_eq</span> <span class="o">&lt;-</span> <span class="n">wage</span> <span class="o">~</span> <span class="n">exper</span> <span class="o">+</span> <span class="n">educ</span>
+
+<span class="c1"># Heckman two-step estimation</span>
+<span class="n">heck</span> <span class="o">&lt;-</span> <span class="n">sampleSelection</span><span class="o">::</span><span class="nf">heckit</span><span class="p">(</span><span class="n">selection_eq</span><span class="p">,</span> <span class="n">outcome_eq</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">Mroz87</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">lmtest</span><span class="o">::</span><span class="nf">coeftest</span><span class="p">(</span><span class="n">heck</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>下方是进行单次自举的函数。为了便捷高效，我们保留点估计 <code class="docutils literal notranslate"><span class="pre">heckit</span></code> ，但忽略估计的方差。(这是一个图省事的方法，如果我们手动编写Heckit点估计的函数，也能得到相同的结果) 在此之后，就是进行重复的运算。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">&lt;-</span> <span class="nf">nrow</span><span class="p">(</span><span class="n">Mroz87</span><span class="p">)</span>
+<span class="n">boot_heck</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">indices</span> <span class="o">&lt;-</span> <span class="nf">sample</span><span class="p">(</span><span class="m">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">replace</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span> <span class="c1"># resample the index set</span>
+  <span class="n">Mroz87_b</span> <span class="o">&lt;-</span> <span class="n">Mroz87</span><span class="p">[</span><span class="n">indices</span><span class="p">,</span> <span class="p">]</span> <span class="c1"># generate the bootstrap sample</span>
+  <span class="n">heck_b</span> <span class="o">&lt;-</span> <span class="n">sampleSelection</span><span class="o">::</span><span class="nf">heckit</span><span class="p">(</span><span class="n">selection_eq</span><span class="p">,</span> <span class="n">outcome_eq</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">Mroz87_b</span><span class="p">)</span>
+  <span class="nf">return</span><span class="p">(</span><span class="nf">coef</span><span class="p">(</span><span class="n">heck_b</span><span class="p">))</span>
+<span class="p">}</span>
+<span class="c1"># repeat the bootstrap</span>
+<span class="n">boot_Rep</span> <span class="o">&lt;-</span> <span class="m">199</span>
+<span class="n">Heck_B</span> <span class="o">&lt;-</span> <span class="n">plyr</span><span class="o">::</span><span class="nf">ldply</span><span class="p">(</span><span class="n">.data</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="n">boot_Rep</span><span class="p">,</span> <span class="n">.fun</span> <span class="o">=</span> <span class="nf">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="nf">boot_heck</span><span class="p">())</span>
+
+<span class="c1"># collect the bootstrap outcomes</span>
+<span class="n">Heck_b_sd</span> <span class="o">&lt;-</span> <span class="nf">apply</span><span class="p">(</span><span class="n">Heck_B</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="n">sd</span><span class="p">)[</span><span class="m">1</span><span class="o">:</span><span class="m">7</span><span class="p">]</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">Heck_b_sd</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>解析式法和自举法的标准误差有相似的性质。二者都是渐近相合的，同时自举估计量也可以直接用于计算置信区间。</p>
+</section>
+<section id="id10">
+<h3><span class="section-number">5.2.2. </span>自举检验<a class="headerlink" href="#id10" title="永久链接至标题">#</a></h3>
+<p>自举法在推断中十分重要。实际上，如果检验统计量是渐近枢轴量，那么与解析渐进估计相比，自举法有着高阶的优点[<span id="id11">[]</span>]。这是可以严格证明的。此外，如果检验统计量是渐近枢轴量，自举的假设检验可能会比解析渐近的算法更加精确。</p>
+<div class="proof example admonition" id="example-2">
+<p class="admonition-title"><span class="caption-number">例子 5.3 </span></p>
+<section class="example-content" id="proof-content">
+<p>我们用自举法对于样本均值进行假设检验。在此我们使用 <span class="math notranslate nohighlight">\(t\)</span> 统计量。样本的分布既不是 <strong>正态分布</strong> 也不是 <strong>以0为中心的卡方分布</strong> 。它将会证明自举法的检验比渐近估计更加精确。</p>
+<p>我们首先准备函数</p>
+</section>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># the t-statistic for a null hypothesis mu</span>
+<span class="n">T_stat</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="nf">mean</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">/</span> <span class="nf">sd</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+
+<span class="c1"># the bootstrap function</span>
+<span class="n">boot_test</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">boot_Rep</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1"># INPUT</span>
+  <span class="c1"># Y: the sample</span>
+  <span class="c1"># boot_Rep: number of bootstrap replications</span>
+
+  <span class="n">n</span> <span class="o">&lt;-</span> <span class="nf">length</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+  <span class="n">boot_T</span> <span class="o">&lt;-</span> <span class="nf">rep</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">boot_Rep</span><span class="p">)</span>
+
+  <span class="c1"># bootstrap in action</span>
+  <span class="nf">for </span><span class="p">(</span><span class="n">r</span> <span class="n">in</span> <span class="m">1</span><span class="o">:</span><span class="n">boot_Rep</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">indices</span> <span class="o">&lt;-</span> <span class="nf">sample.int</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">replace</span> <span class="o">=</span> <span class="bp">T</span><span class="p">)</span> <span class="c1"># resampling the index</span>
+    <span class="n">resampled_Y</span> <span class="o">&lt;-</span> <span class="n">Y</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span> <span class="c1"># construct a bootstrap artificial sample</span>
+    <span class="n">boot_T</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">&lt;-</span> <span class="nf">abs</span><span class="p">(</span><span class="nf">T_stat</span><span class="p">(</span><span class="n">resampled_Y</span><span class="p">,</span> <span class="nf">mean</span><span class="p">(</span><span class="n">Y</span><span class="p">)))</span>
+    <span class="c1"># the bootstrapped t-statistic</span>
+    <span class="c1"># mu is replaced by &quot;mean(Y)&quot; to mimic the situation under the null</span>
+  <span class="p">}</span>
+
+  <span class="c1"># bootstrap critical value</span>
+  <span class="n">boot_critical_value</span> <span class="o">&lt;-</span> <span class="nf">quantile</span><span class="p">(</span><span class="n">boot_T</span><span class="p">,</span> <span class="m">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span>
+  <span class="c1"># bootstrap test decision</span>
+  <span class="nf">return</span><span class="p">(</span><span class="nf">abs</span><span class="p">(</span><span class="nf">T_stat</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">mu</span><span class="p">))</span> <span class="o">&gt;</span> <span class="n">boot_critical_value</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>自举检验的一个关键点在于无论假设的参数是否为真实值，我们都必须引入原假设。
+因此，自举法的 <span class="math notranslate nohighlight">\(t\)</span> 统计量为：</p>
+<div class="math notranslate nohighlight">
+\[
+T^{*}_{n} = \frac{\bar{X^{*}} - \bar{X}} { s^{*} / \sqrt{n} }.
+\]</div>
+<p>也就是说，自举法 <span class="math notranslate nohighlight">\(t\)</span> 统计量以 <span class="math notranslate nohighlight">\(F_n\)</span> 的样本均值 <span class="math notranslate nohighlight">\(\bar{X}\)</span> 为中心，而不是 <span class="math notranslate nohighlight">\(\theta\)</span> ， <span class="math notranslate nohighlight">\(F\)</span> 的总体均值。这是因为在自举法中，“真实”的分布是 <span class="math notranslate nohighlight">\(F_n\)</span> ；如果我们错误地让 <span class="math notranslate nohighlight">\(t\)</span> 统计量以 <span class="math notranslate nohighlight">\(\theta\)</span> 为中心，那么当原假设为False时，检验将变得不可靠。</p>
+<p>下面了代码展示了三种决策方式下的拒绝概率。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">compare</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1"># this function generates a sample of n observations</span>
+  <span class="c1"># and it returns the testing results from three decision rules</span>
+
+  <span class="nf">if </span><span class="p">(</span><span class="n">distribution</span> <span class="o">==</span> <span class="s">&quot;normal&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">X</span> <span class="o">&lt;-</span> <span class="nf">rnorm</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="n">else</span> <span class="nf">if </span><span class="p">(</span><span class="n">distribution</span> <span class="o">==</span> <span class="s">&quot;chisq&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">X</span> <span class="o">&lt;-</span> <span class="nf">rchisq</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="m">3</span><span class="p">)</span> <span class="o">-</span> <span class="m">3</span>
+  <span class="p">}</span>
+
+  <span class="n">t_value_X</span> <span class="o">&lt;-</span> <span class="nf">T_stat</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span> <span class="c1"># T-statistic</span>
+
+  <span class="c1"># compare it to the 97.5% of t-distribution</span>
+  <span class="n">exact</span> <span class="o">&lt;-</span> <span class="nf">abs</span><span class="p">(</span><span class="n">t_value_X</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nf">qt</span><span class="p">(</span><span class="m">0.975</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="m">1</span><span class="p">)</span>
+  <span class="c1"># compare it to the 97.5% of normal distribution</span>
+  <span class="n">asym</span> <span class="o">&lt;-</span> <span class="nf">abs</span><span class="p">(</span><span class="n">t_value_X</span><span class="p">)</span> <span class="o">&gt;</span> <span class="m">1.96</span>
+  <span class="c1"># decision from bootstrap</span>
+  <span class="n">boot_rule</span> <span class="o">&lt;-</span> <span class="nf">boot_test</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">boot_Rep</span><span class="p">)</span>
+
+  <span class="nf">return</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="n">exact</span><span class="p">,</span> <span class="n">asym</span><span class="p">,</span> <span class="n">boot_rule</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="c1"># set the parameters</span>
+<span class="n">n</span> <span class="o">&lt;-</span> <span class="m">20</span>
+<span class="n">distribution</span> <span class="o">&lt;-</span> <span class="s">&quot;normal&quot;</span>
+<span class="n">boot_Rep</span> <span class="o">&lt;-</span> <span class="m">199</span>
+<span class="n">MC_rep</span> <span class="o">&lt;-</span> <span class="m">2000</span>
+<span class="n">alpha</span> <span class="o">&lt;-</span> <span class="m">0.05</span>
+<span class="n">mu</span> <span class="o">&lt;-</span> <span class="m">0</span>
+
+<span class="c1"># Monte Carlo simulation and report the rejection probability</span>
+<span class="n">res</span> <span class="o">&lt;-</span> <span class="n">plyr</span><span class="o">::</span><span class="nf">ldply</span><span class="p">(</span><span class="n">.data</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="n">MC_rep</span><span class="p">,</span> <span class="n">.fun</span> <span class="o">=</span> <span class="nf">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="nf">compare</span><span class="p">())</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;exact&quot;</span><span class="p">,</span> <span class="s">&quot;asym&quot;</span><span class="p">,</span> <span class="s">&quot;bootstrap&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">colMeans</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>这里将名义显著性水平定为5%。通过程序报告实际的显著性水平——拒绝假设的数量占据重复实验总次数的比例。实际显著性水平与名义水平越相近，检验的准确率就越高。</p>
+<p>当暗含的分布为 <span class="math notranslate nohighlight">\(\chi^2\)</span> 时，很难导出精确的分布的解析式。不过，我们仍然可以比较渐近和自举的显著性水平。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">distribution</span> <span class="o">&lt;-</span> <span class="s">&quot;chisq&quot;</span>
+
+<span class="n">res</span> <span class="o">&lt;-</span> <span class="n">plyr</span><span class="o">::</span><span class="nf">ldply</span><span class="p">(</span><span class="n">.data</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="n">MC_rep</span><span class="p">,</span> <span class="n">.fun</span> <span class="o">=</span> <span class="nf">function</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="nf">compare</span><span class="p">())</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;exact?&quot;</span><span class="p">,</span> <span class="s">&quot;asym&quot;</span><span class="p">,</span> <span class="s">&quot;bootstrap&quot;</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">colMeans</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>这里的“精确检验”同样不 <strong>精确</strong> 。 渐近检验的工作原理更可靠，而自举法能够更接近5%的显著性水平。</p>
+</section>
+</section>
+<section id="id12">
+<h2><span class="section-number">5.3. </span>拓展阅读<a class="headerlink" href="#id12" title="永久链接至标题">#</a></h2>
+<p>Efron and Hastie: 第 10 和 11 章</p>
+</section>
+<section id="id13">
+<h2><span class="section-number">5.4. </span>参考文献<a class="headerlink" href="#id13" title="永久链接至标题">#</a></h2>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            kernelName: "ir",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="05-integration-CN.html" title="上一页 页">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">上一页</p>
+            <p class="prev-next-title"><span class="section-number">4. </span>积分</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="07-optimization-CN.html" title="下一页 页">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">下一页</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>数值最优化</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By 史震涛 Shi Zhentao<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

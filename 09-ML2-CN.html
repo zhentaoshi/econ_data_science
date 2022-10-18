@@ -1,0 +1,755 @@
+
+<!DOCTYPE html>
+
+<html lang="zh_CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>8. 基于预测的算法 &#8212; 经济学中的“数据科学”</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/translations.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="prev" title="7. 从非参数到机器学习" href="08-ML-CN.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="zh_CN">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">经济学中的“数据科学”</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00-preface.html">
+                    Preface
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01-basic_R-CN.html">
+   1. 基础R语言
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03-advanced_R-CN.html">
+   3. R语言进阶
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05-integration-CN.html">
+   4. 积分
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="06-simulation-CN.html">
+   5. 模拟
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="07-optimization-CN.html">
+   6. 数值最优化
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="08-ML-CN.html">
+   7. 从非参数到机器学习
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   8. 基于预测的算法
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/zhentaoshi/econ_data_science/master?urlpath=tree/docs/09-ML2-CN.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/zhentaoshi/econ_data_science"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/zhentaoshi/econ_data_science/issues/new?title=Issue%20on%20page%20%2F09-ML2-CN.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/09-ML2-CN.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   8.1. 回归树和装袋法
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   8.2. 随机森林
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id13">
+   8.3. 梯度提升
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id18">
+   8.4. 神经网络
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id20">
+   8.5. 随机梯度下降
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id22">
+   8.6. 拓展阅读
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id23">
+   8.7. 引言
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id24">
+   8.8. 参考文献
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>基于预测的算法</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   8.1. 回归树和装袋法
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   8.2. 随机森林
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id13">
+   8.3. 梯度提升
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id18">
+   8.4. 神经网络
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id20">
+   8.5. 随机梯度下降
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id22">
+   8.6. 拓展阅读
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id23">
+   8.7. 引言
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id24">
+   8.8. 参考文献
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">8. </span>基于预测的算法<a class="headerlink" href="#id1" title="永久链接至标题">#</a></h1>
+<p>在本章的学习中，我们将介绍有监督学习当中自动使用交互协变量的方法。这些数据驱动的协变量能够更灵活地捕捉数据中的特质。但是，由于其过于复杂，目前我们对这些方法的理论研究还处在起步阶段。理论学者把它们这些数学上难以解释的计算过程称为“黑箱”。在实际应用中，如果调试得当，那么它们的预测效果会十分显著。
+<span id="id2">[]</span> 展示了用交互项辅助金融市场预测的一系列方法。但与此同时，由于它并不符合常规的科学范式，业界人士也在当心这些方法是否是类似“炼金术”之类的伪科学。在将这些方法应用于计量分析前，我们有必要采取谨慎地态度。</p>
+<section id="id3">
+<h2><span class="section-number">8.1. </span>回归树和装袋法<a class="headerlink" href="#id3" title="永久链接至标题">#</a></h2>
+<p>有监督学习实际上就是用 <span class="math notranslate nohighlight">\(x\)</span> 来预测 <span class="math notranslate nohighlight">\(y\)</span>。理论上讲，如果我们忽略“维度诅咒”，非参数估计(例如核回归)就可以完成这些任务。</p>
+<p><span id="id4">[]</span>提出了 <strong>回归树</strong> (regression tree)方法。 回归树背后的算法其实不难理解，本质上是递归地拆分协变量。依据的标准则是残差平方和(SSR)是否降低最多，回归树每一次拆分都将一个协变量拆分为两个虚拟变量。每一次拆分后的拟合值都用 <span class="math notranslate nohighlight">\(y_i\)</span> 在每小块 <span class="math notranslate nohighlight">\(x\)</span> 上的简单平均来计算。</p>
+<p>回归树的调谐参数是它的深度，也就是拆分的次数。给定一个数据集 <span class="math notranslate nohighlight">\(d\)</span> 和回归树的深度，就能用数据拟合的回归树 <span class="math notranslate nohighlight">\(\hat{r}(d)\)</span> 。</p>
+<p>回归树的问题在于它的不稳定性。对于同一个数据生成过程下产生的不同样本，算法通常选择不同的协变量和分裂点，会极大地影响拆分的路径。</p>
+<p><strong>自举平均法</strong> (bootstrap averaging)，也叫 <strong>装袋法</strong> (bagging) 可以用于减少回归树的方差[<span id="id5">[]</span>]。 装袋法在每一个自举样本中都建立一个回归树，然后进行简单的算术平均。如果 <span class="math notranslate nohighlight">\(d^{\star b}\)</span> 是原数据 <span class="math notranslate nohighlight">\(d\)</span> 的第 <span class="math notranslate nohighlight">\(b\)</span> 个自举样本，我们可以将装袋法估计量定义为</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{r}_{\mathrm{bagging}} = B^{-1} \sum_{b=1}^B \hat{r}( d^{\star b} ).
+\]</div>
+<p>(装袋法是一种 <strong>集成学习</strong>)</p>
+<p><span id="id6">[]</span> 演示了装袋法在时间序列预测中的应用。
+<span id="id7">[]</span> 提供了一个减少装袋法风险的新理论视角。</p>
+</section>
+<section id="id8">
+<h2><span class="section-number">8.2. </span>随机森林<a class="headerlink" href="#id8" title="永久链接至标题">#</a></h2>
+<p><strong>随机森林</strong> [<span id="id9">[]</span>] 在总体 <span class="math notranslate nohighlight">\(p\)</span> 中随机抽取样本 <span class="math notranslate nohighlight">\(m\)</span> 来构造 <strong>子树</strong> 进行分类。
+随机森林中的调谐参数是树的深度和 <span class="math notranslate nohighlight">\(m\)</span> 。 由于抽样回归的“去相关性”，一般情况下它的预测效果比装袋法更好。</p>
+<p>下方是使用波士顿住房数据的随机森林的简单例子：</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">require</span><span class="p">(</span><span class="n">randomForest</span><span class="p">)</span>
+<span class="n">require</span><span class="p">(</span><span class="n">MASS</span><span class="p">)</span> <span class="c1"># Package which contains the Boston housing dataset</span>
+<span class="n">attach</span><span class="p">(</span><span class="n">Boston</span><span class="p">)</span>
+<span class="nb">set</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">101</span><span class="p">)</span>
+
+<span class="c1"># training Sample with 300 observations</span>
+<span class="n">train</span> <span class="o">&lt;-</span> <span class="n">sample</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">nrow</span><span class="p">(</span><span class="n">Boston</span><span class="p">),</span> <span class="mi">300</span><span class="p">)</span>
+
+<span class="n">Boston</span><span class="o">.</span><span class="n">rf</span> <span class="o">&lt;-</span> <span class="n">randomForest</span><span class="p">(</span><span class="n">medv</span> <span class="o">~</span> <span class="o">.</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">Boston</span><span class="p">,</span> <span class="n">subset</span> <span class="o">=</span> <span class="n">train</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">Boston</span><span class="o">.</span><span class="n">rf</span><span class="p">)</span>
+
+<span class="n">importance</span><span class="p">(</span><span class="n">Boston</span><span class="o">.</span><span class="n">rf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>尽管算法十分简单，随机森林的相合性直到2015年才被<span id="id10">[]</span>证明；而推断理论则是由<span id="id11">[]</span>首先提出；<span id="id12">[]</span> 将 CART 推广到局部极大似然。</p>
+</section>
+<section id="id13">
+<h2><span class="section-number">8.3. </span>梯度提升<a class="headerlink" href="#id13" title="永久链接至标题">#</a></h2>
+<p>装袋法和随机森林在聚合回归树时总是采用相同的权重。然而，<strong>提升树</strong> 法用一种特别的方式来决定权重。它是一种确定性方法，不对原数据进行重抽样。</p>
+<ol class="simple">
+<li><p>用原数据 <span class="math notranslate nohighlight">\(d^0=(x_i,y_i)\)</span> 生成一个较浅的回归树 <span class="math notranslate nohighlight">\(\hat{r}^{0}(d^0)\)</span> 。保留预测结果 <span class="math notranslate nohighlight">\(f^0_i = \alpha \cdot \hat{r}^0 (d^0, x_i)\)</span> (其中
+<span class="math notranslate nohighlight">\(\alpha\in [0,1]\)</span> 是一个压缩调谐参数)和残差 <span class="math notranslate nohighlight">\(e_i^{0} = y_i - f^0_i\)</span> ，令 <span class="math notranslate nohighlight">\(m=1\)</span> 。</p></li>
+<li><p>在第 <span class="math notranslate nohighlight">\(m\)</span> 次迭代中, 使用数据 <span class="math notranslate nohighlight">\(d^m = (x_i,e_i^{m-1})\)</span> 生成浅回归树 <span class="math notranslate nohighlight">\(\hat{r}^{m}(d^m)\)</span> 。保留预测结果 <span class="math notranslate nohighlight">\(f^m_i =  f^{m-1}_i +  \alpha \cdot \hat{r}^m (d, x_i)\)</span> 和残差 <span class="math notranslate nohighlight">\(e_i^{m} = y_i - f^m_i\)</span> 。使 <span class="math notranslate nohighlight">\(m = m+1\)</span> 。
+3.重复步骤2直到 <span class="math notranslate nohighlight">\(m &gt; M\)</span>.</p></li>
+</ol>
+<p>在这个提升算法中有三个调谐参数：树的深度、压缩水平 <span class="math notranslate nohighlight">\(\alpha\)</span> 和迭代次数 <span class="math notranslate nohighlight">\(M\)</span> 。
+算法对于三个参数都很敏感，当参数设定合理时，最终效果会非常显著。例如<span id="id14">[]</span>指出，脚本 <code class="docutils literal notranslate"><span class="pre">Beijing_housing_gbm.R</span></code> 得到的样本外 <span class="math notranslate nohighlight">\(R^2\)</span> 比OLS显著高出不少。该脚本使用 <code class="docutils literal notranslate"><span class="pre">gbm</span></code> (Gradient Boosting Machine) 包进行梯度提升运算。</p>
+<p>Boosting算法不只这一种。例如 <span class="math notranslate nohighlight">\(L_2\)</span> 提升、 逐项提升 (componentwise boosting) 和适应性提升 (adaBoost) 等等。统计学者们将Boosting视为梯度下降算法来降低风险。每次迭代中拟合的树的下降速度都是最快的，而压缩会放缓拟合的速度来避免算法过度贪婪。</p>
+<ul class="simple">
+<li><p><span id="id15">[]</span> 提出了一种与Boosting思路类似的greedy算法，并用来挑选GMM中的矩条件。</p></li>
+<li><p><span id="id16">[]</span> 用 <span class="math notranslate nohighlight">\(L_2\)</span> 提升作为Hodrick-Prescott滤波的进阶版。</p></li>
+<li><p><span id="id17">[]</span></p></li>
+</ul>
+</section>
+<section id="id18">
+<h2><span class="section-number">8.4. </span>神经网络<a class="headerlink" href="#id18" title="永久链接至标题">#</a></h2>
+<p>神经网络是Alpha-Go和自动驾驶背后的支撑技术。但在统计学者看来，它只不过是一种特殊的非线性模型。
+图1展示了一个单层的神经网络。不过，大多数情况下神经网络都不只一层，从 <span class="math notranslate nohighlight">\(k-1\)</span> 层到 <span class="math notranslate nohighlight">\(k\)</span> 层的过渡可以写成</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+z_l^{(k)} &amp; =  w_{l0}^{(k-1)} + \sum_{j=1}^{p_{k-1} } w_{lj}^{(k-1)} a_j^{(k-1)} \\ 
+a_l^{(k)} &amp; =  g^{(k)} ( z_l^{(k)}).
+\end{align*}
+\end{split}\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(a_j^{(0)}  = x_j\)</span>  是输入值， <span class="math notranslate nohighlight">\(z_l^{(k)}\)</span> 是第 <span class="math notranslate nohighlight">\(k\)</span> 个隐藏层，当中所有的 <span class="math notranslate nohighlight">\(w\)</span> 都是要估计的系数。
+上述公式表明 <span class="math notranslate nohighlight">\(z_l^{(k)}\)</span> 通常是线性形式，<strong>激励函数</strong> <span class="math notranslate nohighlight">\(g(\cdot)\)</span> 是恒等函数或者简单的非线性函数。
+激励函数通常选择 sigmoid 函数 (<span class="math notranslate nohighlight">\(1/(1+\exp(-x))\)</span>) 或者线性整流函数 (ReLu, <span class="math notranslate nohighlight">\(z\cdot 1\{x\geq 0\}\)</span>)。</p>
+<p><img alt="A Single Layer Feedforward Neural Network (from Wiki)" src="_images/Colored_neural_network.png" /></p>
+<p>拟合神经网络通常要考虑几个因素：除激励函数外，隐藏层的数量和每一层的节点也是重要的调谐参数。每一层和每一个节点都会生成许多的自由参数，然后可以用正则化方法对于 <span class="math notranslate nohighlight">\(l_1\)</span> 与 <span class="math notranslate nohighlight">\(l_2\)</span> 规范进行惩罚。
+<code class="docutils literal notranslate"><span class="pre">data_example/Keras_ANN.R</span></code> 给出一个两层隐藏层的神经网络的例子(每层有64个节点)，并使用了线性整流激励函数。</p>
+<p>由于神经网络本身是非线性，目前对其尚未有明确的理论解释。早期的一个理论贡献来自于<span id="id19">[]</span>的定理2.2：给定足够多的节点，一个单层神经网络是任何可测函数的<strong>万能近似器</strong>。</p>
+<p>在建立一个神经网络后，自由参数必须要用数值最优化决定。非线性的复杂结构使得最优化极具挑战性，我们很难能够得到全局的最优值。尤其当样本数量较大时，最优化算法是随机梯度下降的。</p>
+<p>归功于计算科学家们的努力， 谷歌的 <code class="docutils literal notranslate"><span class="pre">tensorflow</span></code> 是一个深受欢迎的神经网络后端， <code class="docutils literal notranslate"><span class="pre">keras</span></code> 是深度学习建模语言。
+它们之间的关系类似于 <code class="docutils literal notranslate"><span class="pre">Mosek</span></code> 和 <code class="docutils literal notranslate"><span class="pre">CVXR</span></code> 。</p>
+</section>
+<section id="id20">
+<h2><span class="section-number">8.5. </span>随机梯度下降<a class="headerlink" href="#id20" title="永久链接至标题">#</a></h2>
+<p>在最优化过程中， 我们迭代 <span class="math notranslate nohighlight">\(D\)</span> 维参数</p>
+<div class="math notranslate nohighlight">
+\[
+\beta_{k+1} = \beta_{k} + a_k p_k,
+\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(a_k \in \mathbb{R}\)</span> 是步长， <span class="math notranslate nohighlight">\(p_k\in \mathbb{R}^D\)</span> 是方向向量。使用泰勒级数展开可以得到：</p>
+<div class="math notranslate nohighlight">
+\[
+f(\beta_{k+1}) = f(\beta_k + a_k p_k ) \approx f(\beta_k) + a_k \nabla f(\beta_k) p_k,
+\]</div>
+<p>如果我们希望目标函数 <span class="math notranslate nohighlight">\(f(x)\)</span> 在每一步中递减，那么需要 <span class="math notranslate nohighlight">\(\nabla f(\beta_k) p_k \leq 0\)</span> 。
+我们可以令 <span class="math notranslate nohighlight">\(p_k =-\nabla f(\beta_k)\)</span> ，这种方式通常称为<strong>最深下降</strong>(the deepest descent)。
+牛顿法则是令 <span class="math notranslate nohighlight">\(p_k =- (\nabla^2 f(\beta_k))^{-1}  \nabla f(\beta_k)\)</span> ，
+然后 BFGS 用一个低阶矩阵来估计 <span class="math notranslate nohighlight">\(\nabla^2 f(\beta_k)\)</span> 。 线性搜索是一维问题，可以通过精确最小化或回溯来解决。下降法的具体细节可以参考  <span id="id21">[]</span> 的 9.2–9.5 章节。</p>
+<p>当样本规模大且参数数量过多时，梯度的求解将会非常的复杂。随机梯度下降 (SGD) 在每次迭代中都只用一小部分的样本估计梯度，这样可以大大减少计算的时间。 它是神经网络训练这种复杂的最优化问题中的 <strong>事实</strong> 最优化过程。</p>
+<p>不过， SGD 涉及到了调谐参数 (比如batch的大小和学习速率，学习速率代替了步长 <span class="math notranslate nohighlight">\(a_k\)</span> 并变成了正则参数)。这些参数将会极大地影响最终结果，这种情况在非线性问题中更加显著。因此，在真正实操之前，算法必须经过仔细的测试。</p>
+<p>下面是一个PPMLE中SGD的例子，在最优化那节课中也提到过这个例子。在这里它的样本规模是100，000且参数数量为100。通常情况下， SGD 比 <code class="docutils literal notranslate"><span class="pre">nlopt</span></code>要快很多。</p>
+<p>由于在SGD中每次的对数似然方程和梯度都是在一个不同的子样本中计算的，所以在此我们将带有数据的新函数定义为arguments。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poisson</span><span class="o">.</span><span class="n">loglik</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">b</span> <span class="o">&lt;-</span> <span class="k">as</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+  <span class="k">lambda</span> <span class="o">&lt;-</span> <span class="n">exp</span><span class="p">(</span><span class="n">X</span> <span class="o">%*%</span> <span class="n">b</span><span class="p">)</span>
+  <span class="n">ell</span> <span class="o">&lt;-</span> <span class="o">-</span><span class="n">mean</span><span class="p">(</span><span class="o">-</span><span class="k">lambda</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">log</span><span class="p">(</span><span class="k">lambda</span><span class="p">))</span>
+  <span class="k">return</span><span class="p">(</span><span class="n">ell</span><span class="p">)</span>
+<span class="p">}</span>
+
+
+<span class="n">poisson</span><span class="o">.</span><span class="n">loglik</span><span class="o">.</span><span class="n">grad</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">b</span> <span class="o">&lt;-</span> <span class="k">as</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+  <span class="k">lambda</span> <span class="o">&lt;-</span> <span class="k">as</span><span class="o">.</span><span class="n">vector</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="n">X</span> <span class="o">%*%</span> <span class="n">b</span><span class="p">))</span>
+  <span class="n">ell</span> <span class="o">&lt;-</span> <span class="o">-</span><span class="n">colMeans</span><span class="p">(</span><span class="o">-</span><span class="k">lambda</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">y</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span>
+  <span class="n">ell_eta</span> <span class="o">&lt;-</span> <span class="n">ell</span>
+  <span class="k">return</span><span class="p">(</span><span class="n">ell_eta</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">##### generate the artificial data</span>
+<span class="nb">set</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">898</span><span class="p">)</span>
+<span class="n">nn</span> <span class="o">&lt;-</span> <span class="mf">1e5</span>
+<span class="n">K</span> <span class="o">&lt;-</span> <span class="mi">100</span>
+<span class="n">X</span> <span class="o">&lt;-</span> <span class="n">cbind</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">matrix</span><span class="p">(</span><span class="n">runif</span><span class="p">(</span><span class="n">nn</span> <span class="o">*</span> <span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">ncol</span> <span class="o">=</span> <span class="n">K</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">b0</span> <span class="o">&lt;-</span> <span class="n">rep</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">K</span><span class="p">)</span> <span class="o">/</span> <span class="n">K</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="n">rpois</span><span class="p">(</span><span class="n">nn</span><span class="p">,</span> <span class="n">exp</span><span class="p">(</span><span class="n">X</span> <span class="o">%*%</span> <span class="n">b0</span><span class="p">))</span>
+
+<span class="n">b</span><span class="o">.</span><span class="n">init</span> <span class="o">&lt;-</span> <span class="n">runif</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
+<span class="n">b</span><span class="o">.</span><span class="n">init</span> <span class="o">&lt;-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">b</span><span class="o">.</span><span class="n">init</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">init</span><span class="p">)</span>
+<span class="c1"># and these tuning parameters are related to N and K</span>
+
+<span class="n">n</span> <span class="o">&lt;-</span> <span class="n">length</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">test_ind</span> <span class="o">&lt;-</span> <span class="n">sample</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="mf">0.2</span> <span class="o">*</span> <span class="n">n</span><span class="p">))</span>
+
+<span class="n">y_test</span> <span class="o">&lt;-</span> <span class="n">y</span><span class="p">[</span><span class="n">test_ind</span><span class="p">]</span>
+<span class="n">X_test</span> <span class="o">&lt;-</span> <span class="n">X</span><span class="p">[</span><span class="n">test_ind</span><span class="p">,</span> <span class="p">]</span>
+
+<span class="n">y_train</span> <span class="o">&lt;-</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="n">test_ind</span> <span class="p">]</span>
+<span class="n">X_train</span> <span class="o">&lt;-</span> <span class="n">X</span><span class="p">[</span><span class="o">-</span><span class="n">test_ind</span><span class="p">,</span> <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span># optimization parameters
+# sgd depends on
+
+# * eta: the learning rate
+# * epoch: the averaging small batch
+# * the initial value
+
+max_iter &lt;- 5000
+min_iter &lt;- 20
+eta &lt;- 0.01
+epoch &lt;- round(100 * sqrt(K))
+
+b_old &lt;- b.init
+
+pts0 &lt;- Sys.time()
+# the iteration of gradient
+for (i in 1:max_iter) {
+  loglik_old &lt;- poisson.loglik(b_old, y_train, X_train)
+  i_sample &lt;- sample(1:length(y_train), epoch, replace = TRUE)
+  b_new &lt;- b_old - eta * poisson.loglik.grad(b_old, y_train[i_sample], X_train[i_sample, ])
+  loglik_new &lt;- poisson.loglik(b_new, y_test, X_test)
+  b_old &lt;- b_new # update
+
+  criterion &lt;- loglik_old - loglik_new
+
+  if (criterion &lt; 0.0001 &amp; i &gt;= min_iter) break
+}
+cat(&quot;point estimate =&quot;, b_new, &quot;, log_lik = &quot;, loglik_new, &quot;\n&quot;)
+pts1 &lt;- Sys.time() - pts0
+print(pts1)
+
+
+# optimx is too slow for this dataset.
+# Nelder-Mead method is too slow for this dataset
+
+# thus we only sgd with NLoptr
+
+opts &lt;- list(&quot;algorithm&quot; = &quot;NLOPT_LD_SLSQP&quot;, &quot;xtol_rel&quot; = 1.0e-7, maxeval = 5000)
+
+
+pts0 &lt;- Sys.time()
+res_BFGS &lt;- nloptr::nloptr(
+  x0 = b.init,
+  eval_f = poisson.loglik,
+  eval_grad_f = poisson.loglik.grad,
+  opts = opts,
+  y = y_train, X = X_train
+)
+pts1 &lt;- Sys.time() - pts0
+print(pts1)
+
+b_hat_nlopt &lt;- res_BFGS$solution
+
+#### evaluation in the test sample
+cat(&quot;log lik in test data by sgd = &quot;, poisson.loglik(b_new, y = y_test, X_test), &quot;\n&quot;)
+cat(&quot;log lik in test data by nlopt = &quot;, poisson.loglik(b_hat_nlopt, y = y_test, X_test), &quot;\n&quot;)
+cat(&quot;log lik in test data by true para. = &quot;, poisson.loglik(b0, y = y_test, X_test), &quot;\n&quot;)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id22">
+<h2><span class="section-number">8.6. </span>拓展阅读<a class="headerlink" href="#id22" title="永久链接至标题">#</a></h2>
+<ul class="simple">
+<li><p>Efron and Hastie: 第 8、 17 和 18章节</p></li>
+</ul>
+</section>
+<section id="id23">
+<h2><span class="section-number">8.7. </span>引言<a class="headerlink" href="#id23" title="永久链接至标题">#</a></h2>
+<!-- "The world is yours, as well as ours, but in the last analysis, it is yours. You young people, full of vigor and vitality, are in the bloom of life, like the sun at eight or nine in the morning. Our hope is placed on you." -->
+<!-- ---Mao Zedong, Talk at a meeting with Chinese students and trainees in Moscow (November 17, 1957). -->
+</section>
+<section id="id24">
+<h2><span class="section-number">8.8. </span>参考文献<a class="headerlink" href="#id24" title="永久链接至标题">#</a></h2>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            kernelName: "ir",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="08-ML-CN.html" title="上一页 页">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">上一页</p>
+            <p class="prev-next-title"><span class="section-number">7. </span>从非参数到机器学习</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By 史震涛 Shi Zhentao<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
