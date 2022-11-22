@@ -144,3 +144,4 @@ sympy-plots-for-*.tex/
 *.xdy
 .Rproj.user
 02-data_visualization.ipynb
+04-cloud_computing.ipynb
