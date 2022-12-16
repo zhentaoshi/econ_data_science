@@ -1,5 +1,13 @@
 # Econ5181: Data Science for Economists
 
+
+<a href="https://gitpod.io/#https://github.com/zhentaoshi/econ_data_science" target="_blank">
+  <img
+    src="https://img.shields.io/badge/Contribute%20with-Gitpod-908a85?logo=gitpod"
+    alt="Play with Gitpod"
+  />
+</a>
+
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
 ## Introduction
@@ -56,8 +64,9 @@ Programming experience is helpful, but not prerequisite.
   * Neural network
 12. Causality. treatment effects.
 
+## Online Environment
 
-
+This repository requires a plethora of packages. Therefore, we provide a pre-configured online enviroment on gitpod for preview and study. Clicking the button "Contribute with Gitpod" can help you to get access to this online IDE where you can run the script online without installing all the packages.
 
 
 Backup
@@ -81,3 +90,4 @@ This work is licensed under
 
 
 ![heart](heart.jpg)
+
