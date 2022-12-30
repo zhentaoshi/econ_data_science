@@ -46,5 +46,3 @@ This work is licensed under
 [cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
 
 
-![heart](heart.jpg)
-
