@@ -20,16 +20,15 @@ Programming experience is helpful, but not prerequisite.
 
 
 
-## Online Environment
+## Environment
 
 * [CUHK SCRP](https://scrp-login.econ.cuhk.edu.hk/jupyter/hub/login?next=%2Fjupyter%2Fhub%2F)
 * <a href="https://gitpod.io/#https://github.com/zhentaoshi/econ_data_science" target="_blank">
   <img
     src="https://img.shields.io/badge/Contribute%20with-Gitpod-908a85?logo=gitpod"
     alt="Play with Gitpod"
-  />
-</a>
-* **Software** (Windows): [PuTTY](https://www.putty.org/), [WinSCP](https://winscp.net/eng/download.php)
+  /></a>
+* Software (Windows): [PuTTY](https://www.putty.org/), [WinSCP](https://winscp.net/eng/download.php)
 
 ## License
 
