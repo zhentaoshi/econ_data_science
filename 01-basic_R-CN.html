@@ -599,7 +599,7 @@ title="Print to PDF"
 <h1><span class="section-number">1. </span>基础R语言<a class="headerlink" href="#r" title="永久链接至标题">#</a></h1>
 <section id="id1">
 <h2><span class="section-number">1.1. </span>引言<a class="headerlink" href="#id1" title="永久链接至标题">#</a></h2>
-<p>任何一门编程语言都需要投入大量的时间才能掌握。<a class="reference external" href="https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf">R-Introduction</a> 是由R语言团队编写的一本官方操作手册。本章课程简要地涉及了当中的一些关键点。在本章教学后可以再自行仔细阅读 R-Introduction 。</p>
+<p>任何一门编程语言都需要投入大量的时间才能掌握。<a class="reference external" href="https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf">R-Introduction</a> 是由R语言团队编写的官方操作手册。本章课程简要地涉及了当中的一些关键点。在本章教学后请自行仔细阅读 R-Introduction 。</p>
 </section>
 <section id="id2">
 <h2><span class="section-number">1.2. </span>安装<a class="headerlink" href="#id2" title="永久链接至标题">#</a></h2>
@@ -669,7 +669,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>下面这个指令可以清空工作历史中的所有变量，规范的程序一般会把它放在整个脚本的第一行。</p>
+<p>下面这个指令可以清空工作历史中的所有变量。规范的程序一般会把它放在整个脚本的第一行。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">rm</span><span class="p">(</span><span class="n">list</span> <span class="o">=</span> <span class="nf">ls</span><span class="p">())</span>
@@ -680,7 +680,7 @@ title="Print to PDF"
 </section>
 <section id="id5">
 <h2><span class="section-number">1.5. </span>向量<a class="headerlink" href="#id5" title="永久链接至标题">#</a></h2>
-<p><strong>向量</strong> 是相同类型的元素的集合，比如整数(integer)、逻辑值(logical value）、实数(real number)、复数(complex number)、字符(characters) 或者 因子(factor)。在R语言中，大多数情况下我们不需要特地宣言元素的类型。</p>
+<p><strong>向量</strong> 是相同类型的元素的集合，比如整数(integer)、逻辑值(logical value）、实数(real number)、复数(complex number)、字符(characters) 或者 因子(factor)。在R语言中，通常情况下我们不需要宣言元素的类型。</p>
 <p><code class="docutils literal notranslate"><span class="pre">c()</span></code> 可以把两个以上的向量组合为一个更长的向量。</p>
 <p>二元运算符号 <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code> 和 <code class="docutils literal notranslate"><span class="pre">/</span></code> 默认是每个元素一个一个运算的。二元逻辑符号 <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> <code class="docutils literal notranslate"><span class="pre">|</span></code> <code class="docutils literal notranslate"><span class="pre">!=</span></code>也是一样的。我们可以参考下面的例子来理解。</p>
 <div class="cell docutils container">
@@ -704,7 +704,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>R语言中的 <strong>因子</strong> (factor)是一种特殊的数据结构，这与别的编程语言不同。这个数据结构在制作矩阵和数据分类中会经常用到。而 <strong>字符</strong> (characters)则是纯文本。尽管因子往往也是字符串的形式，但是在实际使用中，二者有明显的不同。</p>
+<p>R语言中的 <strong>因子</strong> (factor)是代表分类。而 <strong>字符</strong> (characters)则是纯文本。尽管因子往往也是字符串的形式，但是在实际使用中，二者有明显的不同。</p>
 <p>R语言中的缺省值用<code class="docutils literal notranslate"><span class="pre">NA</span></code>来表示(Not Available)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -748,7 +748,7 @@ title="Print to PDF"
 <section id="id6">
 <h2><span class="section-number">1.6. </span>筛选<a class="headerlink" href="#id6" title="永久链接至标题">#</a></h2>
 <p>向量的筛选通过方框指令 <code class="docutils literal notranslate"><span class="pre">a[</span> <span class="pre">]</span></code> 来实现。
-R语言不是从0开始，而是从1开始。(这和Python不一样。)</p>
+R语言不是从0开始，而是从1开始。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">10</span>
@@ -993,14 +993,11 @@ t  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \hat{\sigma}_{\hat{\beta}_2}  }
 </div>
 </div>
 </div>
-<p><strong>数据框</strong> (data.frame) 是一个用来储存数据的二维表格，就像Excel数据表一样。矩阵(matrix)同样是二维表格，但不同之处在于，它只能容纳一种元素。
-现实生活中，数据可能是整数、实数、字符、分类数据等各种各样的类型。因此，在R语言当中，处理混合数据时默认使用的类型是数据框。<code class="docutils literal notranslate"><span class="pre">tibble</span></code>是一种新的改良过的数据框类型。</p>
 </section>
 <section id="id10">
 <h2><span class="section-number">1.10. </span>拓展包<a class="headerlink" href="#id10" title="永久链接至标题">#</a></h2>
-<p>R语言自带的基础包(base)十分有限，但是R有良好的统计学拓展包生态系统。这对于R语言开发者来说是宝贵的财富，其他的语言(比如Python和MATLAB)无法媲美。
-大部分的R Packages都在<a class="reference external" href="https://cran.r-project.org/web/packages/">CRAN</a> 平台。
-目前学术界的常规流程是，当统计学家发表一篇关于新的统计学方法的论文时，他们就会在CRAN平台上传对应的程序包。他们通过CRAN拓展他们的成果，开发者也能第一时间接触到最新的方法。</p>
+<p>R语言自带的基础包(base)十分有限，但是R有良好的拓展包生态系统。这对于R语言开发者来说是宝贵的财富，其他的语言(比如Python和MATLAB)无法媲美。
+大部分的R Packages都在<a class="reference external" href="https://cran.r-project.org/web/packages/">CRAN</a> 平台。</p>
 <p>我们可以通过
 <code class="docutils literal notranslate"><span class="pre">install.packages(&quot;package_name&quot;)</span></code>指令下载最新的安装包。为了调用我们需要的函数，我们可以用<code class="docutils literal notranslate"><span class="pre">library(package_name)</span></code>或者<code class="docutils literal notranslate"><span class="pre">package_name::function_name</span></code>指令在当前的程序中调用该拓展包。
 前者将调用程序包中的所有函数，有时候会因为和其他函数名称相同引起冲突。后者则可以让整个环境更简洁。
@@ -1028,6 +1025,8 @@ t  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \hat{\sigma}_{\hat{\beta}_2}  }
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="id11">
 <h1><span class="section-number">2. </span>数据框<a class="headerlink" href="#id11" title="永久链接至标题">#</a></h1>
+<p><strong>数据框</strong> (data.frame) 是一个用来储存数据的二维表格，就像Excel数据表一样。矩阵(matrix)同样是二维表格，但不同之处在于，它只能容纳一种元素。
+现实生活中，数据可能是整数、实数、字符、分类数据等各种各样的类型。因此，在R语言当中，处理混合数据时默认使用的类型是数据框。<code class="docutils literal notranslate"><span class="pre">tibble</span></code>是一种新的改良过的数据框类型。</p>
 <p>下面是一个本科计量经济学教材中的数据集。我们载入数据并展示前6个记录。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1171,15 +1170,11 @@ t  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \hat{\sigma}_{\hat{\beta}_2}  }
 <li><p>如果我们需要修改程序，我们只需要在函数中修改一次而不需要把每个地方进行修改。</p></li>
 </ol>
 <p>R语言自定义函数的格式是：</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">function_name</span> <span class="o">&lt;-</span> <span class="nf">function</span><span class="p">(</span><span class="n">input</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function_name</span> <span class="o">&lt;-</span> <span class="n">function</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span> <span class="p">{</span>
   <span class="n">expressions</span>
-  <span class="nf">return</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+  <span class="k">return</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 <span class="p">}</span>
 </pre></div>
-</div>
-</div>
 </div>
 <p><strong>例子</strong></p>
 <p>如果中心极限定理成立，给定样本，那么我们可以计算95%的双边置信区间</p>
@@ -1243,7 +1238,7 @@ t  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \hat{\sigma}_{\hat{\beta}_2}  }
 <p>R语言自带的所有回归函数都有相同的结构。学会了其中一种，自然可以举一反三。</p>
 <section id="id17">
 <h3><span class="section-number">2.5.1. </span>线性回归例子<a class="headerlink" href="#id17" title="永久链接至标题">#</a></h3>
-<p>我们通过模拟数据来展示一个例子</p>
+<p>我们通过模拟数据来展示一个例子。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="bp">T</span> <span class="o">&lt;-</span> <span class="m">100</span>
@@ -1261,7 +1256,7 @@ t  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \hat{\sigma}_{\hat{\beta}_2}  }
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">result</span></code> 是一个包含了所有回归结果的列表。我们可以从results中看到所有的估计参数值、t检验结果、F检验结果和R方。我们可以画出真实值和拟合值来检验回归模型的拟合效果。</p>
+<p><code class="docutils literal notranslate"><span class="pre">result</span></code> 是一个包含了所有回归结果的列表。我们可以从results中看到所有的估计参数值、<span class="math notranslate nohighlight">\(t\)</span>检验结果、<span class="math notranslate nohighlight">\(F\)</span>检验结果和R方。我们可以画出真实值和拟合值来检验回归模型的拟合效果。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">result</span><span class="o">$</span><span class="n">fitted.values</span><span class="p">,</span>
@@ -1277,7 +1272,7 @@ t  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \hat{\sigma}_{\hat{\beta}_2}  }
 </div>
 </div>
 </div>
-<p>然后我们画出拟合的直线</p>
+<p>然后我们画出拟合的直线。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">xlab</span> <span class="o">=</span> <span class="s">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span> <span class="o">=</span> <span class="s">&quot;y&quot;</span><span class="p">,</span> <span class="n">main</span> <span class="o">=</span> <span class="s">&quot;Fitted Line&quot;</span><span class="p">)</span>
@@ -1288,24 +1283,6 @@ t  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \hat{\sigma}_{\hat{\beta}_2}  }
   <span class="n">legend</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;Fitted Line&quot;</span><span class="p">,</span> <span class="s">&quot;True Coef&quot;</span><span class="p">),</span>
   <span class="n">col</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;black&quot;</span><span class="p">,</span> <span class="s">&quot;red&quot;</span><span class="p">),</span> <span class="n">lty</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span> <span class="n">cex</span> <span class="o">=</span> <span class="m">0.75</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>我们在此再给出另一个例子。这次我们使用数据包<code class="docutils literal notranslate"><span class="pre">datasets</span></code>中的女性数据来研究女性身高与体重的关系。这个数据包是R语言安装自带的，它还有其他各种类型的数据集。要查看完整的数据集列表，可以使用指令<code class="docutils literal notranslate"><span class="pre">library(help</span> <span class="pre">=</span> <span class="pre">&quot;datasets&quot;)</span></code>。</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="c1"># univariate</span>
-<span class="n">reg1</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">height</span> <span class="o">~</span> <span class="n">weight</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">women</span><span class="p">)</span>
-
-<span class="c1"># multivariate</span>
-<span class="n">reg2</span> <span class="o">&lt;-</span> <span class="nf">lm</span><span class="p">(</span><span class="n">height</span> <span class="o">~</span> <span class="n">weight</span> <span class="o">+</span> <span class="nf">I</span><span class="p">(</span><span class="n">weight</span><span class="o">^</span><span class="m">2</span><span class="p">),</span> <span class="n">data</span> <span class="o">=</span> <span class="n">women</span><span class="p">)</span>
-<span class="c1"># &quot;weight^2&quot; is a square term.</span>
-<span class="c1"># &quot;I()&quot; is used to inhibit the formula operator &quot;+&quot;</span>
-<span class="c1"># from being interpreted as an arithmetical one.</span>
-
-<span class="nf">summary</span><span class="p">(</span><span class="n">reg1</span><span class="p">)</span>
-<span class="nf">summary</span><span class="p">(</span><span class="n">reg2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

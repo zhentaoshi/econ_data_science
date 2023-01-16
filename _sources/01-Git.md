@@ -6,44 +6,44 @@ Zhentao Shi and Zhan Gao
 
 ---
 
-Git is a version control system useful when developing and maintaining coding projects as well as preparing long documents.
+Git is a version control system useful when developing and maintaining coding projects as well as preparing long documents. 
 
-With Git, we no longer need to save historical versions `paper v1.tex`, `paper v2.tex` up to even `paper v11.tex`. It is easy to track changes to code and text files and maintain a history  of changes. In addition, it is safe to do experiments and tests on different branches of development without changing the current main branch. More importantly, Git, together with online platforms like Github, empowers collaboration. Researcher are able to work on the same project, even on the same file, separately, see what other people have done and resolve conflicts when needed.
+With Git, we no longer need to save historical versions `paper_v1.tex`, `paper_v2.tex` up to even `paper_v11.tex`. It is easy to track changes to code and text files and maintain a history  of changes. In addition, it is safe to experiment and test
+different branches of development without changing the current main branch. More importantly, Git, together with online platforms like Github, empowers collaboration. Researcher are able to work on the same project, even on the same file, separately, see what other people have done and resolve conflicts when needed. 
 
-Free Git books and tutorials are available online. Self-learning is important.
+To be further motivated, please refer to [git vs. Dropbox from a researcher's perspective](https://michaelstepner.com/blog/git-vs-dropbox/) by [Michael Stepner](https://michaelstepner.com/).
+
+Free Git books and tutorials are available online. Self-learning is important. 
 
 * [Atlassian Online Tutorial](https://www.atlassian.com/git/tutorials) This online tutorial is a good starting point to learn the basics of Git.
 * The version control module from [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/), offered by MIT, is also a great reference for beginners. The [online notes](https://missing.csail.mit.edu/2020/version-control/) is accompanied with a [lecture video](https://www.youtube.com/watch?v=2sjqTHE0zok&t=1s&ab_channel=MissingSemester). The course has been translated to Chinese, see [Chinese version](https://missing-semester-cn.github.io/).
   *Though targeted at computer science majors, this open course is also helpful for econometrics researchers. Modules other than the version control one are also recommended.*
-* If more elaboration is needed, online courses, [Udacity Course](https://www.udacity.com/course/how-to-use-git-and-github--ud775) and [CodeAcademy Course](https://www.codecademy.com/learn/learn-git) for examples, and other video tutorial are helpful.
+* If more elaboration is needed, online courses, [Udacity Course](https://www.udacity.com/course/how-to-use-git-and-github--ud775) and [CodeAcademy Course](https://www.codecademy.com/learn/learn-git) for examples, and other video tutorial are helpful. 
 * A comprehensive reference: [Pro Git](http://git-scm.com/book/en/v2).
 
 We introduce some essential Git commands. There are two ways to interact with Git. Git provides a command line tool Git Bash, and there are many free Git GUIs available (We recommend [SourceTree](https://www.sourcetreeapp.com/)). Even if we use a GUI, knowing the basic commands is helpful.
 
 
-## Basic Git Commands
+## Basic Commands
 
 ### Identity
-* `git branch [brach_name]`
-* `git checkout [commit_id or branch name]`
+
+* `git config --global user.name <name>`
+* `git config --global user.email <email>`
 
 ### Local
 
 * .gitignore
-* `git update-git-for-windows`: command line update to the latest version
 * `git help <command>` gets help for a git command
 * `git init`  creates a new git repo, with data stored in the `.git` directory
 * `git status` inspects the contents of the working directory and staging area.
 * `git add filename` adds files to the staging area from working directory.
-* `git restore .` clean up all unstaged files
 * `git add filename1 filename2` adds multiple files to the staging area.
 * If the file is changed, we can use `git diff filename` to see the difference between the file in the working directory and the staging area. Reuse `git add filename` to add the updated file to the staging area.
 * `git commit` stores changes from the staging area to the repository.
 * `git commit -m "Commit Message"` The commit message must be in the quotation marks.
 * `git log` displays historical commits stored chronologically in the repository.
 * `git log --all --graph --decorate` visualizes history as a DAG
-* `git config --global user.name <name>`
-* `git config --global user.email <email>`
 * `git tag -a v1.0 -m 'message' [optional:commit-id]`
 * `git rm --cached filename` remove
 
@@ -136,7 +136,7 @@ In addition, we can resolve conflicts with *SourceTree* (**preferred**) or exter
 
 ## Github
 
-Github is the most popular provider of Git repository internet hosting. Github's free account offers unlimited public repositories, and university students and teachers can register for unlimited complimentary private repositories as well. Among other internet hosts such as bitbucket and Gitlab, both of which offer unlimited private repositories for free, Github boasts the largest community of code developers.
+Github is so far the most popular provider of Git repository internet hosting. Github's free account offers unlimited public repositories, and university students and teachers can register for unlimited complimentary private repositories as well. Among other internet hosts such as bitbucket and Gitlab, both of which offer unlimited private repositories for free, Github boasts the largest community of code developers.
 
 We collaborate with students and researchers on Github extensively. This is ZT's personal Github profile [https://github.com/zhentaoshi](https://github.com/zhentaoshi).
 

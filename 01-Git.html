@@ -322,8 +322,8 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#basic-git-commands">
-   Basic Git Commands
+  <a class="reference internal nav-link" href="#basic-commands">
+   Basic Commands
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -387,8 +387,8 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#basic-git-commands">
-   Basic Git Commands
+  <a class="reference internal nav-link" href="#basic-commands">
+   Basic Commands
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
@@ -447,7 +447,9 @@ title="Print to PDF"
 <p>Zhentao Shi and Zhan Gao</p>
 <hr class="docutils" />
 <p>Git is a version control system useful when developing and maintaining coding projects as well as preparing long documents.</p>
-<p>With Git, we no longer need to save historical versions <code class="docutils literal notranslate"><span class="pre">paper</span> <span class="pre">v1.tex</span></code>, <code class="docutils literal notranslate"><span class="pre">paper</span> <span class="pre">v2.tex</span></code> up to even <code class="docutils literal notranslate"><span class="pre">paper</span> <span class="pre">v11.tex</span></code>. It is easy to track changes to code and text files and maintain a history  of changes. In addition, it is safe to do experiments and tests on different branches of development without changing the current main branch. More importantly, Git, together with online platforms like Github, empowers collaboration. Researcher are able to work on the same project, even on the same file, separately, see what other people have done and resolve conflicts when needed.</p>
+<p>With Git, we no longer need to save historical versions <code class="docutils literal notranslate"><span class="pre">paper_v1.tex</span></code>, <code class="docutils literal notranslate"><span class="pre">paper_v2.tex</span></code> up to even <code class="docutils literal notranslate"><span class="pre">paper_v11.tex</span></code>. It is easy to track changes to code and text files and maintain a history  of changes. In addition, it is safe to experiment and test
+different branches of development without changing the current main branch. More importantly, Git, together with online platforms like Github, empowers collaboration. Researcher are able to work on the same project, even on the same file, separately, see what other people have done and resolve conflicts when needed.</p>
+<p>To be further motivated, please refer to <a class="reference external" href="https://michaelstepner.com/blog/git-vs-dropbox/">git vs. Dropbox from a researcher’s perspective</a> by <a class="reference external" href="https://michaelstepner.com/">Michael Stepner</a>.</p>
 <p>Free Git books and tutorials are available online. Self-learning is important.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.atlassian.com/git/tutorials">Atlassian Online Tutorial</a> This online tutorial is a good starting point to learn the basics of Git.</p></li>
@@ -457,33 +459,29 @@ title="Print to PDF"
 <li><p>A comprehensive reference: <a class="reference external" href="http://git-scm.com/book/en/v2">Pro Git</a>.</p></li>
 </ul>
 <p>We introduce some essential Git commands. There are two ways to interact with Git. Git provides a command line tool Git Bash, and there are many free Git GUIs available (We recommend <a class="reference external" href="https://www.sourcetreeapp.com/">SourceTree</a>). Even if we use a GUI, knowing the basic commands is helpful.</p>
-<section id="basic-git-commands">
-<h2>Basic Git Commands<a class="headerlink" href="#basic-git-commands" title="永久链接至标题">#</a></h2>
+<section id="basic-commands">
+<h2>Basic Commands<a class="headerlink" href="#basic-commands" title="永久链接至标题">#</a></h2>
 <section id="identity">
 <h3>Identity<a class="headerlink" href="#identity" title="永久链接至标题">#</a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">branch</span> <span class="pre">[brach_name]</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">[commit_id</span> <span class="pre">or</span> <span class="pre">branch</span> <span class="pre">name]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">user.name</span> <span class="pre">&lt;name&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">user.email</span> <span class="pre">&lt;email&gt;</span></code></p></li>
 </ul>
 </section>
 <section id="local">
 <h3>Local<a class="headerlink" href="#local" title="永久链接至标题">#</a></h3>
 <ul class="simple">
 <li><p>.gitignore</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">update-git-for-windows</span></code>: command line update to the latest version</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span> <span class="pre">&lt;command&gt;</span></code> gets help for a git command</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code>  creates a new git repo, with data stored in the <code class="docutils literal notranslate"><span class="pre">.git</span></code> directory</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> inspects the contents of the working directory and staging area.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">filename</span></code> adds files to the staging area from working directory.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">restore</span> <span class="pre">.</span></code> clean up all unstaged files</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">filename1</span> <span class="pre">filename2</span></code> adds multiple files to the staging area.</p></li>
 <li><p>If the file is changed, we can use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">filename</span></code> to see the difference between the file in the working directory and the staging area. Reuse <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">filename</span></code> to add the updated file to the staging area.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span></code> stores changes from the staging area to the repository.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-m</span> <span class="pre">&quot;Commit</span> <span class="pre">Message&quot;</span></code> The commit message must be in the quotation marks.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> displays historical commits stored chronologically in the repository.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">--all</span> <span class="pre">--graph</span> <span class="pre">--decorate</span></code> visualizes history as a DAG</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">user.name</span> <span class="pre">&lt;name&gt;</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span> <span class="pre">user.email</span> <span class="pre">&lt;email&gt;</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">tag</span> <span class="pre">-a</span> <span class="pre">v1.0</span> <span class="pre">-m</span> <span class="pre">'message'</span> <span class="pre">[optional:commit-id]</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rm</span> <span class="pre">--cached</span> <span class="pre">filename</span></code> remove</p></li>
 </ul>
@@ -579,7 +577,7 @@ title="Print to PDF"
 </section>
 <section id="github">
 <h2>Github<a class="headerlink" href="#github" title="永久链接至标题">#</a></h2>
-<p>Github is the most popular provider of Git repository internet hosting. Github’s free account offers unlimited public repositories, and university students and teachers can register for unlimited complimentary private repositories as well. Among other internet hosts such as bitbucket and Gitlab, both of which offer unlimited private repositories for free, Github boasts the largest community of code developers.</p>
+<p>Github is so far the most popular provider of Git repository internet hosting. Github’s free account offers unlimited public repositories, and university students and teachers can register for unlimited complimentary private repositories as well. Among other internet hosts such as bitbucket and Gitlab, both of which offer unlimited private repositories for free, Github boasts the largest community of code developers.</p>
 <p>We collaborate with students and researchers on Github extensively. This is ZT’s personal Github profile <a class="reference external" href="https://github.com/zhentaoshi">https://github.com/zhentaoshi</a>.</p>
 <p><strong>Acknowledgment</strong>: Part of this notes is based on the course offered by CodeAcademy.</p>
 </section>
