@@ -1,9 +1,9 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: 经济学中的“数据科学”
+title: 经济学中的数据科学
 author: 史震涛 Shi Zhentao
-copyright: "2022"
+copyright: "2023"
 
 # logo: logo.png
 
