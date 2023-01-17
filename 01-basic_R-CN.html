@@ -1,16 +1,14 @@
 
 <!DOCTYPE html>
 
-<html lang="zh_CN">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
-    <title>1. 基础R语言 &#8212; 经济学中的“数据科学”</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1. 基础R语言 &#8212; 经济学中的数据科学</title>
     
-  <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -20,32 +18,36 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
+    
+      
+
+    
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
     <script src="_static/translations.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -59,27 +61,13 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="3. R语言进阶" href="03-advanced_R-CN.html" />
     <link rel="prev" title="Preface" href="00-preface.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="zh_CN">
+    <meta name="docsearch:language" content="zh-CN">
     
 
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -88,31 +76,29 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
       
       
       
-      <h1 class="site-logo" id="site-title">经济学中的“数据科学”</h1>
+      <h1 class="site-logo" id="site-title">经济学中的数据科学</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="搜索这本书..." aria-label="搜索这本书..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        
-        <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1">
-                <a class="reference internal" href="00-preface.html">
-                    Preface
-                </a>
-            </li>
-        </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="00-preface.html">
+   Preface
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    1. 基础R语言
@@ -151,17 +137,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
-    </div>
-    <div id="rtd-footer-container"></div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
 </div>
 
 
@@ -169,191 +150,94 @@ const thebe_selector_output = ".output, .cell_output"
 
 
           
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="header-article row sticky-top noprint">
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="切换导航" aria-controls="site-navigation"
+                title="切换导航" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="下载此页面"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
         
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/zhentaoshi/econ_data_science/master?urlpath=tree/docs/01-basic_R-CN.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/zhentaoshi/econ_data_science"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://github.com/zhentaoshi/econ_data_science/issues/new?title=Issue%20on%20page%20%2F01-basic_R-CN.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/01-basic_R-CN.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/01-basic_R-CN.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="下载源文件" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="列印成PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/zhentaoshi/econ_data_science"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="源库"><i
+                    class="fab fa-github"></i>资料库</button></a>
+        <a class="issues-button"
+            href="https://github.com/zhentaoshi/econ_data_science/issues/new?title=Issue%20on%20page%20%2F01-basic_R-CN.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="打开一个问题"><i class="fas fa-lightbulb"></i>公开的问题</button></a>
+        
     </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="全屏模式"
+        title="全屏模式"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/zhentaoshi/econ_data_science/master?urlpath=tree/docs/01-basic_R-CN.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="发射 Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> 内容
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
    1. 基础R语言
@@ -462,11 +346,12 @@ title="Print to PDF"
  </li>
 </ul>
 
-    </nav>
-</div>
+            </nav>
+        </div>
     </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>基础R语言</h1>
@@ -475,7 +360,7 @@ title="Print to PDF"
                     <div id="jb-print-toc">
                         
                         <div>
-                            <h2> Contents </h2>
+                            <h2> 内容 </h2>
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
@@ -591,18 +476,17 @@ title="Print to PDF"
                     </div>
                 </div>
             </div>
-            <main id="main-content" role="main">
-                
+            
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="r">
-<h1><span class="section-number">1. </span>基础R语言<a class="headerlink" href="#r" title="永久链接至标题">#</a></h1>
-<section id="id1">
-<h2><span class="section-number">1.1. </span>引言<a class="headerlink" href="#id1" title="永久链接至标题">#</a></h2>
+  <div class="tex2jax_ignore mathjax_ignore section" id="r">
+<h1><span class="section-number">1. </span>基础R语言<a class="headerlink" href="#r" title="Permalink to this heading">¶</a></h1>
+<div class="section" id="id1">
+<h2><span class="section-number">1.1. </span>引言<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
 <p>任何一门编程语言都需要投入大量的时间才能掌握。<a class="reference external" href="https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf">R-Introduction</a> 是由R语言团队编写的官方操作手册。本章课程简要地涉及了当中的一些关键点。在本章教学后请自行仔细阅读 R-Introduction 。</p>
-</section>
-<section id="id2">
-<h2><span class="section-number">1.2. </span>安装<a class="headerlink" href="#id2" title="永久链接至标题">#</a></h2>
+</div>
+<div class="section" id="id2">
+<h2><span class="section-number">1.2. </span>安装<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
 <p>R语言是开源软件，在Windows，MacOS和Linux系统中都能运行。它的安装也十分便捷。</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://cran.r-project.org/mirrors.html">R project</a> 是R语言的基础版本</p></li>
@@ -625,14 +509,14 @@ title="Print to PDF"
 <li><p>JupyterHub</p></li>
 </ul>
 <p>远程服务器省去了安装步骤，并提供了一个一致而稳定的环境。</p>
-</section>
-<section id="id3">
-<h2><span class="section-number">1.3. </span>帮助系统<a class="headerlink" href="#id3" title="永久链接至标题">#</a></h2>
+</div>
+<div class="section" id="id3">
+<h2><span class="section-number">1.3. </span>帮助系统<a class="headerlink" href="#id3" title="Permalink to this heading">¶</a></h2>
 <p>帮助系统是我们学习新语言的最重要的帮手。在R语言中，如果我们只知道函数名称但不了解它用途，我们就可以使用<code class="docutils literal notranslate"><span class="pre">help(function_name)</span></code>指令或者简单地用一个问号<code class="docutils literal notranslate"><span class="pre">?function_name</span></code>来查看。如果我们只知道当中的部分关键词，那么就可以用双问号<code class="docutils literal notranslate"><span class="pre">??key_words</span></code>进行模糊查询。这样它就会返回多个可能相关的函数以供选择。
 <strong>例子</strong>: <code class="docutils literal notranslate"><span class="pre">?seq</span></code>, <code class="docutils literal notranslate"><span class="pre">??sequence</span></code></p>
-</section>
-<section id="id4">
-<h2><span class="section-number">1.4. </span>赋值<a class="headerlink" href="#id4" title="永久链接至标题">#</a></h2>
+</div>
+<div class="section" id="id4">
+<h2><span class="section-number">1.4. </span>赋值<a class="headerlink" href="#id4" title="Permalink to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">&lt;-</span></code> 是最基本的赋值指令。另一种常见的赋值符号是 <code class="docutils literal notranslate"><span class="pre">=</span></code> 。它们的作用都是给左侧的变量附上在右侧输入的 <strong>值</strong> 。这里的 <strong>值</strong> 并非一定是数值，也可能是向量、列表或者矩阵等等形式。这些我们将会在后续提到。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -677,9 +561,9 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</section>
-<section id="id5">
-<h2><span class="section-number">1.5. </span>向量<a class="headerlink" href="#id5" title="永久链接至标题">#</a></h2>
+</div>
+<div class="section" id="id5">
+<h2><span class="section-number">1.5. </span>向量<a class="headerlink" href="#id5" title="Permalink to this heading">¶</a></h2>
 <p><strong>向量</strong> 是相同类型的元素的集合，比如整数(integer)、逻辑值(logical value）、实数(real number)、复数(complex number)、字符(characters) 或者 因子(factor)。在R语言中，通常情况下我们不需要宣言元素的类型。</p>
 <p><code class="docutils literal notranslate"><span class="pre">c()</span></code> 可以把两个以上的向量组合为一个更长的向量。</p>
 <p>二元运算符号 <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code> 和 <code class="docutils literal notranslate"><span class="pre">/</span></code> 默认是每个元素一个一个运算的。二元逻辑符号 <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> <code class="docutils literal notranslate"><span class="pre">|</span></code> <code class="docutils literal notranslate"><span class="pre">!=</span></code>也是一样的。我们可以参考下面的例子来理解。</p>
@@ -744,9 +628,9 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</section>
-<section id="id6">
-<h2><span class="section-number">1.6. </span>筛选<a class="headerlink" href="#id6" title="永久链接至标题">#</a></h2>
+</div>
+<div class="section" id="id6">
+<h2><span class="section-number">1.6. </span>筛选<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h2>
 <p>向量的筛选通过方框指令 <code class="docutils literal notranslate"><span class="pre">a[</span> <span class="pre">]</span></code> 来实现。
 R语言不是从0开始，而是从1开始。</p>
 <div class="cell docutils container">
@@ -781,9 +665,9 @@ R语言不是从0开始，而是从1开始。</p>
 </div>
 </div>
 </div>
-</section>
-<section id="id7">
-<h2><span class="section-number">1.7. </span>类型<a class="headerlink" href="#id7" title="永久链接至标题">#</a></h2>
+</div>
+<div class="section" id="id7">
+<h2><span class="section-number">1.7. </span>类型<a class="headerlink" href="#id7" title="Permalink to this heading">¶</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">&lt;-</span> <span class="s">&quot;18&quot;</span><span class="p">;</span> <span class="nf">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
@@ -816,9 +700,9 @@ R语言不是从0开始，而是从1开始。</p>
 </div>
 </div>
 </div>
-</section>
-<section id="id8">
-<h2><span class="section-number">1.8. </span>数组和矩阵<a class="headerlink" href="#id8" title="永久链接至标题">#</a></h2>
+</div>
+<div class="section" id="id8">
+<h2><span class="section-number">1.8. </span>数组和矩阵<a class="headerlink" href="#id8" title="Permalink to this heading">¶</a></h2>
 <p><strong>数组</strong> (array)是可以在两个或者以上的维度存储数据的R语言数据类型。<strong>矩阵</strong> (matrix)是二维的数组。</p>
 <ul class="simple">
 <li><p>R 以列为主顺序</p></li>
@@ -958,9 +842,9 @@ t  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \hat{\sigma}_{\hat{\beta}_2}  }
 </div>
 </div>
 </div>
-</section>
-<section id="id9">
-<h2><span class="section-number">1.9. </span>混合数据类型<a class="headerlink" href="#id9" title="永久链接至标题">#</a></h2>
+</div>
+<div class="section" id="id9">
+<h2><span class="section-number">1.9. </span>混合数据类型<a class="headerlink" href="#id9" title="Permalink to this heading">¶</a></h2>
 <p>一个向量只能包含一种的元素。但是 <strong>列表</strong> (list)可以同时装有不同类型的对象。当我们需要返回不止一种对象的时候，我们就可以使用列表。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -993,9 +877,9 @@ t  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \hat{\sigma}_{\hat{\beta}_2}  }
 </div>
 </div>
 </div>
-</section>
-<section id="id10">
-<h2><span class="section-number">1.10. </span>拓展包<a class="headerlink" href="#id10" title="永久链接至标题">#</a></h2>
+</div>
+<div class="section" id="id10">
+<h2><span class="section-number">1.10. </span>拓展包<a class="headerlink" href="#id10" title="Permalink to this heading">¶</a></h2>
 <p>R语言自带的基础包(base)十分有限，但是R有良好的拓展包生态系统。这对于R语言开发者来说是宝贵的财富，其他的语言(比如Python和MATLAB)无法媲美。
 大部分的R Packages都在<a class="reference external" href="https://cran.r-project.org/web/packages/">CRAN</a> 平台。</p>
 <p>我们可以通过
@@ -1021,10 +905,10 @@ t  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \hat{\sigma}_{\hat{\beta}_2}  }
 </div>
 </div>
 </div>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id11">
-<h1><span class="section-number">2. </span>数据框<a class="headerlink" href="#id11" title="永久链接至标题">#</a></h1>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id11">
+<h1><span class="section-number">2. </span>数据框<a class="headerlink" href="#id11" title="Permalink to this heading">¶</a></h1>
 <p><strong>数据框</strong> (data.frame) 是一个用来储存数据的二维表格，就像Excel数据表一样。矩阵(matrix)同样是二维表格，但不同之处在于，它只能容纳一种元素。
 现实生活中，数据可能是整数、实数、字符、分类数据等各种各样的类型。因此，在R语言当中，处理混合数据时默认使用的类型是数据框。<code class="docutils literal notranslate"><span class="pre">tibble</span></code>是一种新的改良过的数据框类型。</p>
 <p>下面是一个本科计量经济学教材中的数据集。我们载入数据并展示前6个记录。</p>
@@ -1044,8 +928,8 @@ t  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \hat{\sigma}_{\hat{\beta}_2}  }
 </div>
 </div>
 </div>
-<section id="id12">
-<h2><span class="section-number">2.1. </span>输入和输出<a class="headerlink" href="#id12" title="永久链接至标题">#</a></h2>
+<div class="section" id="id12">
+<h2><span class="section-number">2.1. </span>输入和输出<a class="headerlink" href="#id12" title="Permalink to this heading">¶</a></h2>
 <p>原始数据通常以ASCII文件或者Excel文件形式储存。我不建议使用Excel数据表来进行数据分析，因为Excel文件背后的结构难以被统计软件识别。我推荐<code class="docutils literal notranslate"><span class="pre">csv</span></code>文件形式，一种简单的ASCII格式。</p>
 <p><code class="docutils literal notranslate"><span class="pre">read.table()</span></code> 或者 <code class="docutils literal notranslate"><span class="pre">read.csv()</span></code> 可以把数据从ASCII文件中导入R语言。</p>
 <p><strong>例子</strong>: Acemoglu, Johnson and Robinson (2001). <a class="reference external" href="https://economics.mit.edu/faculty/acemoglu/data/ajr2001">Data source</a>. 这个实证研究的例子 被 Chang, Shi and Zhang (2022) 采用。</p>
@@ -1102,9 +986,9 @@ t  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \hat{\sigma}_{\hat{\beta}_2}  }
 </div>
 </div>
 </div>
-</section>
-<section id="id13">
-<h2><span class="section-number">2.2. </span>统计数据<a class="headerlink" href="#id13" title="永久链接至标题">#</a></h2>
+</div>
+<div class="section" id="id13">
+<h2><span class="section-number">2.2. </span>统计数据<a class="headerlink" href="#id13" title="Permalink to this heading">¶</a></h2>
 <p>R是一个统计软件，它自然有各种内置的统计学函数。</p>
 <p><code class="docutils literal notranslate"><span class="pre">p</span></code> (概率 probability), <code class="docutils literal notranslate"><span class="pre">d</span></code> (密度 density), <code class="docutils literal notranslate"><span class="pre">q</span></code> (分位点 quantile), <code class="docutils literal notranslate"><span class="pre">r</span></code> (生成随机变量 random variable generator)可以放在概率分布的名称前面使用。R语言中的常见概率分布比如 <code class="docutils literal notranslate"><span class="pre">norm</span></code> (正态分布), <code class="docutils literal notranslate"><span class="pre">chisq</span></code> (<span class="math notranslate nohighlight">\(\chi^2\)</span>), <code class="docutils literal notranslate"><span class="pre">t</span></code> (<em>t</em>分布),
 <code class="docutils literal notranslate"><span class="pre">weibull</span></code> (韦伯分布), <code class="docutils literal notranslate"><span class="pre">cauchy</span></code> (柯西分布), <code class="docutils literal notranslate"><span class="pre">binomial</span></code> (二项分布), <code class="docutils literal notranslate"><span class="pre">pois</span></code> (泊松分布)， 不一而足。</p>
@@ -1160,9 +1044,9 @@ t  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \hat{\sigma}_{\hat{\beta}_2}  }
 </div>
 </div>
 </div>
-</section>
-<section id="id14">
-<h2><span class="section-number">2.3. </span>自定义函数<a class="headerlink" href="#id14" title="永久链接至标题">#</a></h2>
+</div>
+<div class="section" id="id14">
+<h2><span class="section-number">2.3. </span>自定义函数<a class="headerlink" href="#id14" title="Permalink to this heading">¶</a></h2>
 <p>R有许多的内置函数。不过在实际使用中我们往往会遇到各种需要自己DIY函数的情况。 最推荐的方式是自行封装一个用户自定义函数。它有如下优点：</p>
 <ol class="simple">
 <li><p>在搭建程序时，它可以减小代码量，使得一个复杂的程序被拆分为易于操作的各个部分；</p></li>
@@ -1201,9 +1085,9 @@ t  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \hat{\sigma}_{\hat{\beta}_2}  }
 </div>
 </div>
 </div>
-</section>
-<section id="id15">
-<h2><span class="section-number">2.4. </span>控制流<a class="headerlink" href="#id15" title="永久链接至标题">#</a></h2>
+</div>
+<div class="section" id="id15">
+<h2><span class="section-number">2.4. </span>控制流<a class="headerlink" href="#id15" title="Permalink to this heading">¶</a></h2>
 <p>控制流是所有编程语言的必备功能。
 <code class="docutils literal notranslate"><span class="pre">if</span></code> 用于条件选择， 而 <code class="docutils literal notranslate"><span class="pre">for</span></code> 或者 <code class="docutils literal notranslate"><span class="pre">while</span></code> 用于循环。</p>
 <p><strong>例子</strong></p>
@@ -1230,14 +1114,14 @@ t  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \hat{\sigma}_{\hat{\beta}_2}  }
 </div>
 </div>
 </div>
-</section>
-<section id="id16">
-<h2><span class="section-number">2.5. </span>统计学模型<a class="headerlink" href="#id16" title="永久链接至标题">#</a></h2>
+</div>
+<div class="section" id="id16">
+<h2><span class="section-number">2.5. </span>统计学模型<a class="headerlink" href="#id16" title="Permalink to this heading">¶</a></h2>
 <p>统计学模型通常用 <code class="docutils literal notranslate"><span class="pre">y~x</span></code> 表示， 其中左侧的 <code class="docutils literal notranslate"><span class="pre">y</span></code> 是因变量。右侧的 <code class="docutils literal notranslate"><span class="pre">x</span></code> 为解释变量。
 自带的函数是 <code class="docutils literal notranslate"><span class="pre">lm</span></code> 。使用方式为 <code class="docutils literal notranslate"><span class="pre">lm(y~x,</span> <span class="pre">data</span> <span class="pre">=</span> <span class="pre">data_frame)</span></code>。</p>
 <p>R语言自带的所有回归函数都有相同的结构。学会了其中一种，自然可以举一反三。</p>
-<section id="id17">
-<h3><span class="section-number">2.5.1. </span>线性回归例子<a class="headerlink" href="#id17" title="永久链接至标题">#</a></h3>
+<div class="section" id="id17">
+<h3><span class="section-number">2.5.1. </span>线性回归例子<a class="headerlink" href="#id17" title="Permalink to this heading">¶</a></h3>
 <p>我们通过模拟数据来展示一个例子。</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1289,10 +1173,10 @@ t  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \hat{\sigma}_{\hat{\beta}_2}  }
 </div>
 <p><strong>练习</strong></p>
 <p>在先前的练习中(#AJR_exec)，我们编译了<code class="docutils literal notranslate"><span class="pre">AJR.csv</span></code>中所有的<code class="docutils literal notranslate"><span class="pre">shortnam</span></code>、 <code class="docutils literal notranslate"><span class="pre">logpgp95</span></code>、 <code class="docutils literal notranslate"><span class="pre">avexpr</span></code>、<code class="docutils literal notranslate"><span class="pre">lat_abst</span></code>、 和 <code class="docutils literal notranslate"><span class="pre">logem4</span></code> 变量。现在请尝试把<code class="docutils literal notranslate"><span class="pre">logpgp95</span></code>作为因变量进行工具变量回归，其中<code class="docutils literal notranslate"><span class="pre">avexpr</span></code>和<code class="docutils literal notranslate"><span class="pre">latabst</span></code>为解释变量而<code class="docutils literal notranslate"><span class="pre">logem4</span></code>和<code class="docutils literal notranslate"><span class="pre">lat_abst</span></code>是工具变量。(提示: 使用函数<code class="docutils literal notranslate"><span class="pre">AER::ivreg()</span></code>)</p>
-</section>
-</section>
-<section id="id18">
-<h2><span class="section-number">2.6. </span>拓展阅读<a class="headerlink" href="#id18" title="永久链接至标题">#</a></h2>
+</div>
+</div>
+<div class="section" id="id18">
+<h2><span class="section-number">2.6. </span>拓展阅读<a class="headerlink" href="#id18" title="Permalink to this heading">¶</a></h2>
 <!-- [Wickham and Grolemund](https://r4ds.had.co.nz/): Ch 1, 2, 4, 8, 19 and 20 -->
 <ul class="simple">
 <li><p>详细阅读 <a class="reference external" href="https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf">R-Introduction</a></p></li>
@@ -1303,15 +1187,15 @@ t  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \hat{\sigma}_{\hat{\beta}_2}  }
 </ul>
 </li>
 </ul>
-</section>
-<section id="id19">
-<h2><span class="section-number">2.7. </span>参考文献<a class="headerlink" href="#id19" title="永久链接至标题">#</a></h2>
+</div>
+<div class="section" id="id19">
+<h2><span class="section-number">2.7. </span>参考文献<a class="headerlink" href="#id19" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Acemoglu, Daron, Simon Johnson, and James A. Robinson. “The colonial origins of comparative development: An empirical investigation.” American economic review 91, no. 5 (2001): 1369-1401.</p></li>
 <li><p>Chang, Jinyuan., Shi, Zhentao. and Zhang, Jia., 2022. Culling the herd of moments with penalized empirical likelihood. Journal of Business &amp; Economic Statistics,  pp.1-39.</p></li>
 </ul>
-</section>
-</section>
+</div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1335,11 +1219,9 @@ t  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \hat{\sigma}_{\hat{\beta}_2}  }
 
               </div>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="00-preface.html" title="上一页 页">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1355,28 +1237,24 @@ t  =  \frac{\hat{\beta}_2 - \beta_{02}}{ \hat{\sigma}_{\hat{\beta}_2}  }
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            </footer>
+            
         </div>
     </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By 史震涛 Shi Zhentao<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+    <footer class="footer">
+  <p>
     
-</div>
+      通过 史震涛 Shi Zhentao<br/>
+    
+        &copy; 版权 2023.<br/>
+  </p>
+</footer>
+</main>
 
 
       </div>
     </div>
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-
+  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
   </body>
 </html>

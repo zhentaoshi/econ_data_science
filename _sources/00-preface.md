@@ -1,7 +1,7 @@
 
 # Preface
 
-This course was offered in 2015, as a response to postgraduate students' repeatedly request for training in coding skills.
+
 Programming is an essential skill for researchers in economic analysis.
 In the time of big data, empirical economic research becomes main stream.
 
@@ -79,10 +79,3 @@ The first two lectures cover basic R and advanced R. Advanced R taught skills ab
 The following two lectures cover simulation exercises and simulation-based methods in econometrics.
 The last two lectures talk about machine learning methods. Machine learning is relatively new for economists. Most economics programs only introduce a few
 algorithms but do not cover the theoretical components. We try to provide a review starting from the conventional nonparametric statistical methods.
-
-## Packages
-
-```install.packages(c("plyr", "foreach", "doParallel",
-                   "sampleSelection", "AER", "mcmc",
-                   "randomForest", "gbm"))
-```
