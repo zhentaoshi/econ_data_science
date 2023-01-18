@@ -1,5 +1,13 @@
 # play with data for summary
 # `dplyr`
+# related chapters:
+
+
+# Ch.10: tibbles
+# Ch.11: data import
+# Ch.5:  data transformation
+# Ch.18: pipes
+
 
 rm( list = ls() )
 
@@ -47,7 +55,8 @@ summarize(d1, mean_b = mean(balance))
 group_by(d1, education) %>%
   summarize( mean_b = mean(balance))
 
-group_by(d1, education, marital) %>%
+d1 %>%
+  group_by(education, marital) %>%
   summarize( mean_b = mean(balance),
              sd_b = sd(balance),
              count = n())
