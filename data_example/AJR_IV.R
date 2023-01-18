@@ -18,4 +18,4 @@ print(tsls)
 ### Use dplyr 
 
 dd = dplyr::filter(d0, apply(!is.na(d0), 1, all) ) # remove NA
-dd1 = dplyr::select(d0, sshortnam, logpgp95, avexpr, lat_abst, logem4, cons1) # select a subset
+dd1 = dplyr::select(d0, shortnam, logpgp95, avexpr, lat_abst, logem4, cons1) # select a subset
