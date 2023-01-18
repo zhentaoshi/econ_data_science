@@ -1,10 +1,11 @@
 # install missing packages
 
 wanted <- (c("knitr", "tidyverse", "magrittr",
-  "AER", "quantmod",
+  "quantmod",
   "reshape2", "gridExtra",
   "doBy", "Quandl",
-  "caret"))
+  "caret",
+  "shiny"))
 
 ins <- installed.packages()
 
