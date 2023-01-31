@@ -1,6 +1,5 @@
 # Econ5181: Data Science for Economists
 
-## 2023-01-27 
 
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
