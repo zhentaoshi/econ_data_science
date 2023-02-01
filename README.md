@@ -1,6 +1,5 @@
 # Econ5181: Data Science for Economists
 
-## 2023-01-27 
 
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
@@ -33,6 +32,8 @@ This work is licensed under
 [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License][cc-by-nc-sa].
 
 [![CC BY-NC-SA 4.0][cc-by-nc-sa-image]][cc-by-nc-sa]
+
+[Reflection from Paul Romer](https://paulromer.net/jupyter-mathematica-and-the-future-of-the-research-paper/) on Jupyter notebook and open-source science.
 
 [cc-by-nc-sa]: http://creativecommons.org/licenses/by-nc-sa/4.0/
 [cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
