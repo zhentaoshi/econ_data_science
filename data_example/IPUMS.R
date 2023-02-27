@@ -7,9 +7,9 @@
 library(magrittr)
 
 
-d99 = readr::read_csv( file = "ipums.la.99.csv", col_names = FALSE)
-d98 = readr::read_csv( file = "ipums.la.98.csv", col_names = FALSE)
-d97 = readr::read_csv( file = "ipums.la.97.csv", col_names = FALSE)
+d99 = readr::read_csv( file = "data_example/ipums.la.99.csv", col_names = FALSE)
+d98 = readr::read_csv( file = "data_example/ipums.la.98.csv", col_names = FALSE)
+d97 = readr::read_csv( file = "data_example/ipums.la.97.csv", col_names = FALSE)
 d0 = rbind(d97, d98, d99)
 
 X =  cbind(1, d0[, c("X20", "X22")])  %>% as.matrix
@@ -19,7 +19,6 @@ e_hat = lm(y ~ X - 1) %>% residuals()
 
 n = nrow(d0)
 K = ncol(X)
-
 
 
 for (opt in c(1,3,4)){ # option 2 takes too much time. We omit it.
