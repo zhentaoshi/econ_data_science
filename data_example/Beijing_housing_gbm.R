@@ -5,8 +5,6 @@
 # The full data runs for 8 hours with 24 cores on Econsuper
 
 
-library(caret)
-library(doParallel)
 
 set.seed(666)
 
@@ -15,7 +13,7 @@ load("lianjia.RData")
 N <- nrow(lianjia) # a smaller sample
 lianjia <- lianjia[base::sample(1:N, round(N * 0.15 )), ]
 
-tune_ind <- createDataPartition(1:nrow(lianjia), p = 0.1)$Resample1
+tune_ind <- caret::createDataPartition(1:nrow(lianjia), p = 0.1)$Resample1
 
 gbmGrid <- expand.grid(
   interaction.depth = seq(from = 10, to = 50, by = 10),
@@ -24,7 +22,7 @@ gbmGrid <- expand.grid(
   n.minobsinnode = 20
 )
 
-gbmControl <- trainControl(method = "cv", number = 5)
+gbmControl <- caret::trainControl(method = "cv", number = 5)
 
 
 # With Coordinates
@@ -41,15 +39,15 @@ tc <- Sys.time()
 
 ####### run the code
 cat(paste("Starting Tuning with Coordinates at:", tc), "\n")
-registerDoParallel(24)
-Tune.GBM <- train(formula.GBM,
+doParallel::registerDoParallel(24)
+Tune.GBM <- caret::train(formula.GBM,
                   data = lianjia[tune_ind, ],
                   method = "gbm", distribution = "gaussian",
                   trControl = gbmControl, tuneGrid = gbmGrid, metric = "Rsquared",
                   verbose = F
 )
 
-stopImplicitCluster()
+doParallel::stopImplicitCluster()
 tc <- Sys.time() - tc
 print(tc)
 
