@@ -1,36 +1,31 @@
 ###############################################
+rm(list = ls())
 # Install Keras and Tensorflow
 # this script is based on the R tutorial of Keres in RStudio
 
+# If the deep learning frameworks are not installed yet, 
+# then the following packages and commands are needed.
 
 # install.packages("devtools")
-
 # devtools::install_github("rstudio/tensorflow",force = TRUE)
-install.packages(tensorflow)
-library(tensorflow)
-install_tensorflow()
 
-# sess = tf$Session()
-# hello <- tf$constant('Hello, TensorFlow!')
-# sess$run(hello)
+install.packages("tensorflow")
+tensorflow::install_tensorflow()
 
 
-
-# devtools::install_github("rstudio/keras")
 install.packages("keras")
-library(keras)
-install_keras()
+keras::install_keras()
 
 # Keras is convenient for fitting neural network
 # But compared to core Tensorflow, Keras is slower
 
-
-
-
 ################################################
 # Download the data set and split the data
 
-boston_housing <- dataset_boston_housing()
+library(zeallot)
+library(magrittr)
+
+boston_housing <- keras::dataset_boston_housing()
 # this data has training x y and test x y
 
 c(train_data, train_labels) %<-% boston_housing$train
@@ -44,12 +39,11 @@ c(test_data, test_labels) %<-% boston_housing$test
 
 
 
-library(tibble) # a package for data fame
 column_names <- c('CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE',
                   'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT')
 # give names to the feature dataset
 
-train_df <- as_tibble(train_data)
+train_df <- tibble::as_tibble(train_data)
 colnames(train_df) <- column_names   # Make it a data frame
 
 # Rescale data across variables and across training and test sets
@@ -71,27 +65,27 @@ test_data <- scale(test_data, center = col_means_train, scale = col_stddevs_trai
 # of statistical learning. I will refer to other useful links when needed.
 
 build_model <- function() {
-
-# This is a sequential model with 2 hidden dense layers, and 1 output layer
-# Model types: Sequential -> linear layers; Functional -> other types
+  
+  # This is a sequential model with 2 hidden dense layers, and 1 output layer
+  # Model types: Sequential -> linear layers; Functional -> other types
   # Details: https://tensorflow.rstudio.com/keras/articles/about_keras_models.html
-# Layer types: see https://tensorflow.rstudio.com/keras/articles/about_keras_layers.html
+  # Layer types: see https://tensorflow.rstudio.com/keras/articles/about_keras_layers.html
   # For dense layer we are using, see https://keras.rstudio.com/reference/layer_dense.html
-
-
+  
+  
   # this is a sequential model that allows the user to add one layer after another
-  model <- keras_model_sequential() %>%
-    layer_dense(units = 64, activation = "relu",  # "relu" is "rectifier linear unit"
-                input_shape = dim(train_data)[2]) %>%
-    layer_dense(units = 64, activation = "relu") %>%
-    layer_dense(units = 1)
-
-  model %>% compile(
+  model <- keras::keras_model_sequential() %>%
+    keras::layer_dense(units = 64, activation = "relu",  # "relu" is "rectifier linear unit"
+                       input_shape = dim(train_data)[2]) %>%
+    keras::layer_dense(units = 64, activation = "relu") %>%
+    keras::layer_dense(units = 1)
+  
+  model %>% keras::compile(
     loss = "mse",
-    optimizer = optimizer_rmsprop(),
+    optimizer = keras::optimizer_rmsprop(),
     metrics = list("mean_absolute_error")
   )
-
+  
   model
 }
 
@@ -110,11 +104,13 @@ model %>% summary()   # # Show the summary of the model
 
 
 # below sends the model to the training data
-history <- model %>% fit(
+history <- model %>% keras::fit(
   train_data,
   train_labels,
-  epochs = 500,verbose = 0,
-  validation_split = 0.2)
+  epochs = 200,
+  verbose = 1,
+  validation_split = 0.2
+  )
 # verbose=0 -> Silent when fitting
 # epochs = number of epochs to train the model (An epoch is one iteration over the entire input data)
 
@@ -133,9 +129,7 @@ print( test_predictions )
 # Predict test data
 
 # the underlying function is  "evalaute.keras.engine.training.model"
-test_evaluation= model %>% evaluate(test_data,test_labels)
+test_evaluation= model %>% keras::evaluate(test_data,test_labels)
 print( test_evaluation )
 
 # Get the loss and mean absolute error of the model on predicting test data
-#########################################
-
